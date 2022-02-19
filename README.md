@@ -1,11 +1,34 @@
-# Vue 3 + Typescript + Vite
+# vue-zoomable
 
-This template should help get you started developing with Vue 3 and Typescript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Simple Vue 3 wrapper on svg-pan-zoom.js library written using composition API with Typescript support.
 
-## Recommended IDE Setup
+# Installation
 
-- [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
+`npm install vue-zoomable`
 
-## Type Support For `.vue` Imports in TS
+# Usage
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's `.vue` type support plugin by running `Volar: Switch TS Plugin on/off` from VSCode command palette.
+```
+<template>
+    <VueZoomableSvg
+    style="width: 500px; height: 500px; border: 1px solid black"
+    :zoomEnabled="true"
+    :controlIconsEnabled="true"
+    :fit="false"
+    :center="true"
+    >
+        <svg>
+        <circle x="10" y="10" r="50" />
+        </svg>
+  </VueZoomableSvg>
+
+</template>
+
+<script setup lang="ts">
+    import VueZoomableSvg from "./components/VueZoomableSvg.vue";
+</script>
+
+```
+
+# Acknowledgements
+- [vue-svg-pan-zoom](https://www.npmjs.com/package/vue-svg-pan-zoom)
