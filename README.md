@@ -58,18 +58,16 @@ Currently the `vue-zoomable` only works with a `svg` child -- `embed` won't work
 - onUpdatedCTM
 - svgpanzoom
 
-
 ### Prevent Default Behaviour
+
 ```vue
 <template>
-  <VueZoomableSvg @beforePan="beforePan">
-  ....
-  </VueZoomableSvg>
+  <VueZoomableSvg @beforePan="beforePan"> .... </VueZoomableSvg>
 </template>
 
-<script>
+<script setup lang="ts">
 let beforePan = (ev: any) => {
-    ev.preventDefault();   // prevents panning
+  ev.preventDefault(); // prevents panning
 };
 </script>
 ```
@@ -81,35 +79,20 @@ listen to the `svgpanzoom` event on the `SvgPanZoom` component.
 
 ```vue
 <template>
-  <div>
-    <input type="button" value="center me" @click="center" />
-    <SvgPanZoom
-      style="width: 500px; height: 500px; border:1px solid black;"
-      :fit="false"
-      @svgpanzoom="registerSvgPanZoom"
-    >
-      <RawTiger />
-    </SvgPanZoom>
-  </div>
+  <VueZoomableSvg
+    style="width: 500px; height: 500px; border: 1px solid black"
+    @svgpanzoom="svgpanzoom"
+  >
+    <svg>
+      <circle x="10" y="10" r="50" />
+    </svg>
+  </VueZoomableSvg>
 </template>
 
-<script>
-import RawTiger from "./RawTiger.vue";
-import SvgPanZoom from "vue-svg-pan-zoom";
-
-export default {
-  components: { SvgPanZoom, RawTiger },
-  data: () => ({ svgpanzoom: null }),
-  methods: {
-    registerSvgPanZoom(svgpanzoom) {
-      this.svgpanzoom = svgpanzoom;
-    },
-    center() {
-      if (!this.svgpanzoom) return;
-
-      this.svgpanzoom.center();
-    },
-  },
+<script setup lang="ts">
+import VueZoomableSvg from "vue-zoomable";
+let svgpanzoom = (ev: any) => {
+  console.log(ev);
 };
 </script>
 ```
