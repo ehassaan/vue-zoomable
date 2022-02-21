@@ -10,22 +10,29 @@ export let props = {
     preventMouseEventsDefault: { type: Boolean, default: true },
     contain: { type: Boolean, default: false },
     center: { type: Boolean, default: true },
-    viewportSelector: { default: ".svg-pan-zoom_viewport" },
+    viewportSelector: { default: null }, // randomly generated and applied to svg in slot.
     zoomScaleSensitivity: { default: 0.2 },
     minZoom: { default: 0.5 },
     maxZoom: { default: 10 },
     refreshRate: { default: "auto" },
     // customEventsHandler: {},
     eventsListenerElement: {},
-    // onThumbnailShown: {},
 };
 
-export let emits = [
+export let nativeEmits = [
     "beforeZoom",
     "onZoom",
     "beforePan",
     "onPan",
     "onUpdatedCTM",
-    "svgpanzoom"
+    // "svgpanzoom",
+    "onThumbnailShown"
 ];
 
+export let observableProps: { [k: string]: any } = {
+    zoomEnabled: (val: boolean, spz: any) => val ? spz.enableZoom() : spz.disableZoom(),
+    panEnabled: (val: boolean, spz: any) => val ? spz.enablePan() : spz.disablePan(),
+    dblClickZoomEnabled: (val: boolean, spz: any) => val ? spz.enableDblClickZoom() : spz.disableDblClickZoom(),
+    mouseWheelZoomEnabled: (val: boolean, spz: any) => val ? spz.enableMouseWheelZoom() : spz.disableMouseWheelZoom(),
+    controlIconsEnabled: (val: boolean, spz: any) => val ? spz.enableControlIcons() : spz.disableControlIcons(),
+}

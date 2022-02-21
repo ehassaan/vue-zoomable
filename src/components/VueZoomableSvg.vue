@@ -13,27 +13,46 @@
   </VueThumbnail> -->
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
 // import VueThumbnail from "./VueThumbnail.vue";
-import { emits, props as allProps } from "../utils/api";
+import { nativeEmits, observableProps, props as allProps } from "../utils/api";
 import init from "../utils/initZoom";
-import { onMounted, ref } from "vue";
-import { defineExpose } from "vue";
+import { onMounted, ref, SetupContext, watchEffect, onUnmounted } from "vue";
 
-let props = defineProps(
-  Object.assign(allProps, {
+export default {
+  props: Object.assign(allProps, {
     showThumbnail: String,
-  })
-);
-let emit = defineEmits(emits);
+  }),
 
-let root = ref();
+  setup(props: any, context: SetupContext) {
+    let root = ref();
 
-onMounted(() => {
-  console.log(this);
-  let exp = init(props, emit, root.value.children[0], emits);
-  defineExpose(exp);
-});
+    onMounted(() => {
+      let svgId = props.viewportSelector;
+      if (!props.viewportSelector) {
+        svgId = "svg_" + ((Math.random() * 100) | 0);
+        root.value.children[0].id = svgId;
+        svgId = "#" + svgId;
+      }
+      let exp = init(props, context.emit, svgId, nativeEmits);
+      onUnmounted(() => {
+        exp.spz.destroy();
+      });
+
+      context.expose(exp);
+
+      for (let k in observableProps) {
+        watchEffect(() => {
+          observableProps[k](props[k], exp.spz);
+        });
+      }
+    });
+
+    return {
+      root,
+    };
+  },
+};
 </script>
 
 <style scoped>
