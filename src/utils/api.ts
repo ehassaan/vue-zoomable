@@ -10,10 +10,10 @@ export let props = {
     preventMouseEventsDefault: { type: Boolean, default: true },
     contain: { type: Boolean, default: false },
     center: { type: Boolean, default: true },
-    viewportSelector: { default: null }, // randomly generated and applied to svg in slot.
-    zoomScaleSensitivity: { default: 0.2 },
-    minZoom: { default: 0.5 },
-    maxZoom: { default: 10 },
+    viewportSelector: { type: String, default: null }, // randomly generated and applied to svg in slot.
+    zoomScaleSensitivity: { type: Number, default: 0.2 },
+    minZoom: { type: Number, default: 0.5 },
+    maxZoom: { type: Number, default: 10 },
     refreshRate: { default: "auto" },
     // customEventsHandler: {},
     eventsListenerElement: {},

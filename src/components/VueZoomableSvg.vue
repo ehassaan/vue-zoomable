@@ -17,7 +17,21 @@
 // import VueThumbnail from "./VueThumbnail.vue";
 import { nativeEmits, observableProps, props as allProps } from "../utils/api";
 import init from "../utils/initZoom";
-import { onMounted, ref, SetupContext, watchEffect, onUnmounted } from "vue";
+import { onMounted, ref, SetupContext, onUnmounted, watch } from "vue";
+
+function initSpz(props: any, context: SetupContext, root: any) {
+  if (root.value.children.length == 0) return;
+  let svgId = props.viewportSelector;
+  if (!svgId) {
+    svgId = "svg_" + ((Math.random() * 100) | 0);
+    root.value.children[0].id = svgId;
+    svgId = "#" + svgId;
+  }
+  let exp = init(props, context.emit, svgId, nativeEmits);
+
+  context.expose(exp);
+  return exp;
+}
 
 export default {
   props: Object.assign(allProps, {
@@ -26,26 +40,42 @@ export default {
 
   setup(props: any, context: SetupContext) {
     let root = ref();
+    let exp: any = null;
+
+    // initialize when the first time slot content is added
+    watch(
+      () => context.slots.default?.(),
+      () => {
+        // do not re-initialize
+        if (exp) console.warn("Root slot element should not be changed.", exp);
+        if (exp) return;
+        exp = initSpz(props, context, root);
+      },
+      {
+        flush: "post",
+      }
+    );
+
+    for (let k in observableProps) {
+      watch(
+        () => props[k],
+        () => {
+          if (!exp) return;
+          observableProps[k](props[k], exp.spz);
+        },
+        {
+          flush: "post",
+        }
+      );
+    }
 
     onMounted(() => {
-      let svgId = props.viewportSelector;
-      if (!props.viewportSelector) {
-        svgId = "svg_" + ((Math.random() * 100) | 0);
-        root.value.children[0].id = svgId;
-        svgId = "#" + svgId;
-      }
-      let exp = init(props, context.emit, svgId, nativeEmits);
-      onUnmounted(() => {
-        exp.spz.destroy();
-      });
+      console.log("Mounted");
+      exp = initSpz(props, context, root);
+    });
 
-      context.expose(exp);
-
-      for (let k in observableProps) {
-        watchEffect(() => {
-          observableProps[k](props[k], exp.spz);
-        });
-      }
+    onUnmounted(() => {
+      if (exp) exp.spz.destroy();
     });
 
     return {

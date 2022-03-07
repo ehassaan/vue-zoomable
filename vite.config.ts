@@ -11,7 +11,8 @@ export default defineConfig({
       outputDir: 'dist/types',
       staticImport: true,
       insertTypesEntry: true,
-      logDiagnostics: true
+      logDiagnostics: true,
+      copyDtsFiles: false
     })
   ],
   build: {
