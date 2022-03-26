@@ -12,6 +12,7 @@ export function useMouse(
         y: 0,
     }
     function onMouseDown(ev: MouseEvent) {
+        if (!props.mouseEnabled) return;
         dragLoc = {
             x: ev.clientX,
             y: ev.clientY
@@ -22,6 +23,7 @@ export function useMouse(
         });
     }
     function onMouseMove(ev: MouseEvent) {
+        if (!props.panEnabled) return;
         let delta = {
             x: ev.clientX - dragLoc.x,
             y: ev.clientY - dragLoc.y,
@@ -37,11 +39,12 @@ export function useMouse(
         emit("panned", { ...delta, type: "mouse" });
     }
     function onDblClick() {
+        if (!props.dblClickEnabled || !props.zoomEnabled) return;
         let newZoom = zoom.value + props.dblClickZoomStep;
         if (newZoom > props.maxZoom) zoom.value = props.maxZoom;
         if (newZoom == props.maxZoom) return;
         else zoom.value = newZoom;
-        emit("zoom", { zoom: newZoom, type: "mouse" });
+        emit("zoom", { zoom: newZoom, type: "dblClick" });
     }
 
     return {

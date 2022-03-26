@@ -37,6 +37,30 @@ let props = defineProps({
         type: Number,
         default: 0.05,
     },
+    panEnabled: {
+        type: Boolean,
+        default: true,
+    },
+    zoomEnabled: {
+        type: Boolean,
+        default: true,
+    },
+    mouseEnabled: {
+        type: Boolean,
+        default: true,
+    },
+    touchEnabled: {
+        type: Boolean,
+        default: true,
+    },
+    dblClickEnabled: {
+        type: Boolean,
+        default: true,
+    },
+    wheelEnabled: {
+        type: Boolean,
+        default: true,
+    },
 });
 
 let zoom = ref(props.minZoom);
@@ -55,9 +79,9 @@ let wheel = useWheel(props, emit, zoom);
 
 </script>
 <style scoped>
-/* .container {
+.container {
     overflow: hidden;
-} */
+}
 :slotted(.container > * > *) {
     height: auto;
     transform: v-bind("transform");

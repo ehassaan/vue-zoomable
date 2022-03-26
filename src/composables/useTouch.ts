@@ -12,6 +12,7 @@ export function useTouch(
         y: 0,
     }
     function onTouchStart(ev: TouchEvent) {
+        if (!props.touchEnabled) return;
         let touch = ev.changedTouches.item(ev.changedTouches.length - 1);
         if (!touch) return;
         dragLoc = {
@@ -26,6 +27,8 @@ export function useTouch(
     }
 
     function onTouchMove(ev: TouchEvent) {
+        if (!props.panEnabled) return;
+
         let touch = ev.changedTouches.item(ev.changedTouches.length - 1);
         if (!touch) return;
         let delta = {
