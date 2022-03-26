@@ -14,6 +14,12 @@ export default (props: any, emit: any, root: any, events: string[]) => {
             return args.prevent !== true;
         }
     }
+    if (props.eventsListenerElement == "self") {
+        options.eventsListenerElement = null;
+    }
+    else if (props.eventsListenerElement == "window") {
+        options.eventsListenerElement = window;
+    }
     let spz = svg_pan_zoom(root, options);
     emit("svgpanzoom", { spz, options });
 

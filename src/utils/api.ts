@@ -15,8 +15,13 @@ export let props = {
     minZoom: { type: Number, default: 0.5 },
     maxZoom: { type: Number, default: 10 },
     refreshRate: { default: "auto" },
-    // customEventsHandler: {},
-    eventsListenerElement: {},
+    customEventsHandler: {
+        type: Object,
+        default: () => { }
+    },
+    eventsListenerElement: {
+        default: 'self'
+    },
 };
 
 export let nativeEmits = [

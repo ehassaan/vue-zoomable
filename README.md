@@ -2,6 +2,8 @@
 
 Simple Vue 3 wrapper on svg-pan-zoom.js library written using composition API with Typescript support.
 
+## Demo
+
 ## Installation
 
 `npm install vue-zoomable`
@@ -28,26 +30,27 @@ import VueZoomableSvg from "vue-zoomable";
 </script>
 ```
 
-Currently the `vue-zoomable` only works with a `svg` child -- `embed` won't work.
+Currently the `vue-zoomable` only works with an `svg` child -- `embed` won't work.
 
 ### Props
 
-| attribute                 | default                    | Observable |
-| ------------------------- | -------------------------- | ---------- |
-| zoomEnabled               | `true`                     | yes        |
-| controlIconsEnabled       | `false`                    | yes        |
-| fit                       | `true`                     | no         |
-| panEnabled                | `true`                     | yes        |
-| dblClickZoomEnabled       | `true`                     | yes        |
-| mouseWheelZoomEnabled     | `true`                     | yes        |
-| preventMouseEventsDefault | `true`                     | no         |
-| contain                   | `false`                    | no         |
-| center                    | `true`                     | no         |
-| viewportSelector          | `null` (Selects child svg) | no         |
-| zoomScaleSensitivity      | `0.2`                      | no         |
-| minZoom                   | `0.5`                      | no         |
-| maxZoom                   | `10`                       | no         |
-| refreshRate               | `auto`                     | no         |
+| attribute                 | default  | Observable | Description                                 |
+| ------------------------- | -------- | ---------- | ------------------------------------------- |
+| zoomEnabled               | `true`   | yes        |                                             |
+| controlIconsEnabled       | `false`  | yes        |
+| fit                       | `true`   | no         |
+| panEnabled                | `true`   | yes        |
+| dblClickZoomEnabled       | `true`   | yes        |
+| mouseWheelZoomEnabled     | `true`   | yes        |
+| preventMouseEventsDefault | `true`   | no         |
+| contain                   | `false`  | no         |
+| center                    | `true`   | no         |
+| viewportSelector          | `null`   | no         | By default selects root element in the slot |
+| zoomScaleSensitivity      | `0.2`    | no         |
+| minZoom                   | `0.5`    | no         |
+| maxZoom                   | `10`     | no         |
+| refreshRate               | `auto`   | no         |
+| eventsListenerElement     | `'self'` | no         | Can be 'self', 'window' or an html element  |
 
 ### Events
 

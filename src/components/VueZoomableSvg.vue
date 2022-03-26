@@ -10,7 +10,7 @@
     :bus="bus"
   >
     <slot name="thumbnail"></slot>
-  </VueThumbnail> -->
+  </VueThumbnail>-->
 </template>
 
 <script lang="ts">
@@ -43,13 +43,15 @@ export default {
     let exp: any = null;
 
     // initialize when the first time slot content is added
-    watch(
+    let unwatch = watch(
       () => context.slots.default?.(),
       () => {
-        // do not re-initialize
-        if (exp) console.warn("Root slot element should not be changed.", exp);
-        if (exp) return;
+        if (exp) {
+          unwatch();
+          return;
+        };
         exp = initSpz(props, context, root);
+        unwatch();
       },
       {
         flush: "post",
