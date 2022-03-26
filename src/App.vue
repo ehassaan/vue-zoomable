@@ -1,37 +1,44 @@
 
 <template>
+<TestVBind></TestVBind>
   <form>
-
     <select>
-      <option disabled value="">Please select one</option>
+      <option disabled value>Please select one</option>
       <option>A</option>
       <option>B</option>
       <option>C</option>
     </select>
-    <br>
+    <br />
 
     <!-- <button @click="() => visible = !visible">{{ visible ? 'Show' : 'Hide' }}</button> -->
     <input type="checkbox" v-model="zoomEnabled" />Zoom
     <input type="checkbox" v-model="panEnabled" />Pan
     <input type="checkbox" v-model="dbClickEnabled" />DblClickZoom
     <input type="checkbox" v-model="ctrlIconEnabled" />CtrlIcons
-    <input type="checkbox" v-model="mouseWheelZoomEnabled" />MouseWheel
+    <input type="checkbox" v-model="mouseWheelZoomEnabled" />
+    MouseWheel
     {{ listener }}
   </form>
   <!-- :eventsListenerElement="listener" -->
 
-  <VueZoomableSvg style="width: 500px; height: 500px; border: 1px solid black" :zoomEnabled="zoomEnabled"
-    :panEnabled="panEnabled" :controlIconsEnabled="ctrlIconEnabled" :fit="true" :center="true" @beforePan="beforePan"
-    @svgpanzoom="svgpanzoom" :dblClickZoomEnabled="dbClickEnabled" :mouseWheelZoomEnabled="mouseWheelZoomEnabled">
+  <VueZoomable
+    style="width: 500px; height: 500px; border: 1px solid black"
+    :disablePan="!panEnabled"
+    :disableZoom="!zoomEnabled"
+    :zoom="1.5"
+    :panX="100"
+    @ready="ready"
+  >
     <svg v-if="visible">
       <circle x="10" y="10" r="50" />
     </svg>
-  </VueZoomableSvg>
+  </VueZoomable>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
-import VueZoomableSvg from "./components/VueZoomableSvg.vue";
+import VueZoomable from "./components/VueZoomable.vue";
+import TestVBind from "./components/TestVBind.vue";
 
 let zoomEnabled = ref(true);
 let panEnabled = ref(true);
@@ -53,8 +60,10 @@ let beforePan = (ev: any) => {
 };
 
 
-let svgpanzoom = (ev: any) => {
+let ready = (ev: any) => {
   console.log(ev);
+  ev.pz.zoom(2);
+  setTimeout(() => ev.pz.pan(100, 100))
 };
 
 </script>

@@ -21,6 +21,7 @@
     }
   },
   "dependencies": {
+    "@panzoom/panzoom": "^4.4.4",
     "svg-pan-zoom": "^3.6.1"
   },
   "devDependencies": {
