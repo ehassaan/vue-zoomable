@@ -23,11 +23,13 @@
 
   <VueZoomable
     style="width: 500px; height: 500px; border: 1px solid black"
-    :disablePan="!panEnabled"
-    :disableZoom="!zoomEnabled"
-    :zoom="1.5"
-    :panX="100"
-    @ready="ready"
+    :zoomEnabled="zoomEnabled"
+    :panEnabled="panEnabled"
+    :dblClickEnabled="dbClickEnabled"
+    :wheelEnabled="mouseWheelZoomEnabled"
+    :minZoom="1"
+    :maxZoom="6"
+    :wheelZoomStep="0.01"
   >
     <svg v-if="visible">
       <circle x="10" y="10" r="50" />
