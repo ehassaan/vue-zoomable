@@ -1,6 +1,6 @@
 {
   "name": "vue-zoomable",
-  "version": "0.1.11",
+  "version": "1.0.0",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
@@ -19,9 +19,6 @@
       "import": "./dist/vue-zoomable.es.js",
       "require": "./dist/vue-zoomable.umd.js"
     }
-  },
-  "dependencies": {
-    "svg-pan-zoom": "^3.6.1"
   },
   "devDependencies": {
     "@types/node": "^17.0.17",
