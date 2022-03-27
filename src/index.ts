@@ -1,5 +1,5 @@
 // for library build
-import VueZoomableSvg from "./components/VueZoomableSvg.vue";
+import VueZoomable from "./components/VueZoomable.vue";
 
-export { VueZoomableSvg };
-export default VueZoomableSvg;
+export { VueZoomable };
+export default VueZoomable;

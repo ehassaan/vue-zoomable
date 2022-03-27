@@ -12,8 +12,8 @@
     </div>
 </template>
 <script setup lang="ts">
-import { computed, ref } from '@vue/reactivity';
-import { onMounted, useCssModule, watch, watchEffect, watchPostEffect } from 'vue';
+import { computed, ref } from 'vue';
+import { onMounted, watch } from 'vue';
 import { useMouse } from "../composables/useMouse";
 import { useTouch } from "../composables/useTouch";
 import { useWheel } from "../composables/useWheel";

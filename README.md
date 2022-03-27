@@ -17,7 +17,6 @@ Immediate child of VueZoomable must be either svg or an html container.
   <VueZoomable
     style="width: 500px; height: 500px; border: 1px solid black"
     selector="#myContent"
-    :svgChild="true"
     :minZoom="0.5"
     :maxZoom="3"
   >

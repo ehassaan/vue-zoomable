@@ -1,6 +1,6 @@
 {
   "name": "vue-zoomable",
-  "version": "1.0.0",
+  "version": "1.0.6",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
@@ -12,8 +12,8 @@
   "main": "./dist/vue-zoomable.umd.js",
   "module": "./dist/vue-zoomable.es.js",
   "types": "./dist/types/index.d.ts",
-  "website": "https://gitlab.com/HassaanAkbar/vue-zoomable",
-  "repository": "https://gitlab.com/HassaanAkbar/vue-zoomable",
+  "website": "https://github.com/HassaanAkbar/vue-zoomable",
+  "repository": "https://github.com/HassaanAkbar/vue-zoomable",
   "exports": {
     ".": {
       "import": "./dist/vue-zoomable.es.js",
@@ -37,5 +37,7 @@
     "pan",
     "svg",
     "zoomable"
-  ]
+  ],
+  "dependencies": {
+  }
 }
