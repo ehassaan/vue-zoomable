@@ -7,7 +7,10 @@
         @touchstart="touch.onTouchStart"
         @wheel="wheel.onWheel"
     >
-        <slot />
+        <div v-if="!svgChild">
+            <slot />
+        </div>
+        <slot v-else />
     </div>
 </template>
 <script setup lang="ts">
@@ -18,6 +21,10 @@ import { useWheel } from "../composables/useWheel";
 
 let emit = defineEmits(["panned", "zoom"]);
 let props = defineProps({
+    svgChild: {
+        type: Boolean,
+        default: false,
+    },
     maxZoom: {
         type: Number,
         default: 3,

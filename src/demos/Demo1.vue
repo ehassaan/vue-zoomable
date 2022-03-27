@@ -16,6 +16,7 @@
     style="width: 500px; height: 500px; border: 1px solid black"
     :zoomEnabled="zoomEnabled"
     :panEnabled="panEnabled"
+    :svgChild="true"
     :dblClickEnabled="dbClickEnabled"
     :wheelEnabled="mouseWheelZoomEnabled"
     :touchEnabled="touchEnabled"

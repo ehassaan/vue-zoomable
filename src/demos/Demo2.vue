@@ -14,6 +14,7 @@
     style="width: 500px; height: 500px; border: 1px solid black"
     :zoomEnabled="zoomEnabled"
     :panEnabled="panEnabled"
+    :svgChild="false"
     :dblClickEnabled="dbClickEnabled"
     :wheelEnabled="mouseWheelZoomEnabled"
     :touchEnabled="touchEnabled"
@@ -24,16 +25,14 @@
     @zoom="onZoom"
     @panned="onPan"
   >
-    <div>
-      <div class="boxes">
-        <div>
-          <div></div>
-          <div></div>
-        </div>
-        <div>
-          <div></div>
-          <div></div>
-        </div>
+    <div class="boxes">
+      <div>
+        <div></div>
+        <div></div>
+      </div>
+      <div>
+        <div></div>
+        <div></div>
       </div>
     </div>
   </VueZoomable>

@@ -1,7 +1,7 @@
 
 <template>
   <div>
-    <component :is="Demo2"></component>
+    <component :is="Demo1"></component>
   </div>
 </template>
 
