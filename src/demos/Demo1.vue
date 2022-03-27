@@ -1,6 +1,5 @@
 
 <template>
-  <TestVBind></TestVBind>
   <form>
     <!-- <button @click="() => visible = !visible">{{ visible ? 'Show' : 'Hide' }}</button> -->
     <input type="checkbox" v-model="zoomEnabled" />zoomEnabled
@@ -14,6 +13,7 @@
 
   <VueZoomable
     style="width: 500px; height: 500px; border: 1px solid black"
+    selector="#container1"
     :zoomEnabled="zoomEnabled"
     :panEnabled="panEnabled"
     :svgChild="true"
@@ -28,7 +28,9 @@
     @panned="onPan"
   >
     <svg v-if="visible">
-      <circle x="10" y="10" r="50" />
+      <g id="container1">
+        <circle x="10" y="10" r="50" />
+      </g>
     </svg>
   </VueZoomable>
 </template>
@@ -51,7 +53,6 @@ let onPan = (ev: any) => {
 let onZoom = (ev: any) => {
   console.log(ev);
 };
-
 
 </script>
 <style>

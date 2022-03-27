@@ -1,6 +1,5 @@
 
 <template>
-  <TestVBind></TestVBind>
   <form>
     <input type="checkbox" v-model="zoomEnabled" />zoomEnabled
     <input type="checkbox" v-model="panEnabled" />panEnabled

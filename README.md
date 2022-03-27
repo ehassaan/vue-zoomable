@@ -1,8 +1,8 @@
 # vue-zoomable
 
-Simple Vue 3 wrapper on svg-pan-zoom.js library written using composition API with Typescript support.
+Tiny and high performance zoom and pan library for Vue 3. It uses CSS Transforms which provides hardware acceleration.
 
-## Demo
+**Note:** Starting from 1.0, vue-zoomable does not use svg-pan-zoom as a dependency. It is created from scratch to use CSS Transforms for better performance and reactivity.
 
 ## Installation
 
@@ -10,96 +10,79 @@ Simple Vue 3 wrapper on svg-pan-zoom.js library written using composition API wi
 
 ## Usage
 
+Immediate child of VueZoomable must be either svg or an html container.
+
 ```vue
 <template>
-  <VueZoomableSvg
+  <VueZoomable
     style="width: 500px; height: 500px; border: 1px solid black"
-    :zoomEnabled="true"
-    :controlIconsEnabled="true"
-    :fit="false"
-    :center="true"
+    selector="#myContent"
+    :svgChild="true"
+    :minZoom="0.5"
+    :maxZoom="3"
   >
     <svg>
-      <circle x="10" y="10" r="50" />
+      <g id="myContent">
+        <circle x="10" y="10" r="50" />
+      </g>
     </svg>
-  </VueZoomableSvg>
+  </VueZoomable>
 </template>
 
 <script setup lang="ts">
-import VueZoomableSvg from "vue-zoomable";
+import VueZoomable from "vue-zoomable";
 </script>
 ```
-
-Currently the `vue-zoomable` only works with an `svg` child -- `embed` won't work.
 
 ### Props
 
-| attribute                 | default  | Observable | Description                                 |
-| ------------------------- | -------- | ---------- | ------------------------------------------- |
-| zoomEnabled               | `true`   | yes        |                                             |
-| controlIconsEnabled       | `false`  | yes        |
-| fit                       | `true`   | no         |
-| panEnabled                | `true`   | yes        |
-| dblClickZoomEnabled       | `true`   | yes        |
-| mouseWheelZoomEnabled     | `true`   | yes        |
-| preventMouseEventsDefault | `true`   | no         |
-| contain                   | `false`  | no         |
-| center                    | `true`   | no         |
-| viewportSelector          | `null`   | no         | By default selects root element in the slot |
-| zoomScaleSensitivity      | `0.2`    | no         |
-| minZoom                   | `0.5`    | no         |
-| maxZoom                   | `10`     | no         |
-| refreshRate               | `auto`   | no         |
-| eventsListenerElement     | `'self'` | no         | Can be 'self', 'window' or an html element  |
+All props other than `selector` are observable and can be changed after initialization.
+
+| Name             | type    | default | Description                                                                     |
+| ---------------- | ------- | ------- | ------------------------------------------------------------------------------- |
+| selector         | string  | `* > *` | Root element to apply transform on. Preferrably an `id` on `<div>` or `<g>` tag |
+| maxZoom          | number  | 3       | Maximum allowed zoom                                                            |
+| minZoom          | number  | 0.5     | Minimum allowed zoom                                                            |
+| dblClickZoomStep | number  | 0.4     | Step size for zoom on double click                                              |
+| wheelZoomStep    | number  | 0.05    | Step size for zoom on wheel                                                     |
+| panEnabled       | boolean | true    | Enable panning                                                                  |
+| zoomEnabled      | boolean | true    | Enable zoom                                                                     |
+| mouseEnabled     | boolean | true    | Enable mouse events                                                             |
+| touchEnabled     | boolean | true    | Enable touch events                                                             |
+| dblClickEnabled  | boolean | true    | Zoom on double click enabled                                                    |
+| wheelEnabled     | boolean | true    | Zoom on mouse enabled                                                           |
 
 ### Events
 
-- beforeZoom
-- onZoom
-- beforePan
-- onPan
-- onUpdatedCTM
-- svgpanzoom
+- panned
+- zoom
 
-### Prevent Default Behaviour
+All events have argument of type `ZoomableEvent`.
 
-```vue
-<template>
-  <VueZoomableSvg @beforePan="beforePan"> .... </VueZoomableSvg>
-</template>
+### ZoomableEvent
 
-<script setup lang="ts">
-let beforePan = (ev: any) => {
-  ev.preventDefault(); // prevents panning
-};
-</script>
-```
+| Field | Type   | Description                                                                     |
+| ----- | ------ | ------------------------------------------------------------------------------- |
+| zoom  | number | Current zoom value                                                              |
+| pan   | object | Current pan value and delta change in case of `panned` event.                   |
+| type  | string | Source type which triggered the event. `dblClick`, `mouse`, `touch` or `wheel`. |
 
-### svgpanzoom object
+_Sample event data:_
 
-To access the created `svgpanzoom` javascript object, you can
-listen to the `svgpanzoom` event on the `SvgPanZoom` component.
-
-```vue
-<template>
-  <VueZoomableSvg
-    style="width: 500px; height: 500px; border: 1px solid black"
-    @svgpanzoom="svgpanzoom"
-  >
-    <svg>
-      <circle x="10" y="10" r="50" />
-    </svg>
-  </VueZoomableSvg>
-</template>
-
-<script setup lang="ts">
-import VueZoomableSvg from "vue-zoomable";
-let svgpanzoom = (ev: any) => {
-  console.log(ev);
-};
-</script>
+```json
+{
+  "zoom": 0.3,
+  "pan": {
+    "x": 100,
+    "y": 2,
+    "deltaX": 0,
+    "deltaY": 2
+  },
+  "type": "mouse"
+}
 ```
 
 ## Acknowledgements
 
+- [@panzoom/panzoom](https://github.com/timmywil/panzoom)
 - [vue-svg-pan-zoom](https://www.npmjs.com/package/vue-svg-pan-zoom)
