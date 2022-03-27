@@ -75,7 +75,7 @@ let transform = computed(() => {
 
 let mouse = useMouse(props, emit, pan, zoom);
 let touch = useTouch(props, emit, pan, zoom);
-let wheel = useWheel(props, emit, zoom);
+let wheel = useWheel(props, emit, pan, zoom);
 
 </script>
 <style scoped>

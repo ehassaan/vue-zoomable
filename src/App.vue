@@ -2,22 +2,13 @@
 <template>
 <TestVBind></TestVBind>
   <form>
-    <select>
-      <option disabled value>Please select one</option>
-      <option>A</option>
-      <option>B</option>
-      <option>C</option>
-    </select>
-    <br />
-
     <!-- <button @click="() => visible = !visible">{{ visible ? 'Show' : 'Hide' }}</button> -->
-    <input type="checkbox" v-model="zoomEnabled" />Zoom
-    <input type="checkbox" v-model="panEnabled" />Pan
-    <input type="checkbox" v-model="dbClickEnabled" />DblClickZoom
-    <input type="checkbox" v-model="ctrlIconEnabled" />CtrlIcons
-    <input type="checkbox" v-model="mouseWheelZoomEnabled" />
-    MouseWheel
-    {{ listener }}
+    <input type="checkbox" v-model="zoomEnabled" />zoomEnabled
+    <input type="checkbox" v-model="panEnabled" />panEnabled
+    <input type="checkbox" v-model="dbClickEnabled" />dblClickEnabled
+    <input type="checkbox" v-model="touchEnabled" />touchEnabled
+    <input type="checkbox" v-model="mouseWheelZoomEnabled" />wheelEnabled
+    <input type="checkbox" v-model="visible" />Slot Content
   </form>
   <!-- :eventsListenerElement="listener" -->
 
@@ -27,9 +18,13 @@
     :panEnabled="panEnabled"
     :dblClickEnabled="dbClickEnabled"
     :wheelEnabled="mouseWheelZoomEnabled"
-    :minZoom="1"
-    :maxZoom="6"
+    :touchEnabled="touchEnabled"
+    :minZoom="0.3"
+    :maxZoom="2"
+    :dblClickZoomStep="0.4"
     :wheelZoomStep="0.01"
+    @zoom="onZoom"
+    @panned="onPan"
   >
     <svg v-if="visible">
       <circle x="10" y="10" r="50" />
@@ -40,32 +35,21 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import VueZoomable from "./components/VueZoomable.vue";
-import TestVBind from "./components/TestVBind.vue";
 
 let zoomEnabled = ref(true);
 let panEnabled = ref(true);
 let dbClickEnabled = ref(true);
-let ctrlIconEnabled = ref(true);
+let touchEnabled = ref(true);
 let mouseWheelZoomEnabled = ref(true);
 let visible = ref(true);
-let listener = ref('window');
 
-
-// let onSelect = (ev: any) => {
-//   listener.value = ev.target.value
-// }
-
-// let mywindow = window;
-let beforePan = (ev: any) => {
-  // console.log(ev);
-  // ev.preventDefault();
-};
-
-
-let ready = (ev: any) => {
+let onPan = (ev: any) => {
   console.log(ev);
-  ev.pz.zoom(2);
-  setTimeout(() => ev.pz.pan(100, 100))
 };
+
+let onZoom = (ev: any) => {
+  console.log(ev);
+};
+
 
 </script>

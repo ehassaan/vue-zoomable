@@ -43,7 +43,17 @@ export function useTouch(
             x: touch.clientX,
             y: touch.clientY,
         }
-        emit("panned", { ...delta, type: "touch" });
+        let event: ZoomableEvent = {
+            zoom: zoom.value,
+            pan: {
+                x: pan.value.x,
+                y: pan.value.y,
+                deltaX: delta.x,
+                deltaY: delta.y,
+            },
+            type: "touch"
+        };
+        emit("panned", event);
     }
 
     return {
