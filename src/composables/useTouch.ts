@@ -19,7 +19,7 @@ export function useTouch(
             x: touch.clientX,
             y: touch.clientY
         }
-        window.addEventListener("touchmove", onTouchMove);
+        window.addEventListener("touchmove", onTouchMove, { passive: false });
         window.addEventListener("touchend", (evEnd: TouchEvent) => {
             window.removeEventListener("touchmove", onTouchMove);
             evEnd.preventDefault();
@@ -54,10 +54,10 @@ export function useTouch(
             type: "touch"
         };
         emit("panned", event);
+        ev.preventDefault();
     }
 
     return {
         onTouchStart,
-        onTouchMove,
     }
 }

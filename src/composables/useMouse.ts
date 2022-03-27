@@ -73,7 +73,6 @@ export function useMouse(
 
     return {
         onMouseDown,
-        onMouseMove,
         onDblClick
     }
 }

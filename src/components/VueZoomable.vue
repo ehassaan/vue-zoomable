@@ -1,13 +1,10 @@
 
 <template>
-    <h1 class="heading">asdasd</h1>
     <div
         class="container"
         @mousedown="mouse.onMouseDown"
-        @mousemove="mouse.onMouseMove"
         @dblclick="mouse.onDblClick"
         @touchstart="touch.onTouchStart"
-        @touchmove="touch.onTouchMove"
         @wheel="wheel.onWheel"
     >
         <slot />
