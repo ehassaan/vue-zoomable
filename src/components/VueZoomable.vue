@@ -32,6 +32,18 @@ let props = defineProps({
         type: Number,
         default: 0.5,
     },
+    initalPanX: {
+        type: Number,
+        default: 0
+    },
+    initalPanY: {
+        type: Number,
+        default: 0
+    },
+    initialZoom: {
+        type: Number,
+        default: 0.5
+    },
     dblClickZoomStep: {
         type: Number,
         default: 0.4,
@@ -67,10 +79,14 @@ let props = defineProps({
 });
 let container = ref();
 let zoom = ref(props.minZoom);
+if ((props.initialZoom >= props.minZoom) && (props.initialZoom <= props.maxZoom)) {
+    zoom.value = props.initialZoom;
+}
+
 let pan = ref({
-    x: 100,
-    y: 0,
-})
+    x: props.initalPanX,
+    y: props.initalPanY,
+});
 
 let transform = computed(() => {
     return `translate(${pan.value.x}px, ${pan.value.y}px) scale(${zoom.value})`;

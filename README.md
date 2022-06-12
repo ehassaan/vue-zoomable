@@ -50,6 +50,9 @@ All props other than `selector` are observable and can be changed after initiali
 | touchEnabled     | boolean | true    | Enable touch events                                                             |
 | dblClickEnabled  | boolean | true    | Zoom on double click enabled                                                    |
 | wheelEnabled     | boolean | true    | Zoom on mouse enabled                                                           |
+| initialZoom      | number  | 0.5     | Initial zoom value                                                              |
+| initialPanX      | number  | 0       | Initial pan along x-axis                                                        |
+| initialPanY      | number  | 0       | Initial pan along y-axis                                                        |
 
 ### Events
 
