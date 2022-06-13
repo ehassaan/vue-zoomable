@@ -32,11 +32,11 @@ let props = defineProps({
         type: Number,
         default: 0.5,
     },
-    initalPanX: {
+    initialPanX: {
         type: Number,
         default: 0
     },
-    initalPanY: {
+    initialPanY: {
         type: Number,
         default: 0
     },
@@ -84,8 +84,8 @@ if ((props.initialZoom >= props.minZoom) && (props.initialZoom <= props.maxZoom)
 }
 
 let pan = ref({
-    x: props.initalPanX,
-    y: props.initalPanY,
+    x: props.initialPanX,
+    y: props.initialPanY,
 });
 
 let transform = computed(() => {
