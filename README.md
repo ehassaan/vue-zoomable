@@ -84,7 +84,31 @@ _Sample event data:_
 }
 ```
 
+## Contribute
+
+Contributions are most welcome. Please follow the below steps for any contributions.
+
+### If you add new feature
+
+- Open a suggestion issue first.
+- Provide your reasoning on why you want to add this feature.
+- Submit your PR.
+
+### If you fix a bug
+
+- If you are resolving an issue, please add `fix: #<issue number> <short message>` in your PR title (e.g.fix: #3899 update entities encoding/decoding).
+- Provide a description of the bug in your PR and/or link to the issue.
+
+### Where should I start?
+
+A good way to start is to find an issue labeled as bug, help wanted or feature request and suggest your approach in comments.
+
+Other ways to help:
+
+- Write tests
+- Documentation & Demos
+- Share your thoughts! Any features you thing vue-zoomable is missing? Any suggestions? Would love to hear that.
+
 ## Acknowledgements
 
 - [@panzoom/panzoom](https://github.com/timmywil/panzoom)
-- [vue-svg-pan-zoom](https://www.npmjs.com/package/vue-svg-pan-zoom)
