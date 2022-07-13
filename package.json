@@ -12,7 +12,7 @@
   "main": "./dist/vue-zoomable.umd.js",
   "module": "./dist/vue-zoomable.es.js",
   "types": "./dist/types/index.d.ts",
-  "website": "https://github.com/HassaanAkbar/vue-zoomable",
+  "website": "https://hassaanakbar.github.io/vue-zoomable/",
   "repository": "https://github.com/HassaanAkbar/vue-zoomable",
   "exports": {
     ".": {
