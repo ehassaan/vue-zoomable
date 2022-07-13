@@ -1,0 +1,25 @@
+{
+  "name": " vue-zoomable",
+  "version": "0.0.1",
+  "description": "Tiny and high performance pan and zoom library for Vue 3 written in Typescript.",
+  "main": "index.js",
+  "authors": {
+    "name": "Hassaan Akbar",
+    "email": "hassaan.akbar@outlook.com"
+  },
+  "repository": "https://github.com/HassaanAkbar/vue-zoomable/ vue-zoomable",
+  "scripts": {
+    "dev": "vuepress dev src",
+    "build": "vuepress build src"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@vuepress/client": "^2.0.0-beta.49",
+    "@vuepress/plugin-register-components": "^2.0.0-beta.49",
+    "vue": "^3.2.37",
+    "vuepress": "^2.0.0-beta.49"
+  },
+  "dependencies": {
+    "vue-zoomable": "^1.0.8"
+  }
+}
