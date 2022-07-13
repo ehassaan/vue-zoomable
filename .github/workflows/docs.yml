@@ -8,7 +8,6 @@ on:
   workflow_dispatch:
 
 jobs:
-
   docs:
     runs-on: ubuntu-latest
 
@@ -22,7 +21,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           # choose node.js version to use
-          node-version: '14'
+          node-version: "14"
 
       - uses: pnpm/action-setup@v2.0.1
         name: Install pnpm
@@ -33,7 +32,7 @@ jobs:
 
       - name: Get pnpm store directory
         id: pnpm-cache
-        working-directory: 'docs'
+        working-directory: "docs"
         run: |
           echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
 
@@ -46,7 +45,7 @@ jobs:
             ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
-        working-directory: 'docs'
+        working-directory: "docs"
         run: pnpm install
 
       # # cache node_modules
@@ -67,7 +66,7 @@ jobs:
 
       # run build script
       - name: Build VuePress site
-        working-directory: 'docs'
+        working-directory: "docs"
         run: pnpm run build
 
       # please check out the docs of the workflow for more details

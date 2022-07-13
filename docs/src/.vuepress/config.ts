@@ -8,6 +8,7 @@ export default defineUserConfig({
    * Ref：https://v1.vuepress.vuejs.org/config/#title
    */
   title: "vue-zoomable",
+  base: "vue-zoomable",
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#description
    */
