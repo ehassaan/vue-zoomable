@@ -7,3 +7,6 @@ sidebar:
 ---
 
 # Demos
+
+- [SVG Content](./svg-demo)
+- [HTML Content](./html-demo)

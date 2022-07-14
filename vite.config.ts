@@ -19,7 +19,7 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
       name: 'VueZoomable',
-      fileName: (format) => `vue-zoomable.${format}.js`
+      fileName: 'vue-zoomable'
     },
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled

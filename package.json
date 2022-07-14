@@ -1,6 +1,6 @@
 {
   "name": "vue-zoomable",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",

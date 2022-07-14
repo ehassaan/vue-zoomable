@@ -39,6 +39,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import VueZoomable from "vue-zoomable";
+import "../../../node_modules/vue-zoomable/dist/style.css";
 
 let zoomEnabled = ref(true);
 let panEnabled = ref(true);
@@ -58,9 +59,11 @@ let onZoom = (ev: any) => {
 
 </script>
 <style>
+
 .boxes {
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .boxes > div {

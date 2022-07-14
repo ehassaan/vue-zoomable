@@ -33,6 +33,7 @@ Immediate child of VueZoomable must be either svg or an html container.
 </template>
 
 <script setup lang="ts">
+import "vue-zoomable/dist/style.css";
 import VueZoomable from "vue-zoomable";
 </script>
 ```

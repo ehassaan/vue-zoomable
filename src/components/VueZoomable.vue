@@ -3,6 +3,7 @@
     <div
         ref="container"
         class="container"
+        :class="$style.container"
         @mousedown="mouse.onMouseDown"
         @dblclick="mouse.onDblClick"
         @touchstart="touch.onTouchStart"
@@ -117,7 +118,7 @@ let touch = useTouch(props, emit, pan, zoom);
 let wheel = useWheel(props, emit, pan, zoom);
 
 </script>
-<style scoped>
+<style module>
 .container {
     overflow: hidden;
 }

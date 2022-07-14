@@ -38,6 +38,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
+import "../../../node_modules/vue-zoomable/dist/style.css";
 import VueZoomable from "vue-zoomable";
 
 let zoomEnabled = ref(true);

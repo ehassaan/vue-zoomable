@@ -1,7 +1,7 @@
 
 <template>
   <div>
-    <component :is="Svg"></component>
+    <component :is="Div"></component>
   </div>
 </template>
 
