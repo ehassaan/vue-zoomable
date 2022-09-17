@@ -2,6 +2,7 @@
 
 Tiny and high performance zoom and pan library for Vue 3. It uses CSS Transforms which provides hardware acceleration.
 
+Checkout the [demos](https://hassaanakbar.github.io/vue-zoomable/demos/).
 
 ## Installation
 
@@ -11,7 +12,6 @@ Tiny and high performance zoom and pan library for Vue 3. It uses CSS Transforms
 
 Immediate child of VueZoomable must be either svg or an html container.
 
-Checkout the [demos](https://hassaanakbar.github.io/vue-zoomable/demos/).
 
 ```vue
 <template>
