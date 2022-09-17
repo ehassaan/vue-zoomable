@@ -23,7 +23,7 @@
     @zoom="onZoom"
     @panned="onPan"
   >
-    <div class="boxes">
+    <div id="boxes">
       <div>
         <div></div>
         <div></div>
