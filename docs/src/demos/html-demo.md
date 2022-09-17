@@ -12,13 +12,13 @@ sidebar:
 <template>
   <VueZoomable
     style="width: 500px; height: 500px; border: 1px solid black"
-    :svgChild="false"
+    :selector="#boxes"
     :minZoom="0.3"
     :maxZoom="2"
     :dblClickZoomStep="0.4"
     :wheelZoomStep="0.01"
   >
-    <div class="boxes">
+    <div id="boxes">
       <div>
         <div></div>
         <div></div>
@@ -37,18 +37,18 @@ import VueZoomable from "vue-zoomable";
 </script>
 <style>
 
-.boxes {
+#boxes {
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
 
-.boxes > div {
+#boxes > div {
   display: flex;
   flex-direction: row;
 }
 
-.boxes > div > div {
+#boxes > div > div {
   margin: 50px;
   background-color: blue;
   height: 100px;

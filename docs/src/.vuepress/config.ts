@@ -1,7 +1,6 @@
 const { description } = require("../../package");
 import { viteBundler } from '@vuepress/bundler-vite';
 import { defaultTheme, defineUserConfig } from "vuepress";
-
 import { registerComponentsPlugin } from "@vuepress/plugin-register-components";
 import path from "path";
 

@@ -10,9 +10,9 @@
 
   <VueZoomable
     style="width: 500px; height: 500px; border: 1px solid black"
+    selector="#boxes"
     :zoomEnabled="zoomEnabled"
     :panEnabled="panEnabled"
-    :svgChild="false"
     :dblClickEnabled="dbClickEnabled"
     :wheelEnabled="mouseWheelZoomEnabled"
     :touchEnabled="touchEnabled"
@@ -60,18 +60,18 @@ let onZoom = (ev: any) => {
 </script>
 <style>
 
-.boxes {
+#boxes {
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
 
-.boxes > div {
+#boxes > div {
   display: flex;
   flex-direction: row;
 }
 
-.boxes > div > div {
+#boxes > div > div {
   margin: 50px;
   background-color: blue;
   height: 100px;

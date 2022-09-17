@@ -13,7 +13,7 @@
     style="width: 500px; height: 500px; border: 1px solid black"
     :zoomEnabled="zoomEnabled"
     :panEnabled="panEnabled"
-    :svgChild="false"
+    selector="#boxes"
     :dblClickEnabled="dbClickEnabled"
     :wheelEnabled="mouseWheelZoomEnabled"
     :touchEnabled="touchEnabled"
@@ -24,7 +24,7 @@
     @zoom="onZoom"
     @panned="onPan"
   >
-    <div class="boxes">
+    <div id="boxes">
       <div>
         <div></div>
         <div></div>
@@ -59,17 +59,17 @@ let onZoom = (ev: any) => {
 
 </script>
 <style>
-.boxes {
+#boxes {
   display: flex;
   flex-direction: column;
 }
 
-.boxes > div {
+#boxes > div {
   display: flex;
   flex-direction: row;
 }
 
-.boxes > div > div {
+#boxes > div > div {
   margin: 50px;
   background-color: blue;
   height: 100px;
