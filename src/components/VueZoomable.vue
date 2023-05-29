@@ -19,8 +19,12 @@ import { useMouse } from "../composables/useMouse";
 import { useTouch } from "../composables/useTouch";
 import { useWheel } from "../composables/useWheel";
 
-let emit = defineEmits(["panned", "zoom"]);
+let emit = defineEmits(["panned", "zoom", "update:modelValue"]);
 let props = defineProps({
+    modelValue: {
+        type: Number,
+        default: 0.5
+    },
     selector: {
         type: String,
         default: "* > *"
@@ -79,10 +83,18 @@ let props = defineProps({
     },
 });
 let container = ref();
-let zoom = ref(props.minZoom);
+let zoom = ref(props.modelValue ?? props.minZoom);
 if ((props.initialZoom >= props.minZoom) && (props.initialZoom <= props.maxZoom)) {
     zoom.value = props.initialZoom;
 }
+
+watch(zoom, (val) => {
+    emit('update:modelValue', val)
+})
+
+watch(()=> props.modelValue, (val) => {
+    zoom.value = val
+})
 
 let pan = ref({
     x: props.initialPanX,
