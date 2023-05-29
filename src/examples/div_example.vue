@@ -1,4 +1,3 @@
-
 <template>
   <form>
     <input type="checkbox" v-model="zoomEnabled" />zoomEnabled
@@ -10,6 +9,7 @@
   </form>
 
   <VueZoomable
+    v-model="model"
     style="width: 500px; height: 500px; border: 1px solid black"
     :zoomEnabled="zoomEnabled"
     :panEnabled="panEnabled"
@@ -41,6 +41,8 @@
 import { ref } from "vue";
 import VueZoomable from "../components/VueZoomable.vue";
 
+const model = ref(1);
+
 let zoomEnabled = ref(true);
 let panEnabled = ref(true);
 let dbClickEnabled = ref(true);
@@ -55,8 +57,6 @@ let onPan = (ev: any) => {
 let onZoom = (ev: any) => {
   console.log(ev);
 };
-
-
 </script>
 <style>
 #boxes {
