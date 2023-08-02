@@ -56,7 +56,7 @@ All props other than `selector` are observable and can be changed after initiali
 | initialPanX          | number  | 0       | Initial pan along x-axis                                                        |
 | initialPanY          | number  | 0       | Initial pan along y-axis                                                        |
 | enableControllButton | boolean    | false   | Defines, if the controll buttons will be enabled.                               |
-| buttonPanStep        | number  | 0.1     | Step size for pan on controll buttons                                           |
+| buttonPanStep        | number  | 15     | Step size for pan on controll buttons                                           |
 | buttonZoomStep       | number  | 0.1     | Step size for pan on controll buttons                                           |
 
 ### Events
