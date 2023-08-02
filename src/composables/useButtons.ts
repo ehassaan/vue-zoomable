@@ -89,7 +89,11 @@ export function useButtons(
     }
 
     function onHome() {
-
+        zoom.value = props.initialZoom;
+        pan.value = {
+            x: props.initialPanX,
+            y: props.initialPanY,
+        }
     }
 
     return {
