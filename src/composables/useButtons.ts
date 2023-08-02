@@ -18,22 +18,31 @@ export function useButtons(
         "left": { x: -props.buttonPanStep, y: 0 },
     }
 
-    function onPan(ev: MouseEvent) {
+    const zoomDirections: { [key: string]: number } = {
+        "in": props.buttonZoomStep,
+        "out": -props.buttonZoomStep
+    }
+
+    let directionFromEvent = function (ev: MouseEvent): string | null {
         const target = ev.currentTarget as HTMLAnchorElement;
 
         if (!target) {
             console.warn("The target of the event is null, which shouldn't be the case.");
-            return;
+            return null;
         }
 
         const directionString = target.getAttribute("data-direction");
+        return directionString;
+    }
 
-        if (directionString && !(directionString in panDirections)) {
-            console.error("The direction " + directionString + " doesn't exist, and this really should not happen.")
+    function onPan(ev: MouseEvent) {
+        const directionString = directionFromEvent(ev);
+        if (!directionString) { return }
+        if (!(directionString in panDirections)) {
+            console.error("The direction " + directionString + " doesn't exist, and this really should not happen.");
             return;
         }
 
-        if (!directionString) { return }
         const direction = panDirections[directionString];
 
         pan.value = {
@@ -55,7 +64,28 @@ export function useButtons(
     }
 
     function onZoom(ev: MouseEvent) {
+        const directionString = directionFromEvent(ev);
+        if (!directionString) { return }
+        if (!(directionString in zoomDirections)) {
+            console.error("The direction " + directionString + " doesn't exist, and this really should not happen.")
+            return;
+        }
 
+        const direction = zoomDirections[directionString];
+
+        zoom.value = zoom.value + direction;
+
+        let event: ZoomableEvent = {
+            zoom: zoom.value,
+            pan: {
+                x: pan.value.x,
+                y: pan.value.y,
+                deltaX: 0,
+                deltaY: 0,
+            },
+            type: "controll_button",
+        }
+        emit("zoom", event);
     }
 
     function onHome() {
