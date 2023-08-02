@@ -15,10 +15,10 @@ export function useButtons(
     }
 
     const panDirections: { [key: string]: PanDirection } = {
-        "up": { x: 0, y: -props.buttonPanStep },
-        "right": { x: props.buttonPanStep, y: 0 },
-        "down": { x: 0, y: props.buttonPanStep },
-        "left": { x: -props.buttonPanStep, y: 0 },
+        "up": { x: 0, y: props.buttonPanStep },
+        "right": { x: -props.buttonPanStep, y: 0 },
+        "down": { x: 0, y: -props.buttonPanStep },
+        "left": { x: props.buttonPanStep, y: 0 },
     }
 
     const zoomDirections: { [key: string]: number } = {

@@ -82,7 +82,7 @@ let props = defineProps({
     },
     buttonPanStep: {
         type: Number,
-        default: 10,
+        default: 15,
     },
     buttonZoomStep: {
         type: Number,

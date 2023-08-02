@@ -91,7 +91,14 @@ ul {
 
 a {
     cursor: pointer;
+    color: #868e96;
+
+    transition: color .15s ease;
 }
+
+a:hover {
+    color: #555b61;;
+} 
 
 
 .controll__buttons {
