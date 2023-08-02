@@ -4,7 +4,7 @@
         @dblclick="mouse.onDblClick" @touchstart="touch.onTouchStart" @wheel="wheel.onWheel">
         <slot />
 
-        <ControllButtons v-if="props.enableControllButton"></ControllButtons>
+        <ControllButtons v-if="props.enableControllButton" @button-home="button.onHome" @button-pan="button.onPan"  @button-zoom="button.onZoom"></ControllButtons>
     </div>
 </template>
 
@@ -14,6 +14,7 @@ import { onMounted, watch } from 'vue';
 import { useMouse } from "../composables/useMouse";
 import { useTouch } from "../composables/useTouch";
 import { useWheel } from "../composables/useWheel";
+import { useButtons } from '../composables/useButtons';
 
 import ControllButtons from './ControllButtons.vue';
 
@@ -81,13 +82,14 @@ let props = defineProps({
     },
     buttonPanStep: {
         type: Number,
-        default: 0.1,
+        default: 10,
     },
     buttonZoomStep: {
         type: Number,
         default: 0.1,
     }
 });
+
 let container = ref();
 let zoom = ref(props.minZoom);
 if ((props.initialZoom >= props.minZoom) && (props.initialZoom <= props.maxZoom)) {
@@ -126,6 +128,7 @@ onMounted(() => {
 let mouse = useMouse(props, emit, pan, zoom);
 let touch = useTouch(props, emit, pan, zoom);
 let wheel = useWheel(props, emit, pan, zoom);
+let button = useButtons(props, emit, pan, zoom);
 </script>
 
 <style module>

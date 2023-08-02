@@ -1,53 +1,66 @@
 <template>
-    <div class="controll__buttons">
+    <div class="controll__buttons" @dblclick.stop="" @mousedown.stop="">
         <ul class="controll">
             <li class="controll__item controll__item--circle">
                 <ul class="controll__pan controll__item--circle__inner">
-                    <li class="controll__pan__up controll__item--circle__inner__up"><a><svg xmlns="http://www.w3.org/2000/svg"
-                                width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    <li class="controll__pan__up controll__item--circle__inner__up">
+                        <a @click="emit('button-pan', $event)" data-direction="up">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                 class="feather feather-chevron-up">
                                 <polyline points="18 15 12 9 6 15"></polyline>
-                            </svg></a></li>
-                    <li class="controll__pan__right controll__item--circle__inner__right"><a><svg
-                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="controll__pan__right controll__item--circle__inner__right">
+                        <a @click="emit('button-pan', $event)" data-direction="right">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                 class="feather feather-chevron-right">
                                 <polyline points="9 18 15 12 9 6"></polyline>
-                            </svg></a></li>
-                    <li class="controll__pan__down controll__item--circle__inner__down"><a><svg xmlns="http://www.w3.org/2000/svg"
-                                width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="controll__pan__down controll__item--circle__inner__down">
+                        <a @click="emit('button-pan', $event)" data-direction="down">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                 class="feather feather-chevron-down">
                                 <polyline points="6 9 12 15 18 9"></polyline>
-                            </svg></a></li>
-                    <li class="controll__pan__left controll__item--circle__inner__left"><a><svg xmlns="http://www.w3.org/2000/svg"
-                                width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            </svg></a>
+                    </li>
+                    <li class="controll__pan__left controll__item--circle__inner__left">
+                        <a @click="emit('button-pan', $event)" data-direction="left">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                 class="feather feather-chevron-left">
                                 <polyline points="15 18 9 12 15 6"></polyline>
-                            </svg></a></li>
+                            </svg>
+                        </a>
+                    </li>
                 </ul>
             </li>
-            <li class="controll__home controll__item controll__item--list-item"><a><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="feather feather-minimize-2">
+            <li class="controll__home controll__item controll__item--list-item"><a><svg xmlns="http://www.w3.org/2000/svg"
+                        width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" class="feather feather-minimize-2">
                         <polyline points="4 14 10 14 10 20"></polyline>
                         <polyline points="20 10 14 10 14 4"></polyline>
                         <line x1="14" y1="10" x2="21" y2="3"></line>
                         <line x1="3" y1="21" x2="10" y2="14"></line>
                     </svg></a></li>
-            <li class="controll__zoom-in controll__item controll__item--list-item"><a><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="feather feather-zoom-in">
+            <li class="controll__zoom-in controll__item controll__item--list-item"><a><svg
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-zoom-in">
                         <circle cx="11" cy="11" r="8"></circle>
                         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                         <line x1="11" y1="8" x2="11" y2="14"></line>
                         <line x1="8" y1="11" x2="14" y2="11"></line>
                     </svg></a></li>
-            <li class="controll__zoom-in controll__item controll__item--list-item"><a><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="feather feather-zoom-out">
+            <li class="controll__zoom-in controll__item controll__item--list-item"><a><svg
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-zoom-out">
                         <circle cx="11" cy="11" r="8"></circle>
                         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                         <line x1="8" y1="11" x2="14" y2="11"></line>
@@ -57,29 +70,7 @@
 </template>
 
 <script setup lang="ts">
-let emit = defineEmits(["panned", "zoom"]);
-let props = defineProps({
-    initialPanX: {
-        type: Number,
-        default: 0
-    },
-    initialPanY: {
-        type: Number,
-        default: 0
-    },
-    initialZoom: {
-        type: Number,
-        default: 0.5
-    },
-    buttonPanStep: {
-        type: Number,
-        default: 0.1,
-    },
-    buttonZoomStep: {
-        type: Number,
-        default: 0.1,
-    }
-});
+const emit = defineEmits(["button-pan", "button-zoom", "button-home"]);
 </script>
 
 <style scoped>
