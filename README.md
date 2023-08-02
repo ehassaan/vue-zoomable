@@ -101,6 +101,18 @@ Contributions are most welcome. Please follow the below steps for any contributi
 - If you are resolving an issue, please add `fix: #<issue number> <short message>` in your PR title (e.g.fix: #3899 update entities encoding/decoding).
 - Provide a description of the bug in your PR and/or link to the issue.
 
+### Setup
+
+The setup is pretty easy. You need to have `npm` installed.
+
+```sh
+# install the dependencies
+npm install --dev
+
+# start the dev thingie
+npm run dev
+```
+
 ### Where should I start?
 
 A good way to start is to find an issue labeled as bug, help wanted or feature request and suggest your approach in comments.
