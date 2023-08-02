@@ -6,6 +6,9 @@ export function useButtons(
     pan: Ref<{ x: number, y: number }>,
     zoom: Ref<number>) {
 
+
+    const eventType: string = "controll_button";
+
     interface PanDirection {
         x: number;
         y: number;
@@ -58,7 +61,7 @@ export function useButtons(
                 deltaX: direction.x,
                 deltaY: direction.y
             },
-            type: "controll_button",
+            type: eventType,
         }
         emit("panned", event);
     }
@@ -83,17 +86,44 @@ export function useButtons(
                 deltaX: 0,
                 deltaY: 0,
             },
-            type: "controll_button",
+            type: eventType,
         }
         emit("zoom", event);
     }
 
     function onHome() {
+        // reset zoom
         zoom.value = props.initialZoom;
+        emit("zoom", {
+            zoom: zoom.value,
+            pan: {
+                x: pan.value.x,
+                y: pan.value.y,
+                deltaX: 0,
+                deltaY: 0,
+            },
+            type: eventType,
+        })
+
+        // reset pan
+        let delta = {
+            x: props.initialPanX - pan.value.x,
+            y: props.initialPanY - pan.value.y,
+        }
         pan.value = {
             x: props.initialPanX,
             y: props.initialPanY,
         }
+        emit("panned", {
+            zoom: zoom.value,
+            pan: {
+                x: pan.value.x,
+                y: pan.value.y,
+                deltaX: delta.x,
+                deltaY: delta.y,
+            },
+            type: eventType,
+        })
     }
 
     return {
