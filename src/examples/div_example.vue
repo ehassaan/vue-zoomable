@@ -10,7 +10,8 @@
   </form>
 
   <VueZoomable
-    v-model="model"
+    v-model:zoom="zoom"
+    v-model:pan="pan"
     style="width: 500px; height: 500px; border: 1px solid black"
     :zoomEnabled="zoomEnabled"
     :panEnabled="panEnabled"
@@ -37,13 +38,20 @@
       </div>
     </div>
   </VueZoomable>
+  <div>
+    zoom: {{ zoom }}
+  </div>
+  <div>
+    pan: {{ pan }}
+  </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
 import VueZoomable from "../components/VueZoomable.vue";
 
-const model = ref(1);
+const zoom = ref(0.2);
+const pan = ref({ x: 0, y: 100 });
 
 let zoomEnabled = ref(true);
 let panEnabled = ref(true);

@@ -76,7 +76,11 @@ export function useButtons(
 
         const direction = zoomDirections[directionString];
 
-        zoom.value = zoom.value + direction;
+        let newZoom = zoom.value + direction;
+        if (newZoom == props.maxZoom || newZoom == props.minZoom) return;
+        else if (newZoom > props.maxZoom) zoom.value = props.maxZoom;
+        else if (newZoom < props.minZoom) zoom.value = props.minZoom;
+        else zoom.value = newZoom;
 
         let event: ZoomableEvent = {
             zoom: zoom.value,
