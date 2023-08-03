@@ -6,7 +6,7 @@ specifiers:
   '@vuepress/plugin-register-components': 2.0.0-beta.66
   css-loader: ^6.7.1
   vue: ^3.3.4
-  vue-zoomable: ^1.0
+  vue-zoomable: ^1.1.0
   vuepress: 2.0.0-beta.66
 
 dependencies:
