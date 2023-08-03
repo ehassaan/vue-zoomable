@@ -55,7 +55,9 @@ All props other than `selector` are observable and can be changed after initiali
 | initialZoom      | number  | 0.5       | Initial zoom value                                                                                                                         |
 | initialPanX      | number  | 0         | Initial pan along x-axis                                                                                                                   |
 | initialPanY      | number  | 0         | Initial pan along y-axis                                                                                                                   |
-| enableZoomOnKey  | string  | undefined | If not null, zoom is disabled, until the corresponding Key is pressed. You can set it to any key code you want, for example `Control`. |
+| enableWheelmOnKey  | string  | undefined | If not null, the wheel is disabled, until the corresponding Key is pressed. You can set it to any value of `event.key`. [see here](#document-flow) |
+
+### Document Flow
 
 ### Events
 
