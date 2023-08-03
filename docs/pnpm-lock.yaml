@@ -6,11 +6,11 @@ specifiers:
   '@vuepress/plugin-register-components': 2.0.0-beta.66
   css-loader: ^6.7.1
   vue: ^3.3.4
-  vue-zoomable: ^1.1.0
+  vue-zoomable: ../vue-zoomable-1.1.2.tgz
   vuepress: 2.0.0-beta.66
 
 dependencies:
-  vue-zoomable: 1.1.0_vue@3.3.4
+  vue-zoomable: file:../vue-zoomable-1.1.2.tgz_vue@3.3.4
 
 devDependencies:
   '@vuepress/bundler-vite': 2.0.0-beta.66
@@ -1775,15 +1775,6 @@ packages:
       vue: 3.3.4
     dev: true
 
-  /vue-zoomable/1.1.0_vue@3.3.4:
-    resolution: {integrity: sha512-B/MnQt8Seq90vq/+Mvh8jraBYWfYcCjaTJBjjbmozTjhLJM1IYHErlz5IwV4A+q2XW1Jzom2W9XpWIsHCRATsA==}
-    peerDependencies:
-      vue: ^3.2
-    dependencies:
-      '@babel/types': 7.22.5
-      vue: 3.3.4
-    dev: false
-
   /vue/3.3.4:
     resolution: {integrity: sha512-VTyEYn3yvIeY1Py0WaYGZsXnz3y5UnGi62GjVEqvEGPl6nxbOrCXbVOTQWBEJUqAyTUk2uJ5JLVnYJ6ZzGbrSw==}
     dependencies:
@@ -1871,3 +1862,15 @@ packages:
     resolution: {integrity: sha512-2eHWfjaoXgTBC2jNM1LRef62VQa0umtvRiDSk6HSzW7RvS5YtkabJrwYLLEKWBc8a5U2PTSCs+dJjUTJdlHsWQ==}
     engines: {node: '>= 14'}
     dev: true
+
+  file:../vue-zoomable-1.1.2.tgz_vue@3.3.4:
+    resolution: {integrity: sha512-QiEOdcl/lLiLAf/o96NZkOQGcCiWMa1DoET7UN5LPROYP0tWntyt0QHicGAVtPT/0NVjM/lhRQzFA1AKhojAPQ==, tarball: file:../vue-zoomable-1.1.2.tgz}
+    id: file:../vue-zoomable-1.1.2.tgz
+    name: vue-zoomable
+    version: 1.1.2
+    peerDependencies:
+      vue: ^3.2
+    dependencies:
+      '@babel/types': 7.22.5
+      vue: 3.3.4
+    dev: false
