@@ -1,0 +1,14 @@
+{
+  "editor.tabSize": 2,
+  "editor.formatOnSaveMode": "file",
+  "editor.formatOnSave": true,
+  "typescript.format.enable": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll": true
+  },
+  "vue.codeActions.enabled": true,
+  "volar.format.initialIndent": {
+    "html": true
+  },
+}

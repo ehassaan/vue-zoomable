@@ -1,4 +1,3 @@
-
 <template>
   <form>
     <input type="checkbox" v-model="zoomEnabled" />zoomEnabled
@@ -8,6 +7,7 @@
     <input type="checkbox" v-model="mouseWheelZoomEnabled" />wheelEnabled
     <input type="checkbox" v-model="visible" />Slot Content
     <input type="checkbox" v-model="documentFlow" />DocumentFlow
+    <input type="checkbox" v-model="enableControllButton" />Controll Button Enabled
   </form>
 
   <section v-if="documentFlow">
@@ -44,7 +44,8 @@
   <VueZoomable style="width: 500px; height: 500px; border: 1px solid black" :zoomEnabled="zoomEnabled"
     :panEnabled="panEnabled" selector="#boxes" :dblClickEnabled="dbClickEnabled" :wheelEnabled="mouseWheelZoomEnabled"
     :touchEnabled="touchEnabled" :minZoom="0.3" :maxZoom="2" :dblClickZoomStep="0.4" :wheelZoomStep="0.01"
-    :enableWheelOnKey="documentFlow ? 'Control' : undefined" @zoom="onZoom" @panned="onPan">
+    :enableControllButton="enableControllButton" :enableWheelOnKey="documentFlow ? 'Control' : undefined" @zoom="onZoom"
+    @panned="onPan">
     <div id="boxes">
       <div>
         <div></div>
@@ -163,11 +164,21 @@
     </p>
     <!-- Continue with more paragraphs, sections, and chapters as needed to fill a couple of pages -->
   </section>
+
+  <div>
+    zoom: {{ zoom }}
+  </div>
+  <div>
+    pan: {{ pan }}
+  </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
 import VueZoomable from "../components/VueZoomable.vue";
+
+const zoom = ref(0.2);
+const pan = ref({ x: 0, y: 100 });
 
 let zoomEnabled = ref(true);
 let panEnabled = ref(true);
@@ -176,6 +187,7 @@ let touchEnabled = ref(true);
 let mouseWheelZoomEnabled = ref(true);
 let visible = ref(true);
 let documentFlow = ref(true)
+let enableControllButton = ref(true);
 
 let onPan = (ev: any) => {
   console.log(ev);
@@ -184,9 +196,8 @@ let onPan = (ev: any) => {
 let onZoom = (ev: any) => {
   console.log(ev);
 };
-
-
 </script>
+
 <style>
 #boxes {
   display: flex;
@@ -203,4 +214,5 @@ let onZoom = (ev: any) => {
   background-color: blue;
   height: 100px;
   width: 100px;
-}</style>
+}
+</style>

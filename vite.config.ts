@@ -8,10 +8,10 @@ export default defineConfig({
   plugins: [
     vue(),
     dts({
-      outputDir: 'dist/types',
+      outDir: 'dist/types',
       staticImport: true,
       insertTypesEntry: true,
-      logDiagnostics: true,
+      logLevel: "info",
       copyDtsFiles: false
     })
   ],

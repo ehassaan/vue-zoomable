@@ -2,10 +2,9 @@ import {
   isArray,
   isFunction,
   isString
-} from "./chunk-OICIQSTT.js";
-import "./chunk-FEFTYQ2P.js";
+} from "./chunk-L52MBEYQ.js";
 
-// node_modules/.pnpm/@vuepress+shared@2.0.0-beta.49/node_modules/@vuepress/shared/dist/index.js
+// node_modules/.pnpm/@vuepress+shared@2.0.0-beta.66/node_modules/@vuepress/shared/dist/index.js
 var resolveHeadIdentifier = ([
   tag,
   attrs,
@@ -34,8 +33,8 @@ var dedupeHead = (head) => {
   });
   return result;
 };
-var ensureLeadingSlash = (str) => str.replace(/^\/?/, "/");
-var ensureEndingSlash = (str) => /(\.html|\/)$/.test(str) ? str : str + "/";
+var ensureLeadingSlash = (str) => str[0] === "/" ? str : `/${str}`;
+var ensureEndingSlash = (str) => str[str.length - 1] === "/" || str.endsWith(".html") ? str : `${str}/`;
 var formatDateString = (str, defaultDateString = "") => {
   const dateMatch = str.match(/\b(\d{4})-(\d{1,2})-(\d{1,2})\b/);
   if (dateMatch === null) {
@@ -59,8 +58,15 @@ var isLinkExternal = (link, base = "/") => {
 var isLinkMailto = (link) => /^mailto:/.test(link);
 var isLinkTel = (link) => /^tel:/.test(link);
 var isPlainObject = (val) => Object.prototype.toString.call(val) === "[object Object]";
-var removeEndingSlash = (str) => str.replace(/\/$/, "");
-var removeLeadingSlash = (str) => str.replace(/^\//, "");
+var omit = (obj, ...keys) => {
+  const result = { ...obj };
+  for (const key of keys) {
+    delete result[key];
+  }
+  return result;
+};
+var removeEndingSlash = (str) => str[str.length - 1] === "/" ? str.slice(0, -1) : str;
+var removeLeadingSlash = (str) => str[0] === "/" ? str.slice(1) : str;
 var resolveLocalePath = (locales, routePath) => {
   const localePaths = Object.keys(locales).sort((a, b) => {
     const levelDelta = b.split("/").length - a.split("/").length;
@@ -76,7 +82,10 @@ var resolveLocalePath = (locales, routePath) => {
   }
   return "/";
 };
-var resolveRoutePathFromUrl = (url, base = "/") => url.replace(/^(https?:)?\/\/[^/]*/, "").replace(new RegExp(`^${base}`), "/");
+var resolveRoutePathFromUrl = (url, base = "/") => {
+  const pathname = url.replace(/^(https?:)?\/\/[^/]*/, "");
+  return pathname.startsWith(base) ? `/${pathname.slice(base.length)}` : pathname;
+};
 export {
   dedupeHead,
   ensureEndingSlash,
@@ -91,6 +100,7 @@ export {
   isLinkTel,
   isPlainObject,
   isString,
+  omit,
   removeEndingSlash,
   removeLeadingSlash,
   resolveHeadIdentifier,

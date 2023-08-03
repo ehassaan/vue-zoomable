@@ -34,28 +34,35 @@ import VueZoomable from "vue-zoomable";
 import "vue-zoomable/dist/style.css";
 </script>
 ```
+### Model
+
+- v-model:zoom
+- v-model:pan
 
 ### Props
 
 All props other than `selector` are observable and can be changed after initialization.
 
-| Name              | type    | default   | Description                                                                                                                                        |
-| ----------------- | ------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| selector          | string  | `* > *`   | Root element to apply transform on. Preferrably an `id` on `<div>` or `<g>` tag                                                                    |
-| maxZoom           | number  | 3         | Maximum allowed zoom                                                                                                                               |
-| minZoom           | number  | 0.5       | Minimum allowed zoom                                                                                                                               |
-| dblClickZoomStep  | number  | 0.4       | Step size for zoom on double click                                                                                                                 |
-| wheelZoomStep     | number  | 0.05      | Step size for zoom on wheel                                                                                                                        |
-| panEnabled        | boolean | true      | Enable panning                                                                                                                                     |
-| zoomEnabled       | boolean | true      | Enable zoom                                                                                                                                        |
-| mouseEnabled      | boolean | true      | Enable mouse events                                                                                                                                |
-| touchEnabled      | boolean | true      | Enable touch events                                                                                                                                |
-| dblClickEnabled   | boolean | true      | Zoom on double click enabled                                                                                                                       |
-| wheelEnabled      | boolean | true      | Zoom on mouse enabled                                                                                                                              |
-| initialZoom       | number  | 0.5       | Initial zoom value                                                                                                                                 |
-| initialPanX       | number  | 0         | Initial pan along x-axis                                                                                                                           |
-| initialPanY       | number  | 0         | Initial pan along y-axis                                                                                                                           |
-| enableWheelOnKey | string  | undefined | If not null, the wheel is disabled, until the corresponding Key is pressed. You can set it to any value of `event.key`. [see here](#document-flow) |
+| Name                 | type    | default   | Description                                                                                                                                        |
+| -------------------- | ------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| selector             | string  | `* > *`   | Root element to apply transform on. Preferrably an `id` on `<div>` or `<g>` tag                                                                    |
+| maxZoom              | number  | 3         | Maximum allowed zoom                                                                                                                               |
+| minZoom              | number  | 0.5       | Minimum allowed zoom                                                                                                                               |
+| dblClickZoomStep     | number  | 0.4       | Step size for zoom on double click                                                                                                                 |
+| wheelZoomStep        | number  | 0.05      | Step size for zoom on wheel                                                                                                                        |
+| panEnabled           | boolean | true      | Enable panning                                                                                                                                     |
+| zoomEnabled          | boolean | true      | Enable zoom                                                                                                                                        |
+| mouseEnabled         | boolean | true      | Enable mouse events                                                                                                                                |
+| touchEnabled         | boolean | true      | Enable touch events                                                                                                                                |
+| dblClickEnabled      | boolean | true      | Zoom on double click enabled                                                                                                                       |
+| wheelEnabled         | boolean | true      | Zoom on mouse enabled                                                                                                                              |
+| initialZoom          | number  | 0.5       | (Deprecated) Initial zoom value. Use v-model:zoom                                                                                                  |
+| initialPanX          | number  | 0         | (Deprecated) Initial pan along x-axis. Use v-model:pan                                                                                             |
+| initialPanY          | number  | 0         | (Deprecated) Initial pan along y-axis. Use v-model:pan                                                                                             |
+| enableControllButton | boolean | false     | Defines, if the controll buttons will be enabled.                                                                                                  |
+| buttonPanStep        | number  | 15        | Step size for pan on controll buttons                                                                                                              |
+| buttonZoomStep       | number  | 0.1       | Step size for pan on controll buttons                                                                                                              |
+| enableWheelOnKey     | string  | undefined | If not null, the wheel is disabled, until the corresponding Key is pressed. You can set it to any value of `event.key`. [see here](#document-flow) |
 
 ### Document Flow
 
