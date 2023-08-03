@@ -97,11 +97,13 @@ a {
 }
 
 a:hover {
-    color: #555b61;;
-} 
+    color: #555b61;
+    ;
+}
 
 
 .controll__buttons {
+    z-index: 10;
     position: absolute;
 
     bottom: 32px;

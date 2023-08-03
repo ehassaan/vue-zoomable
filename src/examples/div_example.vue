@@ -58,6 +58,13 @@
     </div>
   </VueZoomable>
 
+  <div>
+    zoom: {{ zoom }}
+  </div>
+  <div>
+    pan: {{ pan }}
+  </div>
+
   <section v-if="documentFlow">
     <h1>Chapter 1</h1>
     <p>
@@ -164,13 +171,6 @@
     </p>
     <!-- Continue with more paragraphs, sections, and chapters as needed to fill a couple of pages -->
   </section>
-
-  <div>
-    zoom: {{ zoom }}
-  </div>
-  <div>
-    pan: {{ pan }}
-  </div>
 </template>
 
 <script setup lang="ts">

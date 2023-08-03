@@ -55,6 +55,14 @@
       </g>
     </svg>
   </VueZoomable>
+
+  <div>
+    zoom: {{ zoom }}
+  </div>
+  <div>
+    pan: {{ pan }}
+  </div>
+
   <section v-if="documentFlow">
     <h1>Chapter 1</h1>
     <p>
@@ -166,6 +174,9 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import VueZoomable from "../components/VueZoomable.vue";
+
+const zoom = ref(0.2);
+const pan = ref({ x: 0, y: 100 });
 
 let zoomEnabled = ref(true);
 let panEnabled = ref(true);

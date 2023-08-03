@@ -216,11 +216,17 @@ function showOverlay() { hideOverlay.value = false; }
 let mouse = useMouse(props, emit, pan, zoom, pressedKeys);
 let touch = useTouch(props, emit, pan, zoom, pressedKeys);
 let wheel = useWheel(props, emit, pan, zoom, pressedKeys, showOverlay);
-
+let button = useButtons(props, emit, pan, zoom);
 </script>
 
 <style module>
 .container {
   overflow: hidden;
+  position: relative;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 </style>
