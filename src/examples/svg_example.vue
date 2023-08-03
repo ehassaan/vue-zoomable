@@ -47,8 +47,8 @@
     :zoomEnabled="zoomEnabled" :panEnabled="panEnabled" :initialPanX="100" :initialPanY="120" :initialZoom="1.5"
     :svgChild="true" :dblClickEnabled="dbClickEnabled" :wheelEnabled="mouseWheelZoomEnabled" :touchEnabled="touchEnabled"
     :minZoom="0.3" :maxZoom="2" :dblClickZoomStep="0.4" :wheelZoomStep="0.01"
-    :enableWheelOnKey="documentFlow ? 'Control' : undefined" :enableControllButton="enableControllButton" @zoom="onZoom"
-    @panned="onPan">
+    :enableWheelOnKey="documentFlow ? 'Control' : undefined" :enableControllButton="enableControllButton"
+    @zoom="showEvent" @panned="showEvent">
     <svg v-if="visible">
       <g id="container1">
         <circle x="10" y="10" r="50" />
@@ -178,6 +178,16 @@ import VueZoomable from "../components/VueZoomable.vue";
 const zoom = ref(0.2);
 const pan = ref({ x: 0, y: 100 });
 
+function showEvent(ev: any) {
+  console.log(ev)
+
+  zoom.value = ev.zoom;
+  pan.value = {
+    x: ev.pan.x,
+    y: ev.pan.y,
+  };
+}
+
 let zoomEnabled = ref(true);
 let panEnabled = ref(true);
 let dbClickEnabled = ref(true);
@@ -186,15 +196,6 @@ let mouseWheelZoomEnabled = ref(true);
 let visible = ref(true);
 let documentFlow = ref(true)
 let enableControllButton = ref(true);
-
-let onPan = (ev: any) => {
-  console.log(ev);
-};
-
-let onZoom = (ev: any) => {
-  console.log(ev);
-};
-
-
 </script>
+
 <style></style>
