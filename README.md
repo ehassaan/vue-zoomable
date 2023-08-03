@@ -16,7 +16,11 @@ I will still make pr for changes though.
 
 ## Installation
 
-`npm install vue-zoomable`
+```sh
+npm install vue-zoomable-cute
+# or
+yarn add vue-zoomable-cute
+```
 
 ## Usage
 
@@ -40,8 +44,8 @@ Immediate child of VueZoomable must be either svg or an html container.
 </template>
 
 <script setup lang="ts">
-import VueZoomable from "vue-zoomable";
-import "vue-zoomable/dist/style.css";
+import VueZoomable from "vue-zoomable-cute";
+import "vue-zoomable-cute/dist/style.css";
 </script>
 ```
 ### Model
