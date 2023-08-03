@@ -22,6 +22,6 @@
     "vuepress": "^2.0.0-beta.49"
   },
   "dependencies": {
-    "vue-zoomable": "^1.0.8"
+    "vue-zoomable": "^1.0"
   }
 }
