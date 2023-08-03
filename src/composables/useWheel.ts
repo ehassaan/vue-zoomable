@@ -5,17 +5,21 @@ export function useWheel(
     emit: any,
     pan: Ref<{ x: number, y: number }>,
     zoom: Ref<number>,
-    pressedKeys: Ref<Set<String>>) {
+    pressedKeys: Ref<Set<String>>,
+    showOverlay: Function) {
 
     function onWheel(ev: WheelEvent) {
-        console.log(props.enableZoomOnKey);
+        console.log(props.enableWheelOnKey);
         console.log(pressedKeys.value);
 
-        console.log(pressedKeys.value.has(props.enableZoomOnKey))
+        console.log(pressedKeys.value.has(props.enableWheelOnKey))
 
         if (!props.wheelEnabled || !props.zoomEnabled) return;
         let newZoom = zoom.value + (props.dblClickZoomStep * ev.deltaY / Math.abs(ev.deltaY));
-        if (props.enableZoomOnKey !== undefined && !pressedKeys.value.has(props.enableZoomOnKey)) return;
+        if (props.enableWheelOnKey !== undefined && !pressedKeys.value.has(props.enableWheelOnKey)) {
+            showOverlay();
+            return;
+        }
 
         // it would zoom, if the "zoom bounds" aren't exeded
         if (newZoom > props.maxZoom) zoom.value = props.maxZoom;

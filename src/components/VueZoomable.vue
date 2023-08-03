@@ -14,7 +14,7 @@ import { useWheel } from "../composables/useWheel";
 
 import ScrollOverlay from './ScrollOverlay.vue';
 
-const hideOverlay: Ref<boolean> = ref(false);
+const hideOverlay: Ref<boolean> = ref(true);
 
 let emit = defineEmits(["panned", "zoom"]);
 let props = defineProps({
@@ -128,17 +128,20 @@ onMounted(() => {
 const pressedKeys: Ref<Set<String>> = ref(new Set());
 
 // track the keys, which are currently pressed
-document.addEventListener('keydown', (event) => { pressedKeys.value.add(event.key); });
+document.addEventListener('keydown', (event) => { pressedKeys.value.add(event.key); console.log(pressedKeys.value) });
 document.addEventListener('keyup', (event) => { pressedKeys.value.delete(event.key); });
 
 // track when the mouse leaves, to then hide the overlay
 function onMouseLeave(event: MouseEvent) {
     hideOverlay.value = true;
 }
+function showOverlay() {
+    hideOverlay.value = false;
+}
 
 let mouse = useMouse(props, emit, pan, zoom, pressedKeys);
 let touch = useTouch(props, emit, pan, zoom, pressedKeys);
-let wheel = useWheel(props, emit, pan, zoom, pressedKeys);
+let wheel = useWheel(props, emit, pan, zoom, pressedKeys, showOverlay);
 
 </script>
 <style module>
