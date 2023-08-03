@@ -34,6 +34,10 @@ import VueZoomable from "vue-zoomable";
 import "vue-zoomable/dist/style.css";
 </script>
 ```
+### Model
+
+- v-model:zoom
+- v-model:pan
 
 ### Props
 
@@ -52,11 +56,11 @@ All props other than `selector` are observable and can be changed after initiali
 | touchEnabled         | boolean | true    | Enable touch events                                                             |
 | dblClickEnabled      | boolean | true    | Zoom on double click enabled                                                    |
 | wheelEnabled         | boolean | true    | Zoom on mouse enabled                                                           |
-| initialZoom          | number  | 0.5     | Initial zoom value                                                              |
-| initialPanX          | number  | 0       | Initial pan along x-axis                                                        |
-| initialPanY          | number  | 0       | Initial pan along y-axis                                                        |
-| enableControllButton | boolean    | false   | Defines, if the controll buttons will be enabled.                               |
-| buttonPanStep        | number  | 15     | Step size for pan on controll buttons                                           |
+| initialZoom          | number  | 0.5     | (Deprecated) Initial zoom value. Use v-model:zoom                               |
+| initialPanX          | number  | 0       | (Deprecated) Initial pan along x-axis. Use v-model:pan                          |
+| initialPanY          | number  | 0       | (Deprecated) Initial pan along y-axis. Use v-model:pan                          |
+| enableControllButton | boolean | false   | Defines, if the controll buttons will be enabled.                               |
+| buttonPanStep        | number  | 15      | Step size for pan on controll buttons                                           |
 | buttonZoomStep       | number  | 0.1     | Step size for pan on controll buttons                                           |
 
 ### Events
