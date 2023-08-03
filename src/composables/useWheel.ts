@@ -9,11 +9,6 @@ export function useWheel(
     showOverlay: Function) {
 
     function onWheel(ev: WheelEvent) {
-        console.log(props.enableWheelOnKey);
-        console.log(pressedKeys.value);
-
-        console.log(pressedKeys.value.has(props.enableWheelOnKey))
-
         if (!props.wheelEnabled || !props.zoomEnabled) return;
         let newZoom = zoom.value + (props.dblClickZoomStep * ev.deltaY / Math.abs(ev.deltaY));
         if (props.enableWheelOnKey !== undefined && !pressedKeys.value.has(props.enableWheelOnKey)) {

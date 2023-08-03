@@ -7,7 +7,7 @@
 
 <template>
     <div class="overlay" :class="{ hidden: hideOverlay }">
-        <p>Use {{ props.enableWheelOnKey }} + scroll to zoom</p>
+        <p>Use '{{ props.enableWheelOnKey }}' + 'scroll' to zoom</p>
     </div>
 </template>
 

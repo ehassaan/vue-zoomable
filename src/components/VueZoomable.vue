@@ -1,11 +1,13 @@
 
 <template>
     <div ref="container" class="container" :class="$style.container" @mousedown="mouse.onMouseDown"
-        @dblclick="mouse.onDblClick" @touchstart="touch.onTouchStart" @wheel="wheel.onWheel" @mouseleave="onMouseLeave">
+        @dblclick="mouse.onDblClick" @touchstart="touch.onTouchStart" @wheel="wheel.onWheel" @mouseleave="onMouseLeave"
+        @mouseenter="onMouseEnter">
         <slot />
     </div>
 </template>
 <script setup lang="ts">
+import { eventNames } from 'process';
 import { computed, ref, Ref, createApp, provide } from 'vue';
 import { onMounted, watch } from 'vue';
 import { useMouse } from "../composables/useMouse";
@@ -85,7 +87,6 @@ if ((props.initialZoom >= props.minZoom) && (props.initialZoom <= props.maxZoom)
     zoom.value = props.initialZoom;
 }
 
-
 let pan = ref({
     x: props.initialPanX,
     y: props.initialPanY,
@@ -127,17 +128,33 @@ onMounted(() => {
 
 const pressedKeys: Ref<Set<String>> = ref(new Set());
 
+window.addEventListener(
+    'wheel',
+    event => {
+        if (!isInContainer.value || props.enableWheelOnKey !== "Control") return;
+        if (event.ctrlKey) event.preventDefault();
+    }, { passive: false },
+);
+
 // track the keys, which are currently pressed
-document.addEventListener('keydown', (event) => { pressedKeys.value.add(event.key); console.log(pressedKeys.value) });
+document.addEventListener('keydown', (event) => {
+    pressedKeys.value.add(event.key);
+    if (event.key === props.enableWheelOnKey) hideOverlay.value = true;
+});
 document.addEventListener('keyup', (event) => { pressedKeys.value.delete(event.key); });
+// track if the mouse is in the container
+const isInContainer = ref(false);
 
 // track when the mouse leaves, to then hide the overlay
-function onMouseLeave(event: MouseEvent) {
+function onMouseEnter() {
+    isInContainer.value = true;
+}
+function onMouseLeave() {
     hideOverlay.value = true;
+    isInContainer.value = false;
 }
-function showOverlay() {
-    hideOverlay.value = false;
-}
+
+function showOverlay() { hideOverlay.value = false; }
 
 let mouse = useMouse(props, emit, pan, zoom, pressedKeys);
 let touch = useTouch(props, emit, pan, zoom, pressedKeys);
