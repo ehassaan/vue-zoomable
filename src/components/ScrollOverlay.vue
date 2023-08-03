@@ -23,7 +23,6 @@ const props = defineProps({
 
 interface Injection {
     hideOverlay: Ref<boolean>
-    updateOverlay: (value: boolean) => void
 }
 
 const { hideOverlay } = inject<Injection>('hideOverlay') as Injection;
