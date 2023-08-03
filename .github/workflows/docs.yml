@@ -24,7 +24,7 @@ jobs:
           node-version: "14"
 
       - uses: pnpm/action-setup@v2.0.1
-        name: Install pnpm
+        name: Install pnpm --no-frozen-lockfile
         id: pnpm-install
         with:
           version: 7
@@ -46,7 +46,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: "docs"
-        run: pnpm install
+        run: pnpm install --no-frozen-lockfile
 
       # # cache node_modules
       # - name: Cache dependencies
