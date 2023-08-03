@@ -9,24 +9,10 @@
     <input type="checkbox" v-model="enableControllButton" />Controll Button Enabled
   </form>
 
-  <VueZoomable
-    v-model:zoom="zoom"
-    v-model:pan="pan"
-    style="width: 500px; height: 500px; border: 1px solid black"
-    :zoomEnabled="zoomEnabled"
-    :panEnabled="panEnabled"
-    selector="#boxes"
-    :dblClickEnabled="dbClickEnabled"
-    :wheelEnabled="mouseWheelZoomEnabled"
-    :touchEnabled="touchEnabled"
-    :minZoom="0.3"
-    :maxZoom="2"
-    :dblClickZoomStep="0.4"
-    :wheelZoomStep="0.01"
-    :enableControllButton="enableControllButton"
-    @zoom="onZoom"
-    @panned="onPan"
-  >
+  <VueZoomable v-model:zoom="zoom" v-model:pan="pan" style="width: 500px; height: 500px; border: 1px solid black"
+    :zoomEnabled="zoomEnabled" :panEnabled="panEnabled" selector="#boxes" :dblClickEnabled="dbClickEnabled"
+    :wheelEnabled="mouseWheelZoomEnabled" :touchEnabled="touchEnabled" :minZoom="0.3" :maxZoom="2" :dblClickZoomStep="0.4"
+    :wheelZoomStep="0.01" :enableControllButton="enableControllButton" @zoom="onZoom" @panned="onPan">
     <div id="boxes">
       <div>
         <div></div>
@@ -75,12 +61,12 @@ let onZoom = (ev: any) => {
   flex-direction: column;
 }
 
-#boxes > div {
+#boxes>div {
   display: flex;
   flex-direction: row;
 }
 
-#boxes > div > div {
+#boxes>div>div {
   margin: 50px;
   background-color: blue;
   height: 100px;

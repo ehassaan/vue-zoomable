@@ -1,21 +1,20 @@
 <template>
   <div ref="container" class="container" :class="$style.container" @mousedown="mouse.onMouseDown"
     @dblclick="mouse.onDblClick" @touchstart="touch.onTouchStart" @wheel="wheel.onWheel">
-    <slot />
+    <slot></slot>
     <ControllButtons v-if="props.enableControllButton" @button-home="button.onHome" @button-pan="button.onPan"
       @button-zoom="button.onZoom"></ControllButtons>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, ref, PropType } from "vue";
+import { computed, ref } from "vue";
 import { onMounted, watch } from "vue";
 import { useMouse } from "../composables/useMouse";
 import { useTouch } from "../composables/useTouch";
 import { useWheel } from "../composables/useWheel";
-import { useButtons } from '../composables/useButtons';
-
-import ControllButtons from './ControllButtons.vue';
+import { useButtons } from "../composables/useButtons";
+import ControllButtons from "./ControllButtons.vue";
 
 let emitNative = defineEmits(["panned", "zoom", "update:zoom", "update:pan"]);
 let props = defineProps({
@@ -23,13 +22,14 @@ let props = defineProps({
     type: Number,
     default: null,
   },
+
   pan: {
-    type: Object as PropType<{ x: number, y: number }>,
+    type: Object,
     default: null,
   },
   selector: {
     type: String,
-    default: "* > *"
+    default: "* > *",
   },
   maxZoom: {
     type: Number,
@@ -41,15 +41,15 @@ let props = defineProps({
   },
   initialPanX: {
     type: Number,
-    default: 0
+    default: 0,
   },
   initialPanY: {
     type: Number,
-    default: 0
+    default: 0,
   },
   initialZoom: {
     type: Number,
-    default: 0.5
+    default: 0.5,
   },
   dblClickZoomStep: {
     type: Number,
@@ -94,12 +94,12 @@ let props = defineProps({
   buttonZoomStep: {
     type: Number,
     default: 0.1,
-  }
+  },
 });
 
 let container = ref();
 let zoom = ref(props.minZoom);
-if ((props.initialZoom >= props.minZoom) && (props.initialZoom <= props.maxZoom)) {
+if (props.initialZoom >= props.minZoom && props.initialZoom <= props.maxZoom) {
   zoom.value = props.initialZoom;
 }
 if (props.zoom) zoom.value = props.zoom;
@@ -109,29 +109,32 @@ let pan = ref({
   y: props.pan != null ? props.pan.y : props.initialPanY,
 });
 
-
-watch(() => props.zoom, () => {
-  if (!isNaN(props.zoom)) {
-    zoom.value = props.zoom;
+watch(
+  () => props.zoom,
+  () => {
+    if (!isNaN(props.zoom)) {
+      zoom.value = props.zoom;
+    }
   }
-}
 );
 
-watch(() => props.pan, () => {
-  if (props.pan) {
-    pan.value = { ...props.pan };
+watch(
+  () => props.pan,
+  () => {
+    if (props.pan) {
+      pan.value.x = props.pan.x;
+      pan.value.x = props.pan.y;
+    }
   }
-}
 );
 
 function emit(name: string, event: ZoomableEvent) {
   if (name === "zoom") {
-    emitNative('update:zoom', event.zoom);
+    emitNative("update:zoom", event.zoom);
+  } else if (name === "panned") {
+    emitNative("update:pan", event.pan);
   }
-  else if (name === "panned") {
-    emitNative('update:pan', event.pan);
-  }
-  emitNative(name, event);
+  emitNative(name as any, event);
 }
 
 let transform = computed(() => {
@@ -166,7 +169,6 @@ let mouse = useMouse(props, emit, pan, zoom);
 let touch = useTouch(props, emit, pan, zoom);
 let wheel = useWheel(props, emit, pan, zoom);
 let button = useButtons(props, emit, pan, zoom);
-
 </script>
 
 <style module>
@@ -174,9 +176,9 @@ let button = useButtons(props, emit, pan, zoom);
   overflow: hidden;
   position: relative;
 
-  -webkit-user-select: none;  
-  -moz-user-select: none;    
-  -ms-user-select: none;      
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
 }
 </style>
