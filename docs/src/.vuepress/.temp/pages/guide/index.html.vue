@@ -5,7 +5,7 @@
 <p><code v-pre>npm install vue-zoomable</code></p>
 <h2 id="usage" tabindex="-1"><a class="header-anchor" href="#usage" aria-hidden="true">#</a> Usage</h2>
 <p>Immediate child of VueZoomable must be either svg or an html container.</p>
-<div class="language-vue ext-vue line-numbers-mode"><pre v-pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+<div class="language-vue line-numbers-mode" data-ext="vue"><pre v-pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>VueZoomable</span>
     <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">width</span><span class="token punctuation">:</span> 500px<span class="token punctuation">;</span> <span class="token property">height</span><span class="token punctuation">:</span> 500px<span class="token punctuation">;</span> <span class="token property">border</span><span class="token punctuation">:</span> 1px solid black</span><span class="token punctuation">"</span></span></span>
     <span class="token attr-name">selector</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#myContent<span class="token punctuation">"</span></span>
@@ -24,7 +24,12 @@
 <span class="token keyword">import</span> <span class="token string">"vue-zoomable/dist/style.css"</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> VueZoomable <span class="token keyword">from</span> <span class="token string">"vue-zoomable"</span><span class="token punctuation">;</span>
 </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
-</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="props" tabindex="-1"><a class="header-anchor" href="#props" aria-hidden="true">#</a> Props</h3>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="model" tabindex="-1"><a class="header-anchor" href="#model" aria-hidden="true">#</a> Model</h3>
+<ul>
+<li>v-model:zoom</li>
+<li>v-model:pan</li>
+</ul>
+<h3 id="props" tabindex="-1"><a class="header-anchor" href="#props" aria-hidden="true">#</a> Props</h3>
 <p>All props other than <code v-pre>selector</code> are observable and can be changed after initialization.</p>
 <table>
 <thead>
@@ -106,19 +111,37 @@
 <td>initialZoom</td>
 <td>number</td>
 <td>0.5</td>
-<td>Initial zoom value</td>
+<td>(Deprecated) Initial zoom value. Use v-model:zoom</td>
 </tr>
 <tr>
 <td>initialPanX</td>
 <td>number</td>
 <td>0</td>
-<td>Initial pan along x-axis</td>
+<td>(Deprecated) Initial pan along x-axis. Use v-model:pan</td>
 </tr>
 <tr>
 <td>initialPanY</td>
 <td>number</td>
 <td>0</td>
-<td>Initial pan along y-axis</td>
+<td>(Deprecated) Initial pan along y-axis. Use v-model:pan</td>
+</tr>
+<tr>
+<td>enableControllButton</td>
+<td>boolean</td>
+<td>false</td>
+<td>Defines, if the controll buttons will be enabled.</td>
+</tr>
+<tr>
+<td>buttonPanStep</td>
+<td>number</td>
+<td>15</td>
+<td>Step size for pan on controll buttons</td>
+</tr>
+<tr>
+<td>buttonZoomStep</td>
+<td>number</td>
+<td>0.1</td>
+<td>Step size for pan on controll buttons</td>
 </tr>
 </tbody>
 </table>
@@ -156,7 +179,7 @@
 </tbody>
 </table>
 <p><em>Sample event data:</em></p>
-<div class="language-json ext-json line-numbers-mode"><pre v-pre class="language-json"><code><span class="token punctuation">{</span>
+<div class="language-json line-numbers-mode" data-ext="json"><pre v-pre class="language-json"><code><span class="token punctuation">{</span>
   <span class="token property">"zoom"</span><span class="token operator">:</span> <span class="token number">0.3</span><span class="token punctuation">,</span>
   <span class="token property">"pan"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token property">"x"</span><span class="token operator">:</span> <span class="token number">100</span><span class="token punctuation">,</span>
@@ -179,7 +202,14 @@
 <li>If you are resolving an issue, please add <code v-pre>fix: #&lt;issue number&gt; &lt;short message&gt;</code> in your PR title (e.g.fix: #3899 update entities encoding/decoding).</li>
 <li>Provide a description of the bug in your PR and/or link to the issue.</li>
 </ul>
-<h3 id="where-should-i-start" tabindex="-1"><a class="header-anchor" href="#where-should-i-start" aria-hidden="true">#</a> Where should I start?</h3>
+<h3 id="setup" tabindex="-1"><a class="header-anchor" href="#setup" aria-hidden="true">#</a> Setup</h3>
+<p>The setup is pretty easy. You need to have <code v-pre>npm</code> installed.</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><pre v-pre class="language-bash"><code><span class="token comment"># install the dependencies</span>
+<span class="token function">npm</span> <span class="token function">install</span> <span class="token parameter variable">--dev</span>
+
+<span class="token comment"># start the dev thingie</span>
+<span class="token function">npm</span> run dev
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="where-should-i-start" tabindex="-1"><a class="header-anchor" href="#where-should-i-start" aria-hidden="true">#</a> Where should I start?</h3>
 <p>A good way to start is to find an issue labeled as bug, help wanted or feature request and suggest your approach in comments.</p>
 <p>Other ways to help:</p>
 <ul>
@@ -192,3 +222,5 @@
 <li><a href="https://github.com/timmywil/panzoom" target="_blank" rel="noopener noreferrer">@panzoom/panzoom<ExternalLinkIcon/></a></li>
 </ul>
 </div></template>
+
+

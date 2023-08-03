@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: ../assets/logo.png
+heroImage: /logo.png
 tagline: Tiny and high performance pan and zoom library for Vue 3 written in Typescript.
 actionText: Quick Start →
 actionLink: /guide/
