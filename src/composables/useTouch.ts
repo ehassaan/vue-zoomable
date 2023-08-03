@@ -4,7 +4,8 @@ export function useTouch(
     props: any,
     emit: any,
     pan: Ref<{ x: number, y: number }>,
-    zoom: Ref<number>) {
+    zoom: Ref<number>,
+    pressedKeys: Ref<Set<String>>) {
 
     let dragLoc = {
         x: 0,

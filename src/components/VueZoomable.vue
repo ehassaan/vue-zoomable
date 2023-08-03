@@ -13,11 +13,13 @@
     </div>
 </template>
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, ref, Ref, createApp } from 'vue';
 import { onMounted, watch } from 'vue';
 import { useMouse } from "../composables/useMouse";
 import { useTouch } from "../composables/useTouch";
 import { useWheel } from "../composables/useWheel";
+
+import ScrollOverlay from './ScrollOverlay.vue';
 
 let emit = defineEmits(["panned", "zoom"]);
 let props = defineProps({
@@ -77,12 +79,17 @@ let props = defineProps({
         type: Boolean,
         default: true,
     },
+    enableWheelOnKey: {
+        type: String,
+        default: undefined,
+    }
 });
 let container = ref();
 let zoom = ref(props.minZoom);
 if ((props.initialZoom >= props.minZoom) && (props.initialZoom <= props.maxZoom)) {
     zoom.value = props.initialZoom;
 }
+
 
 let pan = ref({
     x: props.initialPanX,
@@ -110,16 +117,27 @@ watch(transform, () => {
 });
 
 onMounted(() => {
+    const placeholder = document.createElement('div');
+    createApp(ScrollOverlay, {enableWheelOnKey: props.enableWheelOnKey }).mount(placeholder);
+    container.value.appendChild(placeholder);
+
     setTransform();
 });
 
-let mouse = useMouse(props, emit, pan, zoom);
-let touch = useTouch(props, emit, pan, zoom);
-let wheel = useWheel(props, emit, pan, zoom);
+const pressedKeys: Ref<Set<String>> = ref(new Set());
+
+// track the keys, which are currently pressed
+document.addEventListener('keydown', (event) => { pressedKeys.value.add(event.key); });
+document.addEventListener('keyup', (event) => { pressedKeys.value.delete(event.key); });
+
+let mouse = useMouse(props, emit, pan, zoom, pressedKeys);
+let touch = useTouch(props, emit, pan, zoom, pressedKeys);
+let wheel = useWheel(props, emit, pan, zoom, pressedKeys);
 
 </script>
 <style module>
 .container {
     overflow: hidden;
+    position: relative;
 }
 </style>
