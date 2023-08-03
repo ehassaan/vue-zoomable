@@ -28,6 +28,7 @@ export function useMouse(
             x: ev.clientX - dragLoc.x,
             y: ev.clientY - dragLoc.y,
         }
+        
         pan.value = {
             x: pan.value.x + delta.x,
             y: pan.value.y + delta.y,

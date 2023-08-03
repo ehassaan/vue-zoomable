@@ -4,3 +4,4 @@ dist
 dist-ssr
 *.local
 vue-zoomable-*.tgz
+package-lock.json

@@ -1,22 +1,20 @@
 <template>
-  <div
-    ref="container"
-    class="container"
-    :class="$style.container"
-    @mousedown="mouse.onMouseDown"
-    @dblclick="mouse.onDblClick"
-    @touchstart="touch.onTouchStart"
-    @wheel="wheel.onWheel"
-  >
-    <slot />
-  </div>
+    <div ref="container" class="container" :class="$style.container" @mousedown="mouse.onMouseDown"
+        @dblclick="mouse.onDblClick" @touchstart="touch.onTouchStart" @wheel="wheel.onWheel">
+        <slot />
+        <ControllButtons v-if="props.enableControllButton" @button-home="button.onHome" @button-pan="button.onPan"  @button-zoom="button.onZoom"></ControllButtons>
+    </div>
 </template>
+
 <script setup lang="ts">
 import { computed, ref } from "vue";
 import { onMounted, watch } from "vue";
 import { useMouse } from "../composables/useMouse";
 import { useTouch } from "../composables/useTouch";
 import { useWheel } from "../composables/useWheel";
+import { useButtons } from '../composables/useButtons';
+
+import ControllButtons from './ControllButtons.vue';
 
 let emit = defineEmits(["panned", "zoom", "update:modelValue"]);
 let props = defineProps({
@@ -24,63 +22,76 @@ let props = defineProps({
     type: Number,
     default: 0.5,
   },
-  selector: {
-    type: String,
-    default: "* > *",
-  },
-  maxZoom: {
-    type: Number,
-    default: 3,
-  },
-  minZoom: {
-    type: Number,
-    default: 0.5,
-  },
-  initialPanX: {
-    type: Number,
-    default: 0,
-  },
-  initialPanY: {
-    type: Number,
-    default: 0,
-  },
-  initialZoom: {
-    type: Number,
-    default: 0.5,
-  },
-  dblClickZoomStep: {
-    type: Number,
-    default: 0.4,
-  },
-  wheelZoomStep: {
-    type: Number,
-    default: 0.05,
-  },
-  panEnabled: {
-    type: Boolean,
-    default: true,
-  },
-  zoomEnabled: {
-    type: Boolean,
-    default: true,
-  },
-  mouseEnabled: {
-    type: Boolean,
-    default: true,
-  },
-  touchEnabled: {
-    type: Boolean,
-    default: true,
-  },
-  dblClickEnabled: {
-    type: Boolean,
-    default: true,
-  },
-  wheelEnabled: {
-    type: Boolean,
-    default: true,
-  },
+    selector: {
+        type: String,
+        default: "* > *"
+    },
+    maxZoom: {
+        type: Number,
+        default: 3,
+    },
+    minZoom: {
+        type: Number,
+        default: 0.5,
+    },
+    initialPanX: {
+        type: Number,
+        default: 0
+    },
+    initialPanY: {
+        type: Number,
+        default: 0
+    },
+    initialZoom: {
+        type: Number,
+        default: 0.5
+    },
+    dblClickZoomStep: {
+        type: Number,
+        default: 0.4,
+    },
+    wheelZoomStep: {
+        type: Number,
+        default: 0.05,
+    },
+    panEnabled: {
+        type: Boolean,
+        default: true,
+    },
+    zoomEnabled: {
+        type: Boolean,
+        default: true,
+    },
+    mouseEnabled: {
+        type: Boolean,
+        default: true,
+    },
+    touchEnabled: {
+        type: Boolean,
+        default: true,
+    },
+    dblClickEnabled: {
+        type: Boolean,
+        default: true,
+    },
+    wheelEnabled: {
+        type: Boolean,
+        default: true,
+    },
+    enableControllButton: {
+        type: Boolean,
+        default: false,
+    },
+    buttonPanStep: {
+        type: Number,
+        default: 15,
+    },
+    buttonZoomStep: {
+        type: Number,
+        default: 0.1,
+    }
 });
+
 let container = ref();
 let zoom = ref(props.modelValue ?? props.initialZoom ?? props.minZoom);
 
@@ -137,9 +148,13 @@ onMounted(() => {
 let mouse = useMouse(props, emit, pan, zoom);
 let touch = useTouch(props, emit, pan, zoom);
 let wheel = useWheel(props, emit, pan, zoom);
+let button = useButtons(props, emit, pan, zoom);
+
 </script>
+
 <style module>
 .container {
-  overflow: hidden;
+    overflow: hidden;
+    position: relative;
 }
 </style>
