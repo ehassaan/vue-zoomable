@@ -1,8 +1,18 @@
-# vue-zoomable
+# vue-zoomable-cute
 
 Tiny and high performance zoom and pan library for Vue 3. It uses CSS Transforms which provides hardware acceleration.
 
 Checkout the [demos](https://hassaanakbar.github.io/vue-zoomable/demos/).
+
+## Why the fork?
+
+Because I wanna have more controll!!
+
+> _laughs in an evil manner_
+
+xD
+
+I will still make pr for changes though.
 
 ## Installation
 
