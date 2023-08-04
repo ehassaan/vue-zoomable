@@ -1,12 +1,26 @@
-# vue-zoomable
+# vue-zoomable-cute
 
 Tiny and high performance zoom and pan library for Vue 3. It uses CSS Transforms which provides hardware acceleration.
 
 Checkout the [demos](https://hassaanakbar.github.io/vue-zoomable/demos/).
 
+## Why the fork?
+
+Because I wanna have more controll!!
+
+> _laughs in an evil manner_
+
+xD
+
+I will still make pr for changes though.
+
 ## Installation
 
-`npm install vue-zoomable`
+```sh
+npm install vue-zoomable-cute
+# or
+yarn add vue-zoomable-cute
+```
 
 ## Usage
 
@@ -30,8 +44,8 @@ Immediate child of VueZoomable must be either svg or an html container.
 </template>
 
 <script setup lang="ts">
-import VueZoomable from "vue-zoomable";
-import "vue-zoomable/dist/style.css";
+import VueZoomable from "vue-zoomable-cute";
+import "vue-zoomable-cute/dist/style.css";
 </script>
 ```
 ### Model
@@ -43,25 +57,47 @@ import "vue-zoomable/dist/style.css";
 
 All props other than `selector` are observable and can be changed after initialization.
 
-| Name                 | type    | default | Description                                                                     |
-| -------------------- | ------- | ------- | ------------------------------------------------------------------------------- |
-| selector             | string  | `* > *` | Root element to apply transform on. Preferrably an `id` on `<div>` or `<g>` tag |
-| maxZoom              | number  | 3       | Maximum allowed zoom                                                            |
-| minZoom              | number  | 0.5     | Minimum allowed zoom                                                            |
-| dblClickZoomStep     | number  | 0.4     | Step size for zoom on double click                                              |
-| wheelZoomStep        | number  | 0.05    | Step size for zoom on wheel                                                     |
-| panEnabled           | boolean | true    | Enable panning                                                                  |
-| zoomEnabled          | boolean | true    | Enable zoom                                                                     |
-| mouseEnabled         | boolean | true    | Enable mouse events                                                             |
-| touchEnabled         | boolean | true    | Enable touch events                                                             |
-| dblClickEnabled      | boolean | true    | Zoom on double click enabled                                                    |
-| wheelEnabled         | boolean | true    | Zoom on mouse enabled                                                           |
-| initialZoom          | number  | 0.5     | (Deprecated) Initial zoom value. Use v-model:zoom                               |
-| initialPanX          | number  | 0       | (Deprecated) Initial pan along x-axis. Use v-model:pan                          |
-| initialPanY          | number  | 0       | (Deprecated) Initial pan along y-axis. Use v-model:pan                          |
-| enableControllButton | boolean | false   | Defines, if the controll buttons will be enabled.                               |
-| buttonPanStep        | number  | 15      | Step size for pan on controll buttons                                           |
-| buttonZoomStep       | number  | 0.1     | Step size for pan on controll buttons                                           |
+| Name                 | type    | default   | Description                                                                                                                                        |
+| -------------------- | ------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| selector             | string  | `* > *`   | Root element to apply transform on. Preferrably an `id` on `<div>` or `<g>` tag                                                                    |
+| maxZoom              | number  | 3         | Maximum allowed zoom                                                                                                                               |
+| minZoom              | number  | 0.5       | Minimum allowed zoom                                                                                                                               |
+| dblClickZoomStep     | number  | 0.4       | Step size for zoom on double click                                                                                                                 |
+| wheelZoomStep        | number  | 0.05      | Step size for zoom on wheel                                                                                                                        |
+| panEnabled           | boolean | true      | Enable panning                                                                                                                                     |
+| zoomEnabled          | boolean | true      | Enable zoom                                                                                                                                        |
+| mouseEnabled         | boolean | true      | Enable mouse events                                                                                                                                |
+| touchEnabled         | boolean | true      | Enable touch events                                                                                                                                |
+| dblClickEnabled      | boolean | true      | Zoom on double click enabled                                                                                                                       |
+| wheelEnabled         | boolean | true      | Zoom on mouse enabled                                                                                                                              |
+| initialZoom          | number  | 0.5       | (Deprecated) Initial zoom value. Use v-model:zoom                                                                                                  |
+| initialPanX          | number  | 0         | (Deprecated) Initial pan along x-axis. Use v-model:pan                                                                                             |
+| initialPanY          | number  | 0         | (Deprecated) Initial pan along y-axis. Use v-model:pan                                                                                             |
+| enableControllButton | boolean | false     | Defines, if the controll buttons will be enabled.                                                                                                  |
+| buttonPanStep        | number  | 15        | Step size for pan on controll buttons                                                                                                              |
+| buttonZoomStep       | number  | 0.1       | Step size for pan on controll buttons                                                                                                              |
+| enableWheelOnKey     | string  | undefined | If not null, the wheel is disabled, until the corresponding Key is pressed. You can set it to any value of `event.key`. [see here](#document-flow) |
+
+### Document Flow
+
+If you have any document flow whatsoever on your page, it certainly won't do if you can only zoom with the mouse wheel. Because that would scroll the document at the same time. One sollution might be to do some weird stuff with prevent default or smth. But that gets messy REAAAL quickly.
+
+My sollution was inspired by [Google-Maps](https://developers.google.com/maps/documentation/javascript/examples/control-default). You can set the prop `enableWheelOnKey` to whatever key button you like. _(Every value that can be found in KeyEvents `event.key` are valid and should work)_. If `enableWheelOnKey` is set, the zoom on Wheel will only work, if simmultaniously the corresponding Button is pressed.
+
+If you have a document flow, it is reccomended, to set `enableWheelOnKey` to the value `Control`.
+
+```vue
+<VueZoomable :enableWheelOnKey="'Control'">
+</VueZoomable>
+```
+
+Now usually `Control` + `wheel` zooms in and out of the viewport. This... isn't good. Arguably this is a worse ux as scrolling while zooming. That's why I prevent it when following cases are all met:
+
+- `enableWheelOnKey` is set to `"Control"`
+- the mouse is within the bounds of the container element
+- you... well would zoom the viewport
+
+Because this could be unintuitive, I implemented a message that tells you what you need to do to actually zoom, that appears after you would have zoomed without this. Just like [Google](https://developers.google.com/maps/documentation/javascript/examples/control-default) did.
 
 ### Events
 

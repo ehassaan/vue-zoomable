@@ -1,5 +1,5 @@
 {
-  "name": " vue-zoomable",
+  "name": "vue-zoomable",
   "version": "0.0.1",
   "description": "Tiny and high performance pan and zoom library for Vue 3 written in Typescript.",
   "main": "index.js",
