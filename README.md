@@ -146,14 +146,14 @@ Contributions are most welcome. Please follow the below steps for any contributi
 
 ### Setup
 
-The setup is pretty easy. You need to have `npm` installed.
+The setup is pretty easy. You need to have `pnpm` installed.
 
 ```sh
 # install the dependencies
-npm install --dev
+pnpm i
 
 # start the dev thingie
-npm run dev
+pnpm run dev
 ```
 
 ### Where should I start?
