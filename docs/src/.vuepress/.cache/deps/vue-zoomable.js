@@ -23,7 +23,7 @@ import {
   toDisplayString
 } from "./chunk-L52MBEYQ.js";
 
-// node_modules/.pnpm/file+..+vue-zoomable-1.1.5.tgz_vue@3.3.4/node_modules/vue-zoomable/dist/vue-zoomable.mjs
+// node_modules/.pnpm/file+..+vue-zoomable-1.1.6.tgz_vue@3.3.4/node_modules/vue-zoomable/dist/vue-zoomable.mjs
 function q(t, a, e, o, i) {
   let u = {
     x: 0,
@@ -605,16 +605,18 @@ var Ce = defineComponent({
       _.provide("hideOverlay", { hideOverlay: o }), _.mount(r), i.value.appendChild(r), c();
     });
     const v = ref(/* @__PURE__ */ new Set());
-    window.addEventListener(
-      "wheel",
-      (r) => {
-        !y.value || e.enableWheelOnKey !== "Control" || r.ctrlKey && r.preventDefault();
-      },
-      { passive: false }
-    ), document.addEventListener("keydown", (r) => {
-      v.value.add(r.key), r.key === e.enableWheelOnKey && (o.value = true);
-    }), document.addEventListener("keyup", (r) => {
-      v.value.delete(r.key);
+    onMounted(() => {
+      window.addEventListener(
+        "wheel",
+        (r) => {
+          !y.value || e.enableWheelOnKey !== "Control" || r.ctrlKey && r.preventDefault();
+        },
+        { passive: false }
+      ), document.addEventListener("keydown", (r) => {
+        v.value.add(r.key), r.key === e.enableWheelOnKey && (o.value = true);
+      }), document.addEventListener("keyup", (r) => {
+        v.value.delete(r.key);
+      });
     });
     const y = ref(false);
     function h() {
@@ -630,14 +632,14 @@ var Ce = defineComponent({
       o.value = r;
     }
     let Z = q(e, m, d, u), Y = F(e, m, d, u), M = U(e, m, d, u, v, k), C = G(e, m, d, u);
-    function N(r) {
+    function W(r) {
       O(true), Z.onMouseDown(r);
     }
     return (r, _) => (openBlock(), createElementBlock("div", {
       ref_key: "container",
       ref: i,
       class: normalizeClass(["container", r.$style.container]),
-      onMousedown: N,
+      onMousedown: W,
       onDblclick: _[1] || (_[1] = //@ts-ignore
       (...w) => unref(Z).onDblClick && unref(Z).onDblClick(...w)),
       onTouchstart: _[2] || (_[2] = //@ts-ignore

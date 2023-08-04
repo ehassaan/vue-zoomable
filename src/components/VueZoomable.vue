@@ -184,20 +184,23 @@ onMounted(() => {
 
 const pressedKeys: Ref<Set<String>> = ref(new Set<String>());
 
-window.addEventListener(
-  'wheel',
-  event => {
-    if (!isInContainer.value || props.enableWheelOnKey !== "Control") return;
-    if (event.ctrlKey) event.preventDefault();
-  }, { passive: false },
-);
+onMounted(() => {
+  window.addEventListener(
+    'wheel',
+    event => {
+      if (!isInContainer.value || props.enableWheelOnKey !== "Control") return;
+      if (event.ctrlKey) event.preventDefault();
+    }, { passive: false },
+  );
 
-// track the keys, which are currently pressed
-document.addEventListener('keydown', (event) => {
-  pressedKeys.value.add(event.key);
-  if (event.key === props.enableWheelOnKey) hideOverlay.value = true;
-});
-document.addEventListener('keyup', (event) => { pressedKeys.value.delete(event.key); });
+  // track the keys, which are currently pressed
+  document.addEventListener('keydown', (event) => {
+    pressedKeys.value.add(event.key);
+    if (event.key === props.enableWheelOnKey) hideOverlay.value = true;
+  });
+  document.addEventListener('keyup', (event) => { pressedKeys.value.delete(event.key); });
+})
+
 // track if the mouse is in the container
 const isInContainer = ref(false);
 
