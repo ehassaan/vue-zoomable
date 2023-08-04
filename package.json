@@ -39,7 +39,6 @@
     "zoomable"
   ],
   "dependencies": {
-    "@babel/types": "^7.22.5",
-    "vue": "^3.3.4"
+    "@babel/types": "^7.22.5"
   }
 }
