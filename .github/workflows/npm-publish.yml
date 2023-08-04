@@ -17,8 +17,9 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: pnpm i
-      - run: pnpm run build
+      - run: npm i pnpm
+      - run: npx pnpm i
+      - run: npx pnpm run build
 
   publish-npm:
     environment: "npm-publish"
