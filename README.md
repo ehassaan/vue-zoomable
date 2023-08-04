@@ -1,31 +1,16 @@
-# vue-zoomable-cute
+# vue-zoomable
 
 Tiny and high performance zoom and pan library for Vue 3. It uses CSS Transforms which provides hardware acceleration.
 
 Checkout the [demos](https://hassaanakbar.github.io/vue-zoomable/demos/).
 
-## Why the fork?
-
-Because I wanna have more controll!!
-
-> _laughs in an evil manner_
-
-xD
-
-I will still make pr for changes though.
-
 ## Installation
 
-```sh
-npm install vue-zoomable-cute
-# or
-yarn add vue-zoomable-cute
-```
+`npm install vue-zoomable`
 
 ## Usage
 
 Immediate child of VueZoomable must be either svg or an html container.
-
 
 ```vue
 <template>
@@ -44,10 +29,11 @@ Immediate child of VueZoomable must be either svg or an html container.
 </template>
 
 <script setup lang="ts">
-import VueZoomable from "vue-zoomable-cute";
-import "vue-zoomable-cute/dist/style.css";
+import VueZoomable from "vue-zoomable";
+import "vue-zoomable/dist/style.css";
 </script>
 ```
+
 ### Model
 
 - v-model:zoom
@@ -80,7 +66,9 @@ All props other than `selector` are observable and can be changed after initiali
 
 ### Document Flow
 
-If you have any document flow whatsoever on your page, it certainly won't do if you can only zoom with the mouse wheel. Because that would scroll the document at the same time. One sollution might be to do some weird stuff with prevent default or smth. But that gets messy REAAAL quickly.
+If you have any document flow whatsoever on your page, it certainly won't do if you can only zoom with the mouse wheel. Because that would scroll the document at the same time. Thanks to [Hellow2](https://github.com/HeIIow2) for document flow and control buttons features.
+
+---
 
 My sollution was inspired by [Google-Maps](https://developers.google.com/maps/documentation/javascript/examples/control-default). You can set the prop `enableWheelOnKey` to whatever key button you like. _(Every value that can be found in KeyEvents `event.key` are valid and should work)_. If `enableWheelOnKey` is set, the zoom on Wheel will only work, if simmultaniously the corresponding Button is pressed.
 
@@ -98,6 +86,8 @@ Now usually `Control` + `wheel` zooms in and out of the viewport. This... isn't 
 - you... well would zoom the viewport
 
 Because this could be unintuitive, I implemented a message that tells you what you need to do to actually zoom, that appears after you would have zoomed without this. Just like [Google](https://developers.google.com/maps/documentation/javascript/examples/control-default) did.
+
+---
 
 ### Events
 

@@ -18,9 +18,10 @@ export function useWheel(
 
         // it would zoom, if the "zoom bounds" aren't exeded
         if (newZoom > props.maxZoom) zoom.value = props.maxZoom;
-        else if (newZoom == props.maxZoom || newZoom == props.minZoom) return;
+        else if (newZoom == props.maxZoom || newZoom == props.minZoom || isNaN(newZoom)) return;
         else if (newZoom < props.minZoom) zoom.value = props.minZoom;
         else zoom.value = newZoom;
+        console.log("Wheel: ", newZoom, ev);
 
         let event: ZoomableEvent = {
             zoom: zoom.value,

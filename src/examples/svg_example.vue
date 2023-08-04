@@ -49,7 +49,7 @@
     :minZoom="0.3" :maxZoom="2" :dblClickZoomStep="0.4" :wheelZoomStep="0.01"
     :enableWheelOnKey="documentFlow ? 'Control' : undefined" :enableControllButton="enableControllButton"
     @zoom="showEvent" @panned="showEvent">
-    <svg v-if="visible">
+    <svg class="mysvg" v-if="visible">
       <g id="container1">
         <circle x="10" y="10" r="50" />
       </g>
@@ -198,4 +198,9 @@ let documentFlow = ref(true)
 let enableControllButton = ref(true);
 </script>
 
-<style></style>
+<style>
+.mysvg {
+  height: 100%;
+  width: 100%;
+}
+</style>

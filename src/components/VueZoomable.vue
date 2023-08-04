@@ -182,7 +182,7 @@ onMounted(() => {
 });
 
 
-const pressedKeys: Ref<Set<String>> = ref(new Set());
+const pressedKeys: Ref<Set<String>> = ref(new Set<String>());
 
 window.addEventListener(
   'wheel',
