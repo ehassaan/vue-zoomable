@@ -9,7 +9,7 @@ export function useWheel(
     pressedKeys: Ref<Set<String>>,
     showOverlay: Function) {
 
-    const { changeZoom } = useMove(props, emit, pan, zoom);
+    const { changeZoom } = useMove(props, emit, pan, zoom, showOverlay);
 
 
     function onWheel(ev: WheelEvent) {
