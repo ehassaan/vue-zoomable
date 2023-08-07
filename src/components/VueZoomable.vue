@@ -156,6 +156,7 @@ function setTransform() {
   }
   if (!element) return;
   element.style.transform = transform.value;
+  element.style.transition = "transform 0.06s ease-out";
 }
 
 watch(
@@ -231,6 +232,8 @@ function onMouseDown(event: MouseEvent) {
 .container {
   overflow: hidden;
   position: relative;
+
+  transition: transform 0.1s ease-out;
 
   -webkit-user-select: none;
   -moz-user-select: none;
