@@ -98,7 +98,6 @@ a {
 
 a:hover {
     color: #555b61;
-    ;
 }
 
 
@@ -128,7 +127,8 @@ a:hover {
 
 .controll__item--circle .controll__item--circle__inner {
     position: absolute;
-    display: block;
+    display: grid;
+    justify-items: center;
 
     top: -74px;
     left: 50%;
@@ -144,38 +144,29 @@ a:hover {
     box-shadow: 0 5px 25px rgba(50, 50, 93, 0.05), 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
+
 .controll__item--circle .controll__item--circle__inner li {
-    position: absolute;
+    height: 24px;
 }
 
 .controll__item--circle .controll__item--circle__inner .controll__item--circle__inner__up {
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    grid-row: 1;
+    grid-column: 2;
 }
 
 .controll__item--circle .controll__item--circle__inner .controll__item--circle__inner__right {
-    top: 50%;
-    right: 0;
-    transform: translateY(-50%);
+    grid-row: 2;
+    grid-column: 3;
 }
 
 .controll__item--circle .controll__item--circle__inner .controll__item--circle__inner__down {
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    grid-row: 3;
+    grid-column: 2;
 }
 
 .controll__item--circle .controll__item--circle__inner .controll__item--circle__inner__left {
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-}
-
-.controll--item {
-    display: block;
-    line-height: 1;
-    border-bottom: 1px solid #dee2e6;
+    grid-row: 2;
+    grid-column: 1;
 }
 
 .controll--item:last-child {
@@ -183,6 +174,10 @@ a:hover {
 }
 
 .controll__item--list-item {
+    display: block;
+    line-height: 1;
+    border-bottom: 1px solid #dee2e6;
+
     padding: 12px;
 }
 </style>
