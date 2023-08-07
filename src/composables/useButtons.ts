@@ -5,9 +5,10 @@ export function useButtons(
     props: any,
     emit: any,
     pan: Ref<{ x: number, y: number }>,
-    zoom: Ref<number>) {
+    zoom: Ref<number>,
+    setOverlay: Function) {
 
-    const { changeZoom, changePan, goHome } = useMove(props, emit, pan, zoom);
+    const { changeZoom, changePan, goHome } = useMove(props, emit, pan, zoom, setOverlay);
 
     const eventType: string = "controll_button";
 

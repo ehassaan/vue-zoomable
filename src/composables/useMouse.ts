@@ -7,9 +7,10 @@ export function useMouse(
     emit: any,
     pan: Ref<{ x: number, y: number }>,
     zoom: Ref<number>,
+    setOverlay: Function
 ) {
 
-    const { changeZoom, changePan } = useMove(props, emit, pan, zoom);
+    const { changeZoom, changePan } = useMove(props, emit, pan, zoom, setOverlay);
     const eventType = "mouse";
 
     let dragLoc = {

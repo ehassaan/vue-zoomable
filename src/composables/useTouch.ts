@@ -5,6 +5,7 @@ export function useTouch(
     emit: any,
     pan: Ref<{ x: number, y: number }>,
     zoom: Ref<number>,
+    setOverlay: Function
 ) {
 
     let dragLoc = {
