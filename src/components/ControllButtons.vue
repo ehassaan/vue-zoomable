@@ -7,8 +7,7 @@
                         <a @mousedown="emit('button-pan', { x: 0, y: 1 }, true)"
                             @mouseup="emit('button-pan', { x: 0, y: 0 }, false)"
                             @mouseleave="emit('button-pan', { x: 0, y: 0 }, false)"
-                            @touchstart="emit('button-pan', { x: 0, y: 1 }, true)"
-                            @touchcancel="emit('button-pan', { x: 0, y: 0 }, false)"
+                            @touchstart.stop="emit('button-pan', { x: 0, y: 1 }, true)"
                             @touchend="emit('button-pan', { x: 0, y: 0 }, false)" @contextmenu.prevent="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -21,8 +20,7 @@
                         <a @mousedown="emit('button-pan', { x: -1, y: 0 }, true)"
                             @mouseup="emit('button-pan', { x: 0, y: 0 }, false)"
                             @mouseleave="emit('button-pan', { x: 0, y: 0 }, false)"
-                            @touchstart="emit('button-pan', { x: -1, y: 0 }, true)"
-                            @touchcancel="emit('button-pan', { x: 0, y: 0 }, false)"
+                            @touchstart.stop="emit('button-pan', { x: -1, y: 0 }, true)"
                             @touchend="emit('button-pan', { x: 0, y: 0 }, false)" @contextmenu.prevent="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -35,8 +33,7 @@
                         <a @mousedown="emit('button-pan', { x: 0, y: -1 }, true)"
                             @mouseup="emit('button-pan', { x: 0, y: 0 }, false)"
                             @mouseleave="emit('button-pan', { x: 0, y: 0 }, false)"
-                            @touchstart="emit('button-pan', { x: 0, y: -1 }, true)"
-                            @touchcancel="emit('button-pan', { x: 0, y: 0 }, false)"
+                            @touchstart.stop="emit('button-pan', { x: 0, y: -1 }, true)"
                             @touchend="emit('button-pan', { x: 0, y: 0 }, false)" @contextmenu.prevent="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -48,8 +45,7 @@
                         <a @mousedown="emit('button-pan', { x: 1, y: 0 }, true)"
                             @mouseup="emit('button-pan', { x: 0, y: 0 }, false)"
                             @mouseleave="emit('button-pan', { x: 0, y: 0 }, false)"
-                            @touchstart="emit('button-pan', { x: 1, y: 0 }, true)"
-                            @touchcancel="emit('button-pan', { x: 0, y: 0 }, false)"
+                            @touchstart.stop="emit('button-pan', { x: 1, y: 0 }, true)"
                             @touchend="emit('button-pan', { x: 0, y: 0 }, false)" @contextmenu.prevent="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -74,9 +70,8 @@
             </li>
             <li class="controll__zoom-in controll__item controll__item--list-item">
                 <a @mousedown="emit('button-zoom', 1, true);" @mouseup="emit('button-zoom', 0, false)"
-                    @mouseleave="emit('button-zoom', 0, false)" @touchstart="emit('button-zoom', 1, true)"
-                    @touchcancel="emit('button-zoom', 1, false)" @touchend="emit('button-zoom', 1, false)"
-                    @contextmenu.prevent="">
+                    @mouseleave="emit('button-zoom', 0, false)" @touchstart.stop="emit('button-zoom', 1, true)"
+                    @touchend="emit('button-zoom', 1, false)" @contextmenu.prevent="">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="feather feather-zoom-in">
@@ -89,9 +84,8 @@
             </li>
             <li class="controll__zoom-in controll__item controll__item--list-item">
                 <a @mousedown="emit('button-zoom', -1, true);" @mouseup="emit('button-zoom', 0, false)"
-                    @mouseleave="emit('button-zoom', 0, false)" @touchstart="emit('button-zoom', -1, true)"
-                    @touchcancel="emit('button-zoom', -1, false)" @touchend="emit('button-zoom', -1, false)"
-                    @contextmenu.prevent="">
+                    @mouseleave="emit('button-zoom', 0, false)" @touchstart.stop="emit('button-zoom', -1, true)"
+                    @touchend="emit('button-zoom', -1, false)" @contextmenu.prevent="">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="feather feather-zoom-out">
