@@ -1,9 +1,9 @@
 <template>
   <div ref="container" class="container" :class="$style.container" @mousedown="onMouseDown" @dblclick="mouse.onDblClick"
     @touchstart="touch.onTouchStart" @wheel="wheel.onWheel" @mouseleave="onMouseLeave" @mouseenter="onMouseEnter">
-    <slot></slot>
     <ControllButtons v-if="props.enableControllButton" @button-home="button.onHome" @button-pan="button.onPan"
       @button-zoom="button.onZoom" @mousedown="updateHideOverlay(true);"></ControllButtons>
+    <slot></slot>
   </div>
 </template>
 
