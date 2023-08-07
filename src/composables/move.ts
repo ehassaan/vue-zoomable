@@ -7,6 +7,8 @@ export function useMove(
   zoom: Ref<number>
 ) {
   function changeZoom(deltaZoom: number, eventType: string) {
+    if (isNaN(deltaZoom)) return;
+
     // calculate the new zoom value including all the bounds and store the old value for later compare if an event should be sent
     const oldZoom = zoom.value;
     let newZoom = zoom.value + deltaZoom;
@@ -34,6 +36,9 @@ export function useMove(
   }
 
   function changePan(deltaX: number, deltaY: number, eventType: string) {
+    if (isNaN(deltaX)) deltaX = 0;
+    if (isNaN(deltaY)) deltaY = 0;
+
     pan.value = {
       x: pan.value.x + deltaX,
       y: pan.value.y + deltaY,
