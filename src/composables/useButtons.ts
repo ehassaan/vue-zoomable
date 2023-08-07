@@ -1,4 +1,5 @@
 import { Ref } from "vue";
+import { useMove } from "./move";
 
 export function useButtons(
     props: any,
@@ -6,6 +7,7 @@ export function useButtons(
     pan: Ref<{ x: number, y: number }>,
     zoom: Ref<number>) {
 
+    const { changeZoom, changePan, goHome } = useMove(props, emit, pan, zoom);
 
     const eventType: string = "controll_button";
 
@@ -48,22 +50,7 @@ export function useButtons(
 
         const direction = panDirections[directionString];
 
-        pan.value = {
-            x: pan.value.x + direction.x,
-            y: pan.value.y + direction.y,
-        }
-
-        let event: ZoomableEvent = {
-            zoom: zoom.value,
-            pan: {
-                x: pan.value.x,
-                y: pan.value.y,
-                deltaX: direction.x,
-                deltaY: direction.y
-            },
-            type: eventType,
-        }
-        emit("panned", event);
+        changePan(direction.x, direction.y, eventType);
     }
 
     function onZoom(ev: MouseEvent) {
@@ -75,59 +62,12 @@ export function useButtons(
         }
 
         const direction = zoomDirections[directionString];
-
-        let newZoom = zoom.value + direction;
-        if (newZoom == props.maxZoom || newZoom == props.minZoom) return;
-        else if (newZoom > props.maxZoom) zoom.value = props.maxZoom;
-        else if (newZoom < props.minZoom) zoom.value = props.minZoom;
-        else zoom.value = newZoom;
-
-        let event: ZoomableEvent = {
-            zoom: zoom.value,
-            pan: {
-                x: pan.value.x,
-                y: pan.value.y,
-                deltaX: 0,
-                deltaY: 0,
-            },
-            type: eventType,
-        }
-        emit("zoom", event);
+        changeZoom(direction, eventType);
     }
 
     function onHome() {
-        // reset zoom
-        zoom.value = props.initialZoom;
-        emit("zoom", {
-            zoom: zoom.value,
-            pan: {
-                x: pan.value.x,
-                y: pan.value.y,
-                deltaX: 0,
-                deltaY: 0,
-            },
-            type: eventType,
-        })
-
-        // reset pan
-        let delta = {
-            x: props.initialPanX - pan.value.x,
-            y: props.initialPanY - pan.value.y,
-        }
-        pan.value = {
-            x: props.initialPanX,
-            y: props.initialPanY,
-        }
-        emit("panned", {
-            zoom: zoom.value,
-            pan: {
-                x: pan.value.x,
-                y: pan.value.y,
-                deltaX: delta.x,
-                deltaY: delta.y,
-            },
-            type: eventType,
-        })
+        // what a totally necesarry function *rolls eyes*
+        goHome(eventType);
     }
 
     return {

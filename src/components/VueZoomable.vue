@@ -216,8 +216,8 @@ function onMouseLeave() {
 function showOverlay() { hideOverlay.value = false; }
 function updateHideOverlay(newHideOverlay: boolean) { hideOverlay.value = newHideOverlay; }
 
-let mouse = useMouse(props, emit, pan, zoom, pressedKeys);
-let touch = useTouch(props, emit, pan, zoom, pressedKeys);
+let mouse = useMouse(props, emit, pan, zoom);
+let touch = useTouch(props, emit, pan, zoom);
 let wheel = useWheel(props, emit, pan, zoom, pressedKeys, showOverlay);
 let button = useButtons(props, emit, pan, zoom);
 

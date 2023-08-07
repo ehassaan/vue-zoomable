@@ -1,4 +1,5 @@
 import { Ref } from "vue";
+import { useMove } from "./move";
 
 
 export function useMouse(
@@ -6,7 +7,10 @@ export function useMouse(
     emit: any,
     pan: Ref<{ x: number, y: number }>,
     zoom: Ref<number>,
-    pressedKeys: Ref<Set<String>>,) {
+) {
+
+    const { changeZoom, changePan } = useMove(props, emit, pan, zoom);
+    const eventType = "mouse";
 
     let dragLoc = {
         x: 0,
@@ -23,54 +27,27 @@ export function useMouse(
             window.removeEventListener("mousemove", onMouseMove);
         });
     }
+
     function onMouseMove(ev: MouseEvent) {
         if (!props.panEnabled) return;
         let delta = {
             x: ev.clientX - dragLoc.x,
             y: ev.clientY - dragLoc.y,
         }
-        
-        pan.value = {
-            x: pan.value.x + delta.x,
-            y: pan.value.y + delta.y,
-        }
+
+        changePan(delta.x, delta.y, eventType);
+
+        // Idfk what this does but it has to be here, don't ask me
         dragLoc = {
             x: ev.clientX,
             y: ev.clientY,
         }
-        let event: ZoomableEvent = {
-            zoom: zoom.value,
-            pan: {
-                x: pan.value.x,
-                y: pan.value.y,
-                deltaX: delta.x,
-                deltaY: delta.y,
-            },
-            type: "mouse"
-        };
-        emit("panned", event);
     }
+
     function onDblClick() {
         if (!props.dblClickEnabled || !props.zoomEnabled) return;
-        let newZoom = zoom.value + props.dblClickZoomStep;
-        if (newZoom == props.maxZoom) return;
-        else if (newZoom > props.maxZoom) {
-            zoom.value = props.maxZoom;
-        }
-        else {
-            zoom.value = newZoom;
-        }
-        let event: ZoomableEvent = {
-            zoom: newZoom,
-            pan: {
-                x: pan.value.x,
-                y: pan.value.y,
-                deltaX: 0,
-                deltaY: 0,
-            },
-            type: "dblClick"
-        };
-        emit("zoom", event);
+
+        changeZoom(props.dblClickZoomStep, "dblClick");
     }
 
     return {
