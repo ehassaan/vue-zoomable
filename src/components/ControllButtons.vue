@@ -150,6 +150,11 @@ a:hover {
     height: 24px;
 }
 
+.controll__item--circle .controll__item--circle__inner li a {
+    display: block;
+    line-height: 0;
+}
+
 .controll__item--circle .controll__item--circle__inner .controll__item--circle__inner__up {
     grid-row: 1;
     grid-column: 2;
