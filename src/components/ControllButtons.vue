@@ -4,7 +4,12 @@
             <li class="controll__item controll__item--circle">
                 <ul class="controll__pan controll__item--circle__inner">
                     <li class="controll__pan__up controll__item--circle__inner__up">
-                        <a @click="emit('button-pan', $event)" @touchend="emit('button-pan', $event)" data-direction="up">
+                        <a @mousedown="emit('button-pan', { x: 0, y: 1 }, true)"
+                            @mouseup="emit('button-pan', { x: 0, y: 0 }, false)"
+                            @mouseleave="emit('button-pan', { x: 0, y: 0 }, false)"
+                            @touchstart="emit('button-pan', { x: 0, y: 1 }, true)"
+                            @touchcancel="emit('button-pan', { x: 0, y: 0 }, false)"
+                            @touchend="emit('button-pan', { x: 0, y: 0 }, false)" @contextmenu.prevent="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                 class="feather feather-chevron-up">
@@ -13,8 +18,12 @@
                         </a>
                     </li>
                     <li class="controll__pan__right controll__item--circle__inner__right">
-                        <a @click="emit('button-pan', $event)" @touchend="emit('button-pan', $event)"
-                            data-direction="right">
+                        <a @mousedown="emit('button-pan', { x: -1, y: 0 }, true)"
+                            @mouseup="emit('button-pan', { x: 0, y: 0 }, false)"
+                            @mouseleave="emit('button-pan', { x: 0, y: 0 }, false)"
+                            @touchstart="emit('button-pan', { x: -1, y: 0 }, true)"
+                            @touchcancel="emit('button-pan', { x: 0, y: 0 }, false)"
+                            @touchend="emit('button-pan', { x: 0, y: 0 }, false)" @contextmenu.prevent="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                 class="feather feather-chevron-right">
@@ -23,7 +32,12 @@
                         </a>
                     </li>
                     <li class="controll__pan__down controll__item--circle__inner__down">
-                        <a @click="emit('button-pan', $event)" @touchend="emit('button-pan', $event)" data-direction="down">
+                        <a @mousedown="emit('button-pan', { x: 0, y: -1 }, true)"
+                            @mouseup="emit('button-pan', { x: 0, y: 0 }, false)"
+                            @mouseleave="emit('button-pan', { x: 0, y: 0 }, false)"
+                            @touchstart="emit('button-pan', { x: 0, y: -1 }, true)"
+                            @touchcancel="emit('button-pan', { x: 0, y: 0 }, false)"
+                            @touchend="emit('button-pan', { x: 0, y: 0 }, false)" @contextmenu.prevent="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                 class="feather feather-chevron-down">
@@ -31,7 +45,12 @@
                             </svg></a>
                     </li>
                     <li class="controll__pan__left controll__item--circle__inner__left">
-                        <a @click="emit('button-pan', $event)" @touchend="emit('button-pan', $event)" data-direction="left">
+                        <a @mousedown="emit('button-pan', { x: 1, y: 0 }, true)"
+                            @mouseup="emit('button-pan', { x: 0, y: 0 }, false)"
+                            @mouseleave="emit('button-pan', { x: 0, y: 0 }, false)"
+                            @touchstart="emit('button-pan', { x: 1, y: 0 }, true)"
+                            @touchcancel="emit('button-pan', { x: 0, y: 0 }, false)"
+                            @touchend="emit('button-pan', { x: 0, y: 0 }, false)" @contextmenu.prevent="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                 class="feather feather-chevron-left">
@@ -54,7 +73,10 @@
                 </a>
             </li>
             <li class="controll__zoom-in controll__item controll__item--list-item">
-                <a @click="emit('button-zoom', $event);" @touchend="emit('button-zoom', $event)" data-direction="in">
+                <a @mousedown="emit('button-zoom', 1, true);" @mouseup="emit('button-zoom', 0, false)"
+                    @mouseleave="emit('button-zoom', 0, false)" @touchstart="emit('button-zoom', 1, true)"
+                    @touchcancel="emit('button-zoom', 1, false)" @touchend="emit('button-zoom', 1, false)"
+                    @contextmenu.prevent="">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="feather feather-zoom-in">
@@ -66,7 +88,10 @@
                 </a>
             </li>
             <li class="controll__zoom-in controll__item controll__item--list-item">
-                <a @click="emit('button-zoom', $event);" @touchend="emit('button-zoom', $event)" data-direction="out">
+                <a @mousedown="emit('button-zoom', -1, true);" @mouseup="emit('button-zoom', 0, false)"
+                    @mouseleave="emit('button-zoom', 0, false)" @touchstart="emit('button-zoom', -1, true)"
+                    @touchcancel="emit('button-zoom', -1, false)" @touchend="emit('button-zoom', -1, false)"
+                    @contextmenu.prevent="">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="feather feather-zoom-out">
