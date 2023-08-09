@@ -4,10 +4,12 @@ export function useMove(
   props: any,
   emit: any,
   pan: Ref<{ x: number, y: number }>,
-  zoom: Ref<number>
+  zoom: Ref<number>,
+  setOverlay: Function
 ) {
   function changeZoom(deltaZoom: number, eventType: string) {
     if (isNaN(deltaZoom)) return;
+    setOverlay(true);
 
     // calculate the new zoom value including all the bounds and store the old value for later compare if an event should be sent
     const oldZoom = zoom.value;
@@ -38,6 +40,7 @@ export function useMove(
   function changePan(deltaX: number, deltaY: number, eventType: string) {
     if (isNaN(deltaX)) deltaX = 0;
     if (isNaN(deltaY)) deltaY = 0;
+    setOverlay(true);
 
     pan.value = {
       x: pan.value.x + deltaX,
@@ -58,6 +61,8 @@ export function useMove(
   }
 
   function goHome(eventType: string) {
+    setOverlay(true);
+
     // reset zoom
     zoom.value = props.initialZoom;
     emit("zoom", {
