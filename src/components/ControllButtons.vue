@@ -4,7 +4,7 @@
             <li class="controll__item controll__item--circle">
                 <ul class="controll__pan controll__item--circle__inner">
                     <li class="controll__pan__up controll__item--circle__inner__up">
-                        <a @click="emit('button-pan', $event)" data-direction="up">
+                        <a @click="emit('button-pan', $event)" @touchend="emit('button-pan', $event)" data-direction="up">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                 class="feather feather-chevron-up">
@@ -13,7 +13,8 @@
                         </a>
                     </li>
                     <li class="controll__pan__right controll__item--circle__inner__right">
-                        <a @click="emit('button-pan', $event)" data-direction="right">
+                        <a @click="emit('button-pan', $event)" @touchend="emit('button-pan', $event)"
+                            data-direction="right">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                 class="feather feather-chevron-right">
@@ -22,7 +23,7 @@
                         </a>
                     </li>
                     <li class="controll__pan__down controll__item--circle__inner__down">
-                        <a @click="emit('button-pan', $event)" data-direction="down">
+                        <a @click="emit('button-pan', $event)" @touchend="emit('button-pan', $event)" data-direction="down">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                 class="feather feather-chevron-down">
@@ -30,7 +31,7 @@
                             </svg></a>
                     </li>
                     <li class="controll__pan__left controll__item--circle__inner__left">
-                        <a @click="emit('button-pan', $event)" data-direction="left">
+                        <a @click="emit('button-pan', $event)" @touchend="emit('button-pan', $event)" data-direction="left">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                 class="feather feather-chevron-left">
@@ -41,7 +42,7 @@
                 </ul>
             </li>
             <li class="controll__home controll__item controll__item--list-item">
-                <a @click="emit('button-home');">
+                <a @click="emit('button-home');" @touchend="emit('button-home')">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="feather feather-minimize-2">
@@ -53,7 +54,7 @@
                 </a>
             </li>
             <li class="controll__zoom-in controll__item controll__item--list-item">
-                <a @click="emit('button-zoom', $event);" data-direction="in">
+                <a @click="emit('button-zoom', $event);" @touchend="emit('button-zoom', $event)" data-direction="in">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="feather feather-zoom-in">
@@ -65,7 +66,7 @@
                 </a>
             </li>
             <li class="controll__zoom-in controll__item controll__item--list-item">
-                <a @click="emit('button-zoom', $event);" data-direction="out">
+                <a @click="emit('button-zoom', $event);" @touchend="emit('button-zoom', $event)" data-direction="out">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="feather feather-zoom-out">
@@ -98,7 +99,6 @@ a {
 
 a:hover {
     color: #555b61;
-    ;
 }
 
 
@@ -128,7 +128,8 @@ a:hover {
 
 .controll__item--circle .controll__item--circle__inner {
     position: absolute;
-    display: block;
+    display: grid;
+    justify-items: center;
 
     top: -74px;
     left: 50%;
@@ -144,38 +145,34 @@ a:hover {
     box-shadow: 0 5px 25px rgba(50, 50, 93, 0.05), 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
+
 .controll__item--circle .controll__item--circle__inner li {
-    position: absolute;
+    height: 24px;
+}
+
+.controll__item--circle .controll__item--circle__inner li a {
+    display: block;
+    line-height: 0;
 }
 
 .controll__item--circle .controll__item--circle__inner .controll__item--circle__inner__up {
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    grid-row: 1;
+    grid-column: 2;
 }
 
 .controll__item--circle .controll__item--circle__inner .controll__item--circle__inner__right {
-    top: 50%;
-    right: 0;
-    transform: translateY(-50%);
+    grid-row: 2;
+    grid-column: 3;
 }
 
 .controll__item--circle .controll__item--circle__inner .controll__item--circle__inner__down {
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    grid-row: 3;
+    grid-column: 2;
 }
 
 .controll__item--circle .controll__item--circle__inner .controll__item--circle__inner__left {
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-}
-
-.controll--item {
-    display: block;
-    line-height: 1;
-    border-bottom: 1px solid #dee2e6;
+    grid-row: 2;
+    grid-column: 1;
 }
 
 .controll--item:last-child {
@@ -183,6 +180,10 @@ a:hover {
 }
 
 .controll__item--list-item {
+    display: block;
+    line-height: 1;
+    border-bottom: 1px solid #dee2e6;
+
     padding: 12px;
 }
 </style>

@@ -1,9 +1,9 @@
 <template>
   <div ref="container" class="container" :class="$style.container" @mousedown="onMouseDown" @dblclick="mouse.onDblClick"
     @touchstart="touch.onTouchStart" @wheel="wheel.onWheel" @mouseleave="onMouseLeave" @mouseenter="onMouseEnter">
-    <slot></slot>
     <ControllButtons v-if="props.enableControllButton" @button-home="button.onHome" @button-pan="button.onPan"
       @button-zoom="button.onZoom" @mousedown="updateHideOverlay(true);"></ControllButtons>
+    <slot></slot>
   </div>
 </template>
 
@@ -216,8 +216,8 @@ function onMouseLeave() {
 function showOverlay() { hideOverlay.value = false; }
 function updateHideOverlay(newHideOverlay: boolean) { hideOverlay.value = newHideOverlay; }
 
-let mouse = useMouse(props, emit, pan, zoom, pressedKeys);
-let touch = useTouch(props, emit, pan, zoom, pressedKeys);
+let mouse = useMouse(props, emit, pan, zoom);
+let touch = useTouch(props, emit, pan, zoom);
 let wheel = useWheel(props, emit, pan, zoom, pressedKeys, showOverlay);
 let button = useButtons(props, emit, pan, zoom);
 

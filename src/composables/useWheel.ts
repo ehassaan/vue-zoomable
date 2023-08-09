@@ -1,4 +1,5 @@
 import { Ref } from "vue";
+import { useMove } from "./move";
 
 export function useWheel(
     props: any,
@@ -8,32 +9,20 @@ export function useWheel(
     pressedKeys: Ref<Set<String>>,
     showOverlay: Function) {
 
+    const { changeZoom } = useMove(props, emit, pan, zoom);
+
+
     function onWheel(ev: WheelEvent) {
+        // check if all conditions are met to scroll
         if (!props.wheelEnabled || !props.zoomEnabled) return;
-        let newZoom = zoom.value + (props.dblClickZoomStep * ev.deltaY / Math.abs(ev.deltaY));
         if (props.enableWheelOnKey !== undefined && !pressedKeys.value.has(props.enableWheelOnKey)) {
             showOverlay();
             return;
         }
 
-        // it would zoom, if the "zoom bounds" aren't exeded
-        if (newZoom > props.maxZoom) zoom.value = props.maxZoom;
-        else if (newZoom == props.maxZoom || newZoom == props.minZoom || isNaN(newZoom)) return;
-        else if (newZoom < props.minZoom) zoom.value = props.minZoom;
-        else zoom.value = newZoom;
-        console.log("Wheel: ", newZoom, ev);
-
-        let event: ZoomableEvent = {
-            zoom: zoom.value,
-            pan: {
-                x: pan.value.x,
-                y: pan.value.y,
-                deltaX: 0,
-                deltaY: 0,
-            },
-            type: "wheel"
-        };
-        emit("zoom", event);
+        // normalizes the value of ev.deltaY to either be 1 or -1 and multiplies it with the double click zoom step?
+        const deltaZoom = props.dblClickZoomStep * ev.deltaY / Math.abs(ev.deltaY);
+        changeZoom(deltaZoom, "wheel");
     }
 
     return {
