@@ -245,7 +245,7 @@ import VueZoomable from "../components/VueZoomable.vue";
 const zoom = ref(0.5);
 const pan = ref({ x: 0, y: 0 });
 const slotContentType = ref("html");
-const selector = ref("zoomable-content");
+const selector = ref("#zoomable-content");
 
 function showEvent(ev: any) {
   console.log(ev)
