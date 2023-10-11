@@ -105,6 +105,8 @@ let props = defineProps({
 });
 
 let container = ref();
+let transformTarget = computed<HTMLElement>(() => container.value?.querySelector(props.selector))
+
 let zoom = ref(props.minZoom);
 if (props.initialZoom >= props.minZoom && props.initialZoom <= props.maxZoom) {
   zoom.value = props.initialZoom;
@@ -130,7 +132,7 @@ watch(
   () => {
     if (props.pan) {
       pan.value.x = props.pan.x;
-      pan.value.x = props.pan.y;
+      pan.value.y = props.pan.y;
     }
   }
 );
@@ -151,12 +153,10 @@ let transform = computed(() => {
 let element: any = null;
 
 function setTransform() {
-  if (!element) {
-    element = container.value?.querySelector(props.selector);
-  }
-  if (!element) return;
-  element.style.transform = transform.value;
-  element.style.transition = "transform 0.06s ease-out";
+  if (!transformTarget.value) return;
+  console.log(transformTarget);
+  transformTarget.value.style.transform = transform.value;
+  transformTarget.value.style.transition = "transform 0.06s ease-out";
 }
 
 watch(
