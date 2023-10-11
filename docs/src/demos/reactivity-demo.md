@@ -8,7 +8,4 @@ sidebar:
     link: ./reactivity-demo
 ---
 
-# Demos
-
-- [SVG Content](./svg-demo)
-- [HTML Content](./html-demo)
+<ReactivityDemo></ReactivityDemo>

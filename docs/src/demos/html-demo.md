@@ -1,9 +1,11 @@
 ---
 sidebar:
-    - text: SVG Content
-      link: ./svg-demo
-    - text: HTML Content
-      link: ./html-demo
+  - text: SVG Content
+    link: ./svg-demo
+  - text: HTML Demo
+    link: ./html-demo
+  - text: Reactivity Demo
+    link: ./reactivity-demo
 ---
 
 <HtmlDemo></HtmlDemo>
@@ -36,7 +38,6 @@ import "vue-zoomable/dist/style.css";
 import VueZoomable from "vue-zoomable";
 </script>
 <style>
-
 #boxes {
   display: flex;
   flex-direction: column;

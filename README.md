@@ -41,8 +41,6 @@ import "vue-zoomable/dist/style.css";
 
 ### Props
 
-All props other than `selector` are observable and can be changed after initialization.
-
 | Name                 | type    | default   | Description                                                                                                                                        |
 | -------------------- | ------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
 | selector             | string  | `* > *`   | Root element to apply transform on. Preferrably an `id` on `<div>` or `<g>` tag                                                                    |

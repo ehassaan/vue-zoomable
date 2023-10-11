@@ -1,15 +1,5 @@
-<template>
-  <form>
-    <input type="checkbox" v-model="zoomEnabled" />zoomEnabled
-    <input type="checkbox" v-model="panEnabled" />panEnabled
-    <input type="checkbox" v-model="dbClickEnabled" />dblClickEnabled
-    <input type="checkbox" v-model="touchEnabled" />touchEnabled
-    <input type="checkbox" v-model="mouseWheelZoomEnabled" />wheelEnabled
-    <input type="checkbox" v-model="visible" />Slot Content
-    <input type="checkbox" v-model="documentFlow" />DocumentFlow
-    <input type="checkbox" v-model="enableControllButton" />Controll Button Enabled
-  </form>
 
+<template>
   <section v-if="documentFlow">
     <h1>Chapter 1</h1>
     <p>
@@ -41,22 +31,97 @@
     </p>
   </section>
 
-  <VueZoomable style="width: 500px; height: 500px; border: 1px solid black" :zoomEnabled="zoomEnabled"
-    :panEnabled="panEnabled" selector="#boxes" :dblClickEnabled="dbClickEnabled" :wheelEnabled="mouseWheelZoomEnabled"
-    :touchEnabled="touchEnabled" :minZoom="0.3" :maxZoom="2" :dblClickZoomStep="0.4" :wheelZoomStep="0.01"
-    :enableControllButton="enableControllButton" :enableWheelOnKey="documentFlow ? 'Control' : undefined"
-    @zoom="showEvent" @panned="showEvent">
-    <div id="boxes">
-      <div>
-        <div></div>
-        <div></div>
-      </div>
-      <div>
-        <div></div>
-        <div></div>
-      </div>
+  <form>
+    <div>
+      <input type="checkbox" v-model="zoomEnabled" />
+      <label>zoomEnabled</label>
     </div>
-  </VueZoomable>
+    <div>
+      <input type="checkbox" v-model="zoomEnabled" />
+      <label>zoomEnabled</label>
+    </div>
+    <div>
+      <input type="checkbox" v-model="dblClickEnabled" />
+      <label>dblClickEnabled</label>
+    </div>
+    <div>
+      <input type="checkbox" v-model="touchEnabled" />
+      <label>touchEnabled</label>
+    </div>
+    <div>
+      <input type="checkbox" v-model="mouseWheelZoomEnabled" />
+      <label>mouseWheelZoomEnabled</label>
+    </div>
+    <div>
+      <input type="checkbox" v-model="visible" />
+      <label>Slot Content</label>
+    </div>
+    <div>
+      <input type="checkbox" v-model="documentFlow" />
+      <label>DocumentFlow</label>
+    </div>
+    <div>
+      <input type="checkbox" v-model="enableControllButton" />
+      <label>Controll Button Enabled</label>
+    </div>
+    <div>
+      <label>Pan X</label>
+      <input type="number" v-model="pan.x">
+    </div>
+    <div>
+      <label>Pan Y</label>
+      <input type="number" v-model="pan.y">
+    </div>
+    <div>
+      <label>Zoom</label>
+      <input type="number" v-model="zoom">
+    </div>
+    <div>
+      <label>Slot Content Type</label>
+      <select v-model="slotContentType">
+        <option value="html">HTML</option>
+        <option value="svg">SVG</option>
+      </select>
+    </div>
+    <div>
+      <label>Selector</label>
+      <input type="text" v-model="selector">
+    </div>
+  </form>
+
+  <div v-if="slotContentType === 'svg'">
+    <VueZoomable style="width: 500px; height: 500px; border: 1px solid black" :selector="selector"
+      :zoomEnabled="zoomEnabled" :panEnabled="panEnabled" :initialPanX="100" :initialPanY="120" :initialZoom="1.5"
+      :svgChild="true" :dblClickEnabled="dblClickEnabled" :wheelEnabled="mouseWheelZoomEnabled"
+      :touchEnabled="touchEnabled" :minZoom="0.3" :maxZoom="2" :dblClickZoomStep="0.4" :wheelZoomStep="0.01"
+      v-model:pan="pan" v-model:zoom="zoom" :enableWheelOnKey="documentFlow ? 'Control' : undefined"
+      :enableControllButton="enableControllButton" @zoom="showEvent" @panned="showEvent">
+      <svg class="mysvg" v-if="visible">
+        <g id="zoomable-content">
+          <circle x="10" y="10" r="50" />
+        </g>
+      </svg>
+    </VueZoomable>
+  </div>
+  <div v-else>
+    <VueZoomable style="width: 500px; height: 500px; border: 1px solid black" :selector="selector"
+      :zoomEnabled="zoomEnabled" :panEnabled="panEnabled" :initialPanX="100" :initialPanY="120" :initialZoom="1.5"
+      :dblClickEnabled="dblClickEnabled" :wheelEnabled="mouseWheelZoomEnabled" :touchEnabled="touchEnabled" :minZoom="0.3"
+      :maxZoom="2" :dblClickZoomStep="0.4" :wheelZoomStep="0.01" v-model:pan="pan" v-model:zoom="zoom"
+      :enableWheelOnKey="documentFlow ? 'Control' : undefined" :enableControllButton="enableControllButton"
+      @zoom="showEvent" @panned="showEvent">
+      <div id="zoomable-content">
+        <div>
+          <div></div>
+          <div></div>
+        </div>
+        <div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </VueZoomable>
+  </div>
 
   <div>
     zoom: {{ zoom }}
@@ -175,24 +240,26 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import VueZoomable from "../components/VueZoomable.vue";
+import "vue-zoomable/dist/style.css";
+import VueZoomable from "vue-zoomable";
 
-const zoom = ref(0.2);
-const pan = ref({ x: 0, y: 100 });
+const zoom = ref(0.5);
+const pan = ref({ x: 0, y: 0 });
+const slotContentType = ref("html");
+const selector = ref("zoomable-content");
 
 function showEvent(ev: any) {
   console.log(ev)
-
-  zoom.value = ev.zoom;
-  pan.value = {
-    x: ev.pan.x,
-    y: ev.pan.y,
-  };
+  // zoom.value = ev.zoom;
+  // pan.value = {
+  //   x: ev.pan.x,
+  //   y: ev.pan.y,
+  // };
 }
 
 let zoomEnabled = ref(true);
 let panEnabled = ref(true);
-let dbClickEnabled = ref(true);
+let dblClickEnabled = ref(true);
 let touchEnabled = ref(true);
 let mouseWheelZoomEnabled = ref(true);
 let visible = ref(true);
@@ -201,17 +268,22 @@ let enableControllButton = ref(true);
 </script>
 
 <style>
-#boxes {
+.mysvg {
+  height: 100%;
+  width: 100%;
+}
+
+#zoomable-content {
   display: flex;
   flex-direction: column;
 }
 
-#boxes>div {
+#zoomable-content>div {
   display: flex;
   flex-direction: row;
 }
 
-#boxes>div>div {
+#zoomable-content>div>div {
   margin: 50px;
   background-color: blue;
   height: 100px;

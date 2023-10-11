@@ -1,9 +1,11 @@
 ---
 sidebar:
-    - text: SVG Content
-      link: ./svg-demo
-    - text: HTML Content
-      link: ./html-demo
+  - text: SVG Content
+    link: ./svg-demo
+  - text: HTML Demo
+    link: ./html-demo
+  - text: Reactivity Demo
+    link: ./reactivity-demo
 ---
 
 <SvgDemo></SvgDemo>

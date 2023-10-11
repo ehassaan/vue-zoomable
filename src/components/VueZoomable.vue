@@ -8,8 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import { eventNames } from 'process';
-import { computed, ref, Ref, createApp, provide, onMounted, watch } from 'vue';
+import { computed, ref, Ref, createApp, onMounted, watch } from 'vue';
 import { useMouse } from "../composables/useMouse";
 import { useTouch } from "../composables/useTouch";
 import { useWheel } from "../composables/useWheel";
@@ -135,7 +134,7 @@ watch(
       pan.value.y = props.pan.y;
     }
   }
-);
+  , { deep: true });
 
 function emit(name: string, event: ZoomableEvent) {
   if (name === "zoom") {
@@ -149,8 +148,6 @@ function emit(name: string, event: ZoomableEvent) {
 let transform = computed(() => {
   return `translate(${pan.value.x}px, ${pan.value.y}px) scale(${zoom.value})`;
 });
-
-let element: any = null;
 
 function setTransform() {
   if (!transformTarget.value) return;

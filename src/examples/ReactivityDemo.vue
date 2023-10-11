@@ -83,30 +83,34 @@
         <option value="svg">SVG</option>
       </select>
     </div>
+    <div>
+      <label>Selector</label>
+      <input type="text" v-model="selector">
+    </div>
   </form>
 
   <div v-if="slotContentType === 'svg'">
-    <VueZoomable style="width: 500px; height: 500px; border: 1px solid black" selector="#container1"
+    <VueZoomable style="width: 500px; height: 500px; border: 1px solid black" :selector="selector"
       :zoomEnabled="zoomEnabled" :panEnabled="panEnabled" :initialPanX="100" :initialPanY="120" :initialZoom="1.5"
       :svgChild="true" :dblClickEnabled="dblClickEnabled" :wheelEnabled="mouseWheelZoomEnabled"
       :touchEnabled="touchEnabled" :minZoom="0.3" :maxZoom="2" :dblClickZoomStep="0.4" :wheelZoomStep="0.01"
       v-model:pan="pan" v-model:zoom="zoom" :enableWheelOnKey="documentFlow ? 'Control' : undefined"
       :enableControllButton="enableControllButton" @zoom="showEvent" @panned="showEvent">
       <svg class="mysvg" v-if="visible">
-        <g id="container1">
+        <g id="zoomable-content">
           <circle x="10" y="10" r="50" />
         </g>
       </svg>
     </VueZoomable>
   </div>
   <div v-else>
-    <VueZoomable style="width: 500px; height: 500px; border: 1px solid black" selector="#boxes" :zoomEnabled="zoomEnabled"
-      :panEnabled="panEnabled" :initialPanX="100" :initialPanY="120" :initialZoom="1.5" :dblClickEnabled="dblClickEnabled"
-      :wheelEnabled="mouseWheelZoomEnabled" :touchEnabled="touchEnabled" :minZoom="0.3" :maxZoom="2"
-      :dblClickZoomStep="0.4" :wheelZoomStep="0.01" v-model:pan="pan" v-model:zoom="zoom"
+    <VueZoomable style="width: 500px; height: 500px; border: 1px solid black" :selector="selector"
+      :zoomEnabled="zoomEnabled" :panEnabled="panEnabled" :initialPanX="100" :initialPanY="120" :initialZoom="1.5"
+      :dblClickEnabled="dblClickEnabled" :wheelEnabled="mouseWheelZoomEnabled" :touchEnabled="touchEnabled" :minZoom="0.3"
+      :maxZoom="2" :dblClickZoomStep="0.4" :wheelZoomStep="0.01" v-model:pan="pan" v-model:zoom="zoom"
       :enableWheelOnKey="documentFlow ? 'Control' : undefined" :enableControllButton="enableControllButton"
       @zoom="showEvent" @panned="showEvent">
-      <div id="boxes">
+      <div id="zoomable-content">
         <div>
           <div></div>
           <div></div>
@@ -239,10 +243,9 @@ import { ref } from "vue";
 import VueZoomable from "../components/VueZoomable.vue";
 
 const zoom = ref(0.5);
-const panX = ref(0);
-const panY = ref(0);
 const pan = ref({ x: 0, y: 0 });
 const slotContentType = ref("html");
+const selector = ref("zoomable-content");
 
 function showEvent(ev: any) {
   console.log(ev)
@@ -269,17 +272,17 @@ let enableControllButton = ref(true);
   width: 100%;
 }
 
-#boxes {
+#zoomable-content {
   display: flex;
   flex-direction: column;
 }
 
-#boxes>div {
+#zoomable-content>div {
   display: flex;
   flex-direction: row;
 }
 
-#boxes>div>div {
+#zoomable-content>div>div {
   margin: 50px;
   background-color: blue;
   height: 100px;
