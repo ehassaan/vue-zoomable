@@ -151,7 +151,6 @@ let transform = computed(() => {
 
 function setTransform() {
   if (!transformTarget.value) return;
-  console.log(transformTarget);
   transformTarget.value.style.transform = transform.value;
   transformTarget.value.style.transition = "transform 0.06s ease-out";
 }
