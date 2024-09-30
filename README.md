@@ -47,7 +47,7 @@ import "vue-zoomable/dist/style.css";
 | maxZoom              | number  | 3         | Maximum allowed zoom                                                                                                                               |
 | minZoom              | number  | 0.5       | Minimum allowed zoom                                                                                                                               |
 | dblClickZoomStep     | number  | 0.4       | Step size for zoom on double click                                                                                                                 |
-| wheelZoomStep        | number  | 0.05      | Step size for zoom on wheel                                                                                                                        |
+| wheelZoomStep        | number  | 0.2      | Step size for zoom on wheel                                                                                                                        |
 | panEnabled           | boolean | true      | Enable panning                                                                                                                                     |
 | zoomEnabled          | boolean | true      | Enable zoom                                                                                                                                        |
 | mouseEnabled         | boolean | true      | Enable mouse events                                                                                                                                |

@@ -1,22 +1,25 @@
 <template>
-  <div ref="container" class="container" :class="$style.container" @mousedown="onMouseDown" @dblclick="mouse.onDblClick"
-    @touchstart="touch.onTouchStart" @wheel="wheel.onWheel" @mouseleave="onMouseLeave" @mouseenter="onMouseEnter">
-    <ControllButtons v-if="props.enableControllButton" @button-home="button.onHome" @button-pan="button.onPan"
-      @button-zoom="button.onZoom" @mousedown="updateHideOverlay(true);"></ControllButtons>
+  <div ref="container" class="container" :class="$style.container" @dblclick="zoomable.onDblClick"
+    @pointerdown="panable.onPointerDown" @wheel="zoomable.onWheel" @pointerenter="onPointerEnter"
+    @pointerleave="onPointerLeave">
+
+    <ControllButtons v-if="props.enableControllButton" @home="panable.onHome" @pandown="panable.onPanButtonDown"
+      @panup="panable.onPanButtonUp" @zoomdown="zoomable.onZoomButtonDown" @zoomup="zoomable.onZoomButtonUp">
+    </ControllButtons>
     <slot></slot>
+
+    <ScrollOverlay :enable-wheel-on-key="props.enableWheelOnKey" :overlay="panable.overlay.value && isInContainer">
+    </ScrollOverlay>
+
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, ref, Ref, createApp, onMounted, watch } from 'vue';
-import { useMouse } from "../composables/useMouse";
-import { useTouch } from "../composables/useTouch";
-import { useWheel } from "../composables/useWheel";
-import { useButtons } from "../composables/useButtons";
-import ControllButtons from "./ControllButtons.vue";
+import { computed, ref, onMounted, watch } from 'vue';
+import { usePan } from "../composables/pan";
+import { useZoom } from "../composables/zoom";
+import ControllButtons from "./ControlButtons.vue";
 import ScrollOverlay from './ScrollOverlay.vue';
-
-const hideOverlay: Ref<boolean> = ref(true);
 
 let emitNative = defineEmits(["panned", "zoom", "update:zoom", "update:pan"]);
 let props = defineProps({
@@ -59,7 +62,7 @@ let props = defineProps({
   },
   wheelZoomStep: {
     type: Number,
-    default: 0.05,
+    default: 0.4,
   },
   panEnabled: {
     type: Boolean,
@@ -104,37 +107,10 @@ let props = defineProps({
 });
 
 let container = ref();
-let transformTarget = computed<HTMLElement>(() => container.value?.querySelector(props.selector))
+let transformTarget = computed<HTMLElement>(() => container.value?.querySelector(props.selector));
+let panable = usePan(props, emit);
+let zoomable = useZoom(props, emit);
 
-let zoom = ref(props.minZoom);
-if (props.initialZoom >= props.minZoom && props.initialZoom <= props.maxZoom) {
-  zoom.value = props.initialZoom;
-}
-if (props.zoom) zoom.value = props.zoom;
-
-let pan = ref({
-  x: props.pan != null ? props.pan.x : props.initialPanX,
-  y: props.pan != null ? props.pan.y : props.initialPanY,
-});
-
-watch(
-  () => props.zoom,
-  () => {
-    if (!isNaN(props.zoom)) {
-      zoom.value = props.zoom;
-    }
-  }
-);
-
-watch(
-  () => props.pan,
-  () => {
-    if (props.pan) {
-      pan.value.x = props.pan.x;
-      pan.value.y = props.pan.y;
-    }
-  }
-  , { deep: true });
 
 function emit(name: string, event: ZoomableEvent) {
   if (name === "zoom") {
@@ -146,7 +122,7 @@ function emit(name: string, event: ZoomableEvent) {
 }
 
 let transform = computed(() => {
-  return `translate(${pan.value.x}px, ${pan.value.y}px) scale(${zoom.value})`;
+  return `translate(${panable.pan.value.x}px, ${panable.pan.value.y}px) scale(${zoomable.zoom.value})`;
 });
 
 function setTransform() {
@@ -166,68 +142,29 @@ watch(
 );
 
 onMounted(() => {
-  const placeholder = document.createElement('div');
-  const scrollOverlayApp = createApp(ScrollOverlay, { enableWheelOnKey: props.enableWheelOnKey });
-
-  // needs to be injected before it is mounted
-  scrollOverlayApp.provide("hideOverlay", { hideOverlay });
-
-  scrollOverlayApp.mount(placeholder)
-  container.value.appendChild(placeholder);
-
   setTransform();
 });
-
-
-const pressedKeys: Ref<Set<String>> = ref(new Set<String>());
-
-onMounted(() => {
-  window.addEventListener(
-    'wheel',
-    event => {
-      if (!isInContainer.value || props.enableWheelOnKey !== "Control") return;
-      if (event.ctrlKey) event.preventDefault();
-    }, { passive: false },
-  );
-
-  // track the keys, which are currently pressed
-  document.addEventListener('keydown', (event) => {
-    pressedKeys.value.add(event.key);
-    if (event.key === props.enableWheelOnKey) hideOverlay.value = true;
-  });
-  document.addEventListener('keyup', (event) => { pressedKeys.value.delete(event.key); });
-})
 
 // track if the mouse is in the container
 const isInContainer = ref(false);
 
 // track when the mouse leaves, to then hide the overlay
-function onMouseEnter() {
+function onPointerEnter(ev: PointerEvent) {
+  if (ev.pointerType === "touch") return;  // dont show overlay for touch
   isInContainer.value = true;
 }
-function onMouseLeave() {
-  hideOverlay.value = true;
+function onPointerLeave() {
   isInContainer.value = false;
+  panable.overlay.value = true;
 }
 
-function showOverlay() { hideOverlay.value = false; }
-function updateHideOverlay(newHideOverlay: boolean) { hideOverlay.value = newHideOverlay; }
-
-let mouse = useMouse(props, emit, pan, zoom, updateHideOverlay);
-let touch = useTouch(props, emit, pan, zoom, updateHideOverlay);
-let wheel = useWheel(props, emit, pan, zoom, pressedKeys, updateHideOverlay);
-let button = useButtons(props, emit, pan, zoom, updateHideOverlay);
-
-function onMouseDown(event: MouseEvent) {
-  updateHideOverlay(true);
-  mouse.onMouseDown(event);
-}
 </script>
 
 <style module>
 .container {
   overflow: hidden;
   position: relative;
+  touch-action: none;
 
   transition: transform 0.1s ease-out;
 
