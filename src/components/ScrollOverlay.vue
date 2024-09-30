@@ -6,26 +6,30 @@
 -->
 
 <template>
-    <div class="overlay" :class="{ hidden: hideOverlay }">
+    <div class="overlay" :class="{ hidden: !overlay }">
         <p>Use '{{ props.enableWheelOnKey }}' + 'scroll' to zoom</p>
     </div>
 </template>
 
 <script setup lang="ts">
-import { inject, ref, Ref } from 'vue';
+// import { inject, ref, Ref } from 'vue';
 
 const props = defineProps({
     enableWheelOnKey: {
         type: String,
         default: undefined,
+    },
+    overlay: {
+        type: Boolean,
+        default: false
     }
-})
+});
 
-interface Injection {
-    hideOverlay: Ref<boolean>
-}
+// interface Injection {
+//     hideOverlay: Ref<boolean>
+// }
 
-const { hideOverlay } = inject<Injection>('hideOverlay') as Injection;
+// const { hideOverlay } = inject<Injection>('hideOverlay') as Injection;
 </script>
 
 <style scoped>

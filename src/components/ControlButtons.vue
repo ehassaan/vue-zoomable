@@ -1,55 +1,49 @@
 <template>
-    <div class="controll__buttons" @dblclick.stop="" @mousedown.stop="">
+    <div id="v-zoomable-control-btns" class="controll__buttons" @dblclick.stop="" @mousedown.stop="">
         <ul class="controll">
             <li class="controll__item controll__item--circle">
                 <ul class="controll__pan controll__item--circle__inner">
                     <li class="controll__pan__up controll__item--circle__inner__up">
-                        <a @mousedown="emit('button-pan', { x: 0, y: 1 }, true)"
-                            @mouseup="emit('button-pan', { x: 0, y: 0 }, false)"
-                            @mouseleave="emit('button-pan', { x: 0, y: 0 }, false)"
-                            @touchstart.stop="emit('button-pan', { x: 0, y: 1 }, true)"
-                            @touchend="emit('button-pan', { x: 0, y: 0 }, false)" @contextmenu.prevent="">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                class="feather feather-chevron-up">
+                        <a @pointerdown="ev => onPanButtonDown(ev, 'up')" @pointerup="ev => onPanButtonUp(ev, 'up')"
+                            @pointercancel="ev => onPanButtonUp(ev, 'up')" @pointerleave="ev => onPanButtonUp(ev, 'up')"
+                            @contextmenu.prevent="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-chevron-up">
                                 <polyline points="18 15 12 9 6 15"></polyline>
                             </svg>
                         </a>
                     </li>
                     <li class="controll__pan__right controll__item--circle__inner__right">
-                        <a @mousedown="emit('button-pan', { x: -1, y: 0 }, true)"
-                            @mouseup="emit('button-pan', { x: 0, y: 0 }, false)"
-                            @mouseleave="emit('button-pan', { x: 0, y: 0 }, false)"
-                            @touchstart.stop="emit('button-pan', { x: -1, y: 0 }, true)"
-                            @touchend="emit('button-pan', { x: 0, y: 0 }, false)" @contextmenu.prevent="">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                class="feather feather-chevron-right">
+                        <a @pointerdown="ev => onPanButtonDown(ev, 'right')"
+                            @pointerup="ev => onPanButtonUp(ev, 'right')"
+                            @pointercancel="ev => onPanButtonUp(ev, 'right')"
+                            @pointerleave="ev => onPanButtonUp(ev, 'right')" @contextmenu.prevent="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-chevron-right">
                                 <polyline points="9 18 15 12 9 6"></polyline>
                             </svg>
                         </a>
                     </li>
                     <li class="controll__pan__down controll__item--circle__inner__down">
-                        <a @mousedown="emit('button-pan', { x: 0, y: -1 }, true)"
-                            @mouseup="emit('button-pan', { x: 0, y: 0 }, false)"
-                            @mouseleave="emit('button-pan', { x: 0, y: 0 }, false)"
-                            @touchstart.stop="emit('button-pan', { x: 0, y: -1 }, true)"
-                            @touchend="emit('button-pan', { x: 0, y: 0 }, false)" @contextmenu.prevent="">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                class="feather feather-chevron-down">
+                        <a @pointerdown="ev => onPanButtonDown(ev, 'down')" @pointerup="ev => onPanButtonUp(ev, 'down')"
+                            @pointercancel="ev => onPanButtonUp(ev, 'down')"
+                            @pointerleave="ev => onPanButtonUp(ev, 'down')" @contextmenu.prevent="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-chevron-down">
                                 <polyline points="6 9 12 15 18 9"></polyline>
                             </svg></a>
                     </li>
                     <li class="controll__pan__left controll__item--circle__inner__left">
-                        <a @mousedown="emit('button-pan', { x: 1, y: 0 }, true)"
-                            @mouseup="emit('button-pan', { x: 0, y: 0 }, false)"
-                            @mouseleave="emit('button-pan', { x: 0, y: 0 }, false)"
-                            @touchstart.stop="emit('button-pan', { x: 1, y: 0 }, true)"
-                            @touchend="emit('button-pan', { x: 0, y: 0 }, false)" @contextmenu.prevent="">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                class="feather feather-chevron-left">
+                        <a @pointerdown="ev => onPanButtonDown(ev, 'left')"
+                            @pointercancel="ev => onPanButtonUp(ev, 'left')"
+                            @pointerup="ev => onPanButtonUp(ev, 'left')" @pointerleave="ev => onPanButtonUp(ev, 'left')"
+                            @contextmenu.prevent="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-chevron-left">
                                 <polyline points="15 18 9 12 15 6"></polyline>
                             </svg>
                         </a>
@@ -57,7 +51,7 @@
                 </ul>
             </li>
             <li class="controll__home controll__item controll__item--list-item">
-                <a @click="emit('button-home');" @touchend="emit('button-home')">
+                <a @click="() => emit('home')">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="feather feather-minimize-2">
@@ -69,9 +63,8 @@
                 </a>
             </li>
             <li class="controll__zoom-in controll__item controll__item--list-item">
-                <a @mousedown="emit('button-zoom', 1, true);" @mouseup="emit('button-zoom', 0, false)"
-                    @mouseleave="emit('button-zoom', 0, false)" @touchstart.stop="emit('button-zoom', 1, true)"
-                    @touchend="emit('button-zoom', 1, false)" @contextmenu.prevent="">
+                <a @pointerdown="ev => onZoomButtonDown(ev, 1)" @pointerup="ev => onZoomButtonUp(ev)"
+                    @pointercancel="ev => onZoomButtonUp(ev)" @pointerleave="onZoomButtonUp" @contextmenu.prevent="">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="feather feather-zoom-in">
@@ -83,9 +76,8 @@
                 </a>
             </li>
             <li class="controll__zoom-in controll__item controll__item--list-item">
-                <a @mousedown="emit('button-zoom', -1, true);" @mouseup="emit('button-zoom', 0, false)"
-                    @mouseleave="emit('button-zoom', 0, false)" @touchstart.stop="emit('button-zoom', -1, true)"
-                    @touchend="emit('button-zoom', -1, false)" @contextmenu.prevent="">
+                <a @pointerdown="ev => onZoomButtonDown(ev, -1)" @pointerup="ev => onZoomButtonUp(ev)"
+                    @pointercancel="ev => onZoomButtonUp(ev)" @pointerleave="onZoomButtonUp" @contextmenu.prevent="">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="feather feather-zoom-out">
@@ -100,7 +92,24 @@
 </template>
 
 <script setup lang="ts">
-const emit = defineEmits(["button-pan", "button-zoom", "button-home"]);
+const emit = defineEmits(["pandown", "panup", "zoomdown", "zoomup", "home"]);
+
+function onPanButtonDown(event: PointerEvent, button: string) {
+    emit("pandown", button);
+}
+
+function onPanButtonUp(event: PointerEvent, button: string) {
+    emit("panup", button);
+}
+
+function onZoomButtonDown(event: PointerEvent, zoom: number) {
+    emit("zoomdown", zoom);
+}
+
+function onZoomButtonUp(event: PointerEvent) {
+    emit("zoomup");
+}
+
 </script>
 
 <style scoped>
