@@ -16,6 +16,7 @@
   "devDependencies": {
     "@vuepress/bundler-vite": "2.0.0-rc.15",
     "@vuepress/client": "2.0.0-rc.15",
+    "@vuepress/theme-default": "2.0.0-rc.15",
     "@vuepress/plugin-register-components": "2.0.0-rc.15",
     "css-loader": "^6.7.1",
     "vue": "^3.3.4",
