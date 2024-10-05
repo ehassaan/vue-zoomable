@@ -87,7 +87,7 @@ let props = defineProps({
   },
   enableControlButton: {
     type: Boolean,
-    default: false,
+    default: true,
   },
   buttonPanStep: {
     type: Number,

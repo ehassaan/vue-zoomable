@@ -63,7 +63,7 @@
       <label>DocumentFlow</label>
     </div>
     <div>
-      <input type="checkbox" v-model="enableControllButton" />
+      <input type="checkbox" v-model="enableControlButton" />
       <label>Controll Button Enabled</label>
     </div>
     <div>
@@ -116,7 +116,7 @@
           :panEnabled="panEnabled" :initialPanX="100" :initialPanY="120" :initialZoom="1.5" :svgChild="true"
           :dblClickEnabled="dblClickEnabled" :wheelEnabled="mouseWheelZoomEnabled" :touchEnabled="touchEnabled"
           :minZoom="0.3" :maxZoom="2" :dblClickZoomStep="0.4" :wheelZoomStep="0.2" v-model:pan="pan" v-model:zoom="zoom"
-          :enableControlButton="enableControllButton" @zoom="showEvent" @panned="showEvent">
+          :enableControlButton="enableControlButton" @zoom="showEvent" @panned="showEvent">
           <svg class="mysvg" v-if="visible">
             <g id="zoomable-content">
               <circle x="10" y="10" r="50" />
@@ -129,7 +129,7 @@
           :panEnabled="panEnabled" :initialPanX="100" :initialPanY="120" :initialZoom="1.5"
           :dblClickEnabled="dblClickEnabled" :wheelEnabled="mouseWheelZoomEnabled" :touchEnabled="touchEnabled"
           :minZoom="0.3" :maxZoom="2" :dblClickZoomStep="0.4" :wheelZoomStep="0.2" v-model:pan="pan" v-model:zoom="zoom"
-          :enableControlButton="enableControllButton" @zoom="showEvent" @panned="showEvent">
+          :enableControlButton="enableControlButton" @zoom="showEvent" @panned="showEvent">
           <div id="zoomable-content">
             <div>
               <div></div>
@@ -155,7 +155,7 @@
   <VueZoomable :selector="selector" :zoomEnabled="zoomEnabled" :panEnabled="panEnabled" :initialPanX="100"
     :initialPanY="120" :initialZoom="1.0" :dblClickEnabled="dblClickEnabled" :wheelEnabled="mouseWheelZoomEnabled"
     :touchEnabled="touchEnabled" :minZoom="0.3" :maxZoom="2" :dblClickZoomStep="0.4" :wheelZoomStep="0.2"
-    :enableControlButton="enableControllButton" @zoom="showEvent" @panned="showEvent">
+    :enableControlButton="enableControlButton" @zoom="showEvent" @panned="showEvent">
     <div id="zoomable-content">
       <div>
         <div></div>
@@ -317,7 +317,7 @@ let touchEnabled = ref(true);
 let mouseWheelZoomEnabled = ref(true);
 let visible = ref(true);
 let documentFlow = ref(true);
-let enableControllButton = ref(true);
+let enableControlButton = ref(true);
 </script>
 
 <style>
