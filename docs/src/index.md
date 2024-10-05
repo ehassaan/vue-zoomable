@@ -11,5 +11,6 @@ features:
   details: Written using Typescript providing first class Typescript support.
 - title: Easy to use
   details: Just put your code in <vue-zoomable> component to make it zoomable and pan-able.
-footer: Released under the MIT License. <br/>Copyright © 2023-present Hassaan Akbar
+footer: Released under the MIT License.
+Copyright © 2023-present Hassaan Akbar
 ---
