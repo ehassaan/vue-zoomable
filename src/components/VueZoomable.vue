@@ -1,25 +1,23 @@
 <template>
-  <div ref="container" class="container" :class="$style.container" @dblclick="zoomable.onDblClick"
-    @pointerdown="panable.onPointerDown" @wheel="zoomable.onWheel" @pointerenter="onPointerEnter"
-    @pointerleave="onPointerLeave">
+  <div ref="container" :class="$style.container" @dblclick="zoomable.onDblClick" @pointerdown="zoomable.onPointerDown"
+    @wheel="zoomable.onWheel" @touchstart="zoomable.onTouchStart">
 
-    <ControllButtons v-if="props.enableControllButton" @home="panable.onHome" @pandown="panable.onPanButtonDown"
-      @panup="panable.onPanButtonUp" @zoomdown="zoomable.onZoomButtonDown" @zoomup="zoomable.onZoomButtonUp">
-    </ControllButtons>
     <slot></slot>
 
-    <ScrollOverlay :enable-wheel-on-key="props.enableWheelOnKey" :overlay="panable.overlay.value && isInContainer">
-    </ScrollOverlay>
+    <slot name="buttons">
+      <ControlButtons v-if="props.enableControlButton" @buttondown="zoomable.onButtonDown"
+        @buttonup="zoomable.onButtonUp">
+      </ControlButtons>
+    </slot>
 
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed, ref, onMounted, watch } from 'vue';
-import { usePan } from "../composables/pan";
-import { useZoom } from "../composables/zoom";
-import ControllButtons from "./ControlButtons.vue";
-import ScrollOverlay from './ScrollOverlay.vue';
+import ControlButtons from "./ControlButtons.vue";
+import { useZoomable } from '../composables/zoomable';
+
 
 let emitNative = defineEmits(["panned", "zoom", "update:zoom", "update:pan"]);
 let props = defineProps({
@@ -27,7 +25,6 @@ let props = defineProps({
     type: Number,
     default: null,
   },
-
   pan: {
     type: Object,
     default: null,
@@ -88,9 +85,9 @@ let props = defineProps({
     type: Boolean,
     default: true,
   },
-  enableControllButton: {
+  enableControlButton: {
     type: Boolean,
-    default: false,
+    default: true,
   },
   buttonPanStep: {
     type: Number,
@@ -100,16 +97,15 @@ let props = defineProps({
     type: Number,
     default: 0.1,
   },
-  enableWheelOnKey: {
-    type: String,
-    default: undefined,
+  disabled: {
+    type: Boolean,
+    default: false,
   }
 });
 
 let container = ref();
 let transformTarget = computed<HTMLElement>(() => container.value?.querySelector(props.selector));
-let panable = usePan(props, emit);
-let zoomable = useZoom(props, emit);
+let zoomable = useZoomable(props, emit);
 
 
 function emit(name: string, event: ZoomableEvent) {
@@ -122,7 +118,7 @@ function emit(name: string, event: ZoomableEvent) {
 }
 
 let transform = computed(() => {
-  return `translate(${panable.pan.value.x}px, ${panable.pan.value.y}px) scale(${zoomable.zoom.value})`;
+  return `translate(${zoomable.pan.value.x}px, ${zoomable.pan.value.y}px) scale(${zoomable.zoom.value})`;
 });
 
 function setTransform() {
@@ -145,32 +141,19 @@ onMounted(() => {
   setTransform();
 });
 
-// track if the mouse is in the container
-const isInContainer = ref(false);
-
-// track when the mouse leaves, to then hide the overlay
-function onPointerEnter(ev: PointerEvent) {
-  if (ev.pointerType === "touch") return;  // dont show overlay for touch
-  isInContainer.value = true;
-}
-function onPointerLeave() {
-  isInContainer.value = false;
-  panable.overlay.value = true;
-}
-
 </script>
 
-<style module>
+<style scoped module>
 .container {
   overflow: hidden;
   position: relative;
-  touch-action: none;
+  user-select: none;
 
   transition: transform 0.1s ease-out;
 
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+}
+
+.buttons {
+  z-index: 100;
 }
 </style>

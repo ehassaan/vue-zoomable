@@ -1,12 +1,10 @@
-import { ref, watch, watchEffect } from 'vue';
-
 
 export function useHoldingEffect() {
 
   let clear = 0;
 
+
   /**
-   * 
    * @param cbOnce this function will be called only once when the button is pressed
    * @param cbWhileHold this function will be called throughout the duration while button is pressed and hold
    * @param minHoldDuration minimum press and hold duration before cbWhileHold is called for first time
