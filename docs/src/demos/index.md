@@ -12,3 +12,4 @@ sidebar:
 
 - [SVG Content](./svg-demo)
 - [HTML Content](./html-demo)
+- [Reactivity](./reactivity-demo)
