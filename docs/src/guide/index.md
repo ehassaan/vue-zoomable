@@ -3,6 +3,9 @@ lang: en-US
 title: Getting Started
 description: Getting Started
 ---
+# Introduction
+
+Tiny and high performance zoom and pan library for Vue 3. It uses CSS Transforms which provides hardware acceleration.
 
 ## Installation
 
