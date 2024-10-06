@@ -1,43 +1,5 @@
 <template>
-  <section v-if="documentFlow">
-    <h1>Chapter 1</h1>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non ultrices mi, nec cursus justo. Ut efficitur,
-      dui
-      nec consectetur consequat, lorem elit tincidunt metus, vel ultrices elit velit ac lectus. Proin in eros non nisi
-      venenatis bibendum. Integer nec neque sit amet velit varius tempus. Integer viverra ligula nec nunc egestas, non
-      ullamcorper mauris venenatis. Nullam sit amet pharetra odio, eget ultrices enim. Aenean non nisl auctor, vulputate
-      quam sit amet, tincidunt lectus. Duis vitae elit sed justo tincidunt sodales id ac est. Vivamus eu orci dapibus,
-      hendrerit nulla in, vehicula libero.
-    </p>
-    <p>
-      Sed pulvinar bibendum metus, quis lacinia urna varius non. Duis eget velit quam. Vestibulum consectetur vehicula
-      facilisis. Nunc egestas et enim ut facilisis. In volutpat augue eget risus faucibus malesuada. Ut et quam elit.
-      Fusce quis tincidunt elit. Nullam gravida justo ut feugiat mollis.
-    </p>
-    <h2>Section 1.1</h2>
-    <p>
-      Vivamus maximus scelerisque ligula, vel fringilla odio consectetur nec. Duis eleifend, erat quis maximus ultrices,
-      elit arcu congue nibh, nec elementum eros purus nec nulla. Fusce aliquet lacus id ligula rhoncus, in sodales
-      lectus
-      fringilla. Maecenas et purus et erat pulvinar interdum vel sit amet quam. Vestibulum facilisis turpis nec metus
-      congue posuere.
-    </p>
-    <h2>Section 1.2</h2>
-    <p>
-      Nulla vehicula lectus felis, in feugiat massa dignissim id. Vivamus eget magna ac eros viverra mattis ac sit amet
-      nulla. Pellentesque venenatis risus ut ex suscipit, in auctor nulla consequat. Proin rhoncus semper risus, a
-      dapibus
-      turpis luctus a. Nullam nec tincidunt sapien. Vivamus gravida ultricies lacus, in eleifend nunc cursus ut. In hac
-      habitasse platea dictumst. Duis ut purus nec sapien convallis pellentesque vel eu erat.
-    </p>
-  </section>
-
-  <form>
-    <div>
-      <input type="checkbox" v-model="zoomEnabled" />
-      <label>zoomEnabled</label>
-    </div>
+  <form class="controls">
     <div>
       <input type="checkbox" v-model="zoomEnabled" />
       <label>zoomEnabled</label>
@@ -287,6 +249,26 @@ let enableControlButton = ref(true);
 </script>
 
 <style>
+.controls {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  height: 200px;
+}
+
+.controls>div {
+  display: flex;
+  flex-direction: row;
+  margin-left: 15px;
+  margin-bottom: 5px;
+}
+
+.controls>div>label {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
 .mysvg {
   height: 100%;
   width: 100%;

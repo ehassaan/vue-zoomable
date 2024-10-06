@@ -1,4 +1,17 @@
-<template><div><h2 id="installation" tabindex="-1"><a class="header-anchor" href="#installation"><span>Installation</span></a></h2>
+<template><div><h1 id="introduction" tabindex="-1"><a class="header-anchor" href="#introduction"><span>Introduction</span></a></h1>
+<p>Tiny and high performance zoom and pan library for Vue 3. It uses CSS Transforms which provides hardware acceleration.</p>
+<p>Checkout the <a href="https://hassaanakbar.github.io/vue-zoomable/demos/" target="_blank" rel="noopener noreferrer">demos<ExternalLinkIcon/></a>.</p>
+<h2 id="features" tabindex="-1"><a class="header-anchor" href="#features"><span>Features</span></a></h2>
+<ul>
+<li>Simply wrap your content in VueZoomable component to make it zoom-able and pan-able.</li>
+<li>Mouse wheel support</li>
+<li>Touch and pinch-zoom support</li>
+<li>Control buttons for zoom and pan</li>
+<li>Supports SVG and HTML content</li>
+<li>Uses CSS transform for zoom and pan</li>
+<li><code v-pre>ScrollOverlay</code> component to lock pan/zoom while scrolling</li>
+</ul>
+<h2 id="installation" tabindex="-1"><a class="header-anchor" href="#installation"><span>Installation</span></a></h2>
 <p><code v-pre>npm install vue-zoomable</code></p>
 <h2 id="usage" tabindex="-1"><a class="header-anchor" href="#usage"><span>Usage</span></a></h2>
 <p>Immediate child of VueZoomable must be either svg or an html container.</p>
@@ -22,11 +35,8 @@
 <span class="token keyword">import</span> <span class="token string">"vue-zoomable/dist/style.css"</span><span class="token punctuation">;</span>
 </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
 </code></pre>
-<h3 id="model" tabindex="-1"><a class="header-anchor" href="#model"><span>Model</span></a></h3>
-<ul>
-<li>v-model:zoom</li>
-<li>v-model:pan</li>
-</ul>
+<h1 id="api-reference" tabindex="-1"><a class="header-anchor" href="#api-reference"><span>API Reference</span></a></h1>
+<h2 id="vuezoomable" tabindex="-1"><a class="header-anchor" href="#vuezoomable"><span>VueZoomable</span></a></h2>
 <h3 id="props" tabindex="-1"><a class="header-anchor" href="#props"><span>Props</span></a></h3>
 <table>
 <thead>
@@ -123,54 +133,42 @@
 <td>(Deprecated) Initial pan along y-axis. Use v-model:pan</td>
 </tr>
 <tr>
-<td>enableControllButton</td>
+<td>enableControlButton</td>
 <td>boolean</td>
-<td>false</td>
-<td>Defines, if the controll buttons will be enabled.</td>
+<td>true</td>
+<td>Enable or disable control buttons</td>
 </tr>
 <tr>
 <td>buttonPanStep</td>
 <td>number</td>
 <td>15</td>
-<td>Step size for pan on controll buttons</td>
+<td>Step size for pan on control buttons</td>
 </tr>
 <tr>
 <td>buttonZoomStep</td>
 <td>number</td>
 <td>0.1</td>
-<td>Step size for pan on controll buttons</td>
-</tr>
-<tr>
-<td>enableWheelOnKey</td>
-<td>string</td>
-<td>undefined</td>
-<td>If not null, the wheel is disabled, until the corresponding Key is pressed. You can set it to any value of <code v-pre>event.key</code>. <a href="#document-flow">see here</a></td>
+<td>Step size for pan on control buttons</td>
 </tr>
 </tbody>
 </table>
-<h3 id="document-flow" tabindex="-1"><a class="header-anchor" href="#document-flow"><span>Document Flow</span></a></h3>
-<p>If you have any document flow whatsoever on your page, it certainly won't do if you can only zoom with the mouse wheel. Because that would scroll the document at the same time. Thanks to <a href="https://github.com/HeIIow2" target="_blank" rel="noopener noreferrer">Hellow2<ExternalLinkIcon/></a> for document flow and control buttons features.</p>
-<hr>
-<p>My sollution was inspired by <a href="https://developers.google.com/maps/documentation/javascript/examples/control-default" target="_blank" rel="noopener noreferrer">Google-Maps<ExternalLinkIcon/></a>. You can set the prop <code v-pre>enableWheelOnKey</code> to whatever key button you like. <em>(Every value that can be found in KeyEvents <code v-pre>event.key</code> are valid and should work)</em>. If <code v-pre>enableWheelOnKey</code> is set, the zoom on Wheel will only work, if simmultaniously the corresponding Button is pressed.</p>
-<p>If you have a document flow, it is reccomended, to set <code v-pre>enableWheelOnKey</code> to the value <code v-pre>Control</code>.</p>
-<pre v-pre><code class="language-vue"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>VueZoomable</span> <span class="token attr-name">:enableWheelOnKey</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token punctuation">'</span>Control'<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>VueZoomable</span><span class="token punctuation">></span></span>
-</code></pre>
-<p>Now usually <code v-pre>Control</code> + <code v-pre>wheel</code> zooms in and out of the viewport. This... isn't good. Arguably this is a worse ux as scrolling while zooming. That's why I prevent it when following cases are all met:</p>
+<h3 id="model" tabindex="-1"><a class="header-anchor" href="#model"><span>Model</span></a></h3>
 <ul>
-<li><code v-pre>enableWheelOnKey</code> is set to <code v-pre>&quot;Control&quot;</code></li>
-<li>the mouse is within the bounds of the container element</li>
-<li>you... well would zoom the viewport</li>
+<li>v-model:zoom</li>
+<li>v-model:pan</li>
 </ul>
-<p>Because this could be unintuitive, I implemented a message that tells you what you need to do to actually zoom, that appears after you would have zoomed without this. Just like <a href="https://developers.google.com/maps/documentation/javascript/examples/control-default" target="_blank" rel="noopener noreferrer">Google<ExternalLinkIcon/></a> did.</p>
-<hr>
+<h3 id="slots" tabindex="-1"><a class="header-anchor" href="#slots"><span>Slots</span></a></h3>
+<ul>
+<li>default - Default Content</li>
+<li>buttons - Control buttons</li>
+</ul>
 <h3 id="events" tabindex="-1"><a class="header-anchor" href="#events"><span>Events</span></a></h3>
 <ul>
 <li>panned</li>
 <li>zoom</li>
 </ul>
 <p>All events have argument of type <code v-pre>ZoomableEvent</code>.</p>
-<h3 id="zoomableevent" tabindex="-1"><a class="header-anchor" href="#zoomableevent"><span>ZoomableEvent</span></a></h3>
+<h4 id="zoomableevent" tabindex="-1"><a class="header-anchor" href="#zoomableevent"><span>ZoomableEvent</span></a></h4>
 <table>
 <thead>
 <tr>
@@ -193,7 +191,7 @@
 <tr>
 <td>type</td>
 <td>string</td>
-<td>Source type which triggered the event. <code v-pre>dblClick</code>, <code v-pre>mouse</code>, <code v-pre>touch</code> or <code v-pre>wheel</code>.</td>
+<td>Source type which triggered the event. <code v-pre>dblClick</code>, <code v-pre>mouse</code>, <code v-pre>touch</code>, <code v-pre>wheel</code> or <code v-pre>control-btn</code>.</td>
 </tr>
 </tbody>
 </table>
@@ -209,6 +207,40 @@
   <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"mouse"</span>
 <span class="token punctuation">}</span>
 </code></pre>
+<h2 id="scrolloverlay" tabindex="-1"><a class="header-anchor" href="#scrolloverlay"><span>ScrollOverlay</span></a></h2>
+<p>Prevents mistaken zoom/pan while scrolling the page using mouse wheel or touchscreen. Useful if your zoomable content is embedded within scrollable content. Google map provides similar functionality <a href="https://developers.google.com/maps/documentation/javascript/examples/control-default" target="_blank" rel="noopener noreferrer">Google<ExternalLinkIcon/></a>.</p>
+<h3 id="props-1" tabindex="-1"><a class="header-anchor" href="#props-1"><span>Props</span></a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>type</th>
+<th>default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>wheelUnlockKey</td>
+<td>string</td>
+<td><code v-pre>Control</code></td>
+<td>Wheel is disabled, until the corresponding Key is pressed. You can set it to any value of <code v-pre>event.key</code>. <a href="#document-flow">see here</a></td>
+</tr>
+<tr>
+<td>enableWheelLock</td>
+<td>boolean</td>
+<td><code v-pre>true</code></td>
+<td>When true, zoom using wheel is disabled until <code v-pre>wheelUnclockKey</code> is pressed.</td>
+</tr>
+<tr>
+<td>enableTouchLock</td>
+<td>boolean</td>
+<td><code v-pre>true</code></td>
+<td>When true, pan or zoom requires touch using two fingers.</td>
+</tr>
+</tbody>
+</table>
+<hr>
 <h2 id="contribute" tabindex="-1"><a class="header-anchor" href="#contribute"><span>Contribute</span></a></h2>
 <p>Contributions are most welcome. Please follow the below steps for any contributions.</p>
 <h3 id="if-you-add-new-feature" tabindex="-1"><a class="header-anchor" href="#if-you-add-new-feature"><span>If you add new feature</span></a></h3>

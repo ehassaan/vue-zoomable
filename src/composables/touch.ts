@@ -44,7 +44,8 @@ export function useTouch(props: any, emit: any) {
         deltaZoom = 0;
       }
       else {
-        deltaZoom = (res.distance / startingTpDist.value) - transform.zoom.value;
+        deltaZoom = ((res.distance / startingTpDist.value) * transform.zoom.value) - transform.zoom.value;
+        startingTpDist.value = res.distance;
       }
       center = res.center;
     }

@@ -125,6 +125,7 @@ function setTransform() {
   if (!transformTarget.value) return;
   transformTarget.value.style.transform = transform.value;
   transformTarget.value.style.transition = "transform 0.06s ease-out";
+  transformTarget.value.style.transformOrigin = "center center";
 }
 
 watch(
@@ -150,7 +151,6 @@ onMounted(() => {
   user-select: none;
 
   transition: transform 0.1s ease-out;
-
 }
 
 .buttons {
