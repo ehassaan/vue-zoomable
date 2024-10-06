@@ -23,6 +23,6 @@
     "vuepress": "2.0.0-rc.15"
   },
   "dependencies": {
-    "vue-zoomable": "^1.2.0"
+    "vue-zoomable": "^1.2.2"
   }
 }

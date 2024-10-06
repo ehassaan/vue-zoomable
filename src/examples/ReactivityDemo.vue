@@ -33,11 +33,7 @@
     </p>
   </section>
 
-  <form>
-    <div>
-      <input type="checkbox" v-model="zoomEnabled" />
-      <label>zoomEnabled</label>
-    </div>
+  <form class="controls">
     <div>
       <input type="checkbox" v-model="zoomEnabled" />
       <label>zoomEnabled</label>
@@ -64,7 +60,7 @@
     </div>
     <div>
       <input type="checkbox" v-model="enableControlButton" />
-      <label>Controll Button Enabled</label>
+      <label>Control Button Enabled</label>
     </div>
     <div>
       <label>Pan X</label>
@@ -98,7 +94,6 @@
         <option value="A">A</option>
         <option value="Z">Z</option>
       </select>
-      {{ wheelKey }}
     </div>
   </form>
 
@@ -113,7 +108,7 @@
 
       <div v-if="slotContentType === 'svg'">
         <VueZoomable :disabled="disableInteraction" :selector="selector" :zoomEnabled="zoomEnabled"
-          :panEnabled="panEnabled" :initialPanX="100" :initialPanY="120" :initialZoom="1.5" :svgChild="true"
+          :panEnabled="panEnabled" :initialPanX="0" :initialPanY="0" :initialZoom="1.5" :svgChild="true"
           :dblClickEnabled="dblClickEnabled" :wheelEnabled="mouseWheelZoomEnabled" :touchEnabled="touchEnabled"
           :minZoom="0.3" :maxZoom="2" :dblClickZoomStep="0.4" :wheelZoomStep="0.2" v-model:pan="pan" v-model:zoom="zoom"
           :enableControlButton="enableControlButton" @zoom="showEvent" @panned="showEvent">
@@ -320,7 +315,27 @@ let documentFlow = ref(true);
 let enableControlButton = ref(true);
 </script>
 
-<style>
+<style scoped>
+.controls {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  height: 200px;
+}
+
+.controls>div {
+  display: flex;
+  flex-direction: row;
+  margin-left: 15px;
+  margin-bottom: 5px;
+}
+
+.controls>div>label {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
 .mysvg {
   height: 100%;
   width: 100%;
