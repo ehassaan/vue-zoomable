@@ -12,3 +12,6 @@ config.local.js
 basement_dist
 package-lock.json
 pnpm-lock.yaml
+.temp
+.cache
+dist
