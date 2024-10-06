@@ -1,4 +1,6 @@
-export const data = JSON.parse("{\"key\":\"v-7a043378\",\"path\":\"/demos/\",\"title\":\"Demos\",\"lang\":\"en-US\",\"frontmatter\":{\"sidebar\":[{\"text\":\"SVG Content\",\"link\":\"/demos/svg-demo\"},{\"text\":\"HTML Content\",\"link\":\"/demos/html-demo\"}]},\"headers\":[],\"git\":{\"updatedTime\":1657770800000,\"contributors\":[{\"name\":\"Hassaan Akbar\",\"email\":\"hassaan.akbar@outlook.com\",\"commits\":2}]},\"filePathRelative\":\"demos/index.md\"}")
+import comp from "C:/Users/Hassan.Akbar/Documents/VsCode/vue-zoomable/docs/src/.vuepress/.temp/pages/demos/index.html.vue"
+const data = JSON.parse("{\"path\":\"/demos/\",\"title\":\"Demos\",\"lang\":\"en-US\",\"frontmatter\":{\"sidebar\":[{\"text\":\"SVG Content\",\"link\":\"./svg-demo\"},{\"text\":\"HTML Demo\",\"link\":\"./html-demo\"},{\"text\":\"Reactivity Demo\",\"link\":\"./reactivity-demo\"}]},\"headers\":[],\"git\":{\"updatedTime\":1728171205000,\"contributors\":[{\"name\":\"Hassaan Akbar\",\"email\":\"hassaan.akbar@outlook.com\",\"commits\":4}]},\"filePathRelative\":\"demos/index.md\"}")
+export { comp, data }
 
 if (import.meta.webpackHot) {
   import.meta.webpackHot.accept()

@@ -1,53 +1,46 @@
 {
-  "hash": "0cfecf3b",
-  "browserHash": "2e436130",
+  "hash": "9ee4120a",
+  "configHash": "f11fa281",
+  "lockfileHash": "1f41f34a",
+  "browserHash": "1f3c1de7",
   "optimized": {
     "@vue/devtools-api": {
-      "src": "../../../../node_modules/.pnpm/@vue+devtools-api@6.5.0/node_modules/@vue/devtools-api/lib/esm/index.js",
+      "src": "../../../../node_modules/.pnpm/@vue+devtools-api@6.6.4/node_modules/@vue/devtools-api/lib/esm/index.js",
       "file": "@vue_devtools-api.js",
-      "fileHash": "52837029",
+      "fileHash": "adf2184d",
       "needsInterop": false
     },
     "@vuepress/shared": {
-      "src": "../../../../node_modules/.pnpm/@vuepress+shared@2.0.0-beta.66/node_modules/@vuepress/shared/dist/index.js",
+      "src": "../../../../node_modules/.pnpm/@vuepress+shared@2.0.0-rc.15/node_modules/@vuepress/shared/dist/index.js",
       "file": "@vuepress_shared.js",
-      "fileHash": "cb682e2f",
-      "needsInterop": false
-    },
-    "@vueuse/core": {
-      "src": "../../../../node_modules/.pnpm/@vueuse+core@10.3.0_vue@3.3.4/node_modules/@vueuse/core/index.mjs",
-      "file": "@vueuse_core.js",
-      "fileHash": "647d9c44",
+      "fileHash": "a17e84c6",
       "needsInterop": false
     },
     "vue": {
-      "src": "../../../../node_modules/.pnpm/vue@3.3.4/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+      "src": "../../../../node_modules/.pnpm/vue@3.5.11/node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "994eb25c",
+      "fileHash": "8b12e94e",
       "needsInterop": false
     },
     "vue-router": {
-      "src": "../../../../node_modules/.pnpm/vue-router@4.2.4_vue@3.3.4/node_modules/vue-router/dist/vue-router.esm-bundler.js",
+      "src": "../../../../node_modules/.pnpm/vue-router@4.4.5_vue@3.5.11/node_modules/vue-router/dist/vue-router.esm-bundler.js",
       "file": "vue-router.js",
-      "fileHash": "aca7db41",
+      "fileHash": "6acaf939",
       "needsInterop": false
     },
     "vue-zoomable": {
-      "src": "../../../../node_modules/.pnpm/file+..+vue-zoomable-1.1.6.tgz_vue@3.3.4/node_modules/vue-zoomable/dist/vue-zoomable.mjs",
+      "src": "../../../../node_modules/.pnpm/vue-zoomable@1.2.0_vue@3.5.11/node_modules/vue-zoomable/dist/vue-zoomable.mjs",
       "file": "vue-zoomable.js",
-      "fileHash": "e88d81b0",
+      "fileHash": "4e7c5e68",
       "needsInterop": false
     }
   },
   "chunks": {
-    "chunk-3TUUMKET": {
-      "file": "chunk-3TUUMKET.js"
+    "chunk-QYQIBODO": {
+      "file": "chunk-QYQIBODO.js"
     },
-    "chunk-L52MBEYQ": {
-      "file": "chunk-L52MBEYQ.js"
-    },
-    "chunk-OQKHIZIR": {
-      "file": "chunk-OQKHIZIR.js"
+    "chunk-Q56VL3NH": {
+      "file": "chunk-Q56VL3NH.js"
     }
   }
 }
