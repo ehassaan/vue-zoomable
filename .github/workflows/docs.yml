@@ -3,8 +3,6 @@ name: docs
 on:
   # trigger deployment on every push to main branch
 
-
-
   workflow_dispatch:
 
 jobs:
@@ -21,7 +19,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           # choose node.js version to use
-          node-version: "14"
+          node-version: "20"
 
       - uses: pnpm/action-setup@v2.0.1
         name: Install pnpm --no-frozen-lockfile
