@@ -2,7 +2,17 @@
 
 Tiny and high performance zoom and pan library for Vue 3. It uses CSS Transforms which provides hardware acceleration.
 
-Checkout the [demos](https://hassaanakbar.github.io/vue-zoomable/demos/).
+Checkout the [demos](https://ehassaan.github.io/vue-zoomable/demos/).
+
+## Features
+
+- Simply wrap your content in VueZoomable component to make it zoom-able and pan-able.
+- Mouse wheel support
+- Touch and pinch-zoom support
+- Control buttons for zoom and pan
+- Supports SVG and HTML content
+- Uses CSS transform for zoom and pan
+- `ScrollOverlay` component to lock pan/zoom while scrolling
 
 ## Features
 
