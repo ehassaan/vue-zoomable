@@ -1,6 +1,6 @@
 {
   "name": "vue-zoomable",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
@@ -13,8 +13,8 @@
   "main": "./dist/vue-zoomable.umd.js",
   "module": "./dist/vue-zoomable.mjs",
   "types": "./dist/types/index.d.ts",
-  "website": "https://hassaanakbar.github.io/vue-zoomable/",
-  "repository": "https://github.com/HassaanAkbar/vue-zoomable",
+  "website": "https://ehassaan.github.io/vue-zoomable/",
+  "repository": "https://github.com/ehassaan/vue-zoomable",
   "exports": {
     ".": {
       "import": "./dist/vue-zoomable.mjs",
