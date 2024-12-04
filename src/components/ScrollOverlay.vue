@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, useTemplateRef } from 'vue';
+import { onMounted, ref } from 'vue';
 
 
 const props = defineProps({
@@ -39,7 +39,7 @@ const props = defineProps({
 const visibility = ref(false);
 const keysPressed = ref(new Set());
 const isTouch = ref(false);
-const container = useTemplateRef("container");
+const container = ref();
 let parent: any = null;
 
 
