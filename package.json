@@ -17,6 +17,7 @@
   "repository": "https://github.com/ehassaan/vue-zoomable",
   "exports": {
     ".": {
+      "types": "./dist/types/index.d.ts",
       "import": "./dist/vue-zoomable.mjs",
       "require": "./dist/vue-zoomable.umd.js"
     },
