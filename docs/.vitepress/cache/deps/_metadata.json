@@ -1,31 +1,31 @@
 {
-  "hash": "78aaff7d",
-  "configHash": "d0e15790",
+  "hash": "d9f2ef4a",
+  "configHash": "2499ccab",
   "lockfileHash": "a19bf7a4",
-  "browserHash": "8e213770",
+  "browserHash": "da2ef0a4",
   "optimized": {
     "vue": {
       "src": "../../../node_modules/.pnpm/vue@3.5.13/node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "2309f2ed",
+      "fileHash": "dbb2cb59",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
       "src": "../../../node_modules/.pnpm/@vue+devtools-api@7.6.7/node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "d4dbc9de",
+      "fileHash": "b6bd79f5",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
       "src": "../../../node_modules/.pnpm/@vueuse+core@11.3.0_vue@3.5.13/node_modules/@vueuse/core/index.mjs",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "c2391bfd",
+      "fileHash": "eb946d9e",
       "needsInterop": false
     },
     "vue-zoomable": {
       "src": "../../../node_modules/.pnpm/vue-zoomable@1.2.5_vue@3.5.13/node_modules/vue-zoomable/dist/vue-zoomable.mjs",
       "file": "vue-zoomable.js",
-      "fileHash": "780bac86",
+      "fileHash": "61440e29",
       "needsInterop": false
     }
   },
