@@ -126,6 +126,7 @@ function setTransform() {
   transformTarget.value.style.transform = transform.value;
   transformTarget.value.style.transition = "transform 0.06s ease-out";
   transformTarget.value.style.transformOrigin = "center center";
+  transformTarget.value.style.transformBox = "fill-box";
 }
 
 watch(
