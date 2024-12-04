@@ -262,11 +262,33 @@ let enableControlButton = ref(true);
   flex-direction: row;
   margin-left: 15px;
   margin-bottom: 5px;
+  align-items: center;
 }
 
 .controls>div>label {
   margin-left: 5px;
   margin-right: 5px;
+}
+
+.controls>div>input {
+  padding: 5px;
+  min-height: 18px;
+  min-width: 18px;
+  font-size: 14px;
+  border-bottom: 1px solid var(--vp-c-brand);
+}
+
+.controls>div>checkbox {
+  padding: 5px;
+  border-bottom: 1px solid var(--vp-c-brand);
+}
+
+.controls>div>select {
+  padding: 3px 0 3px 0;
+  min-width: 60px;
+  text-align: center;
+  background-color: var(--vp-c-brand-2);
+  color: white;
 }
 
 .mysvg {
