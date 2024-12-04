@@ -149,6 +149,9 @@ onMounted(() => {
   overflow: hidden;
   position: relative;
   user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   transition: transform 0.1s ease-out;
 }
