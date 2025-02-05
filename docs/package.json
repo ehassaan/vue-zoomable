@@ -19,6 +19,6 @@
     "vue": "^3.3.4"
   },
   "dependencies": {
-    "vue-zoomable": "^1.2.5"
+    "vue-zoomable": "^1.2.6"
   }
 }
