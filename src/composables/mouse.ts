@@ -1,11 +1,9 @@
 import { useTransform } from './transform';
 
-export function useMouse(
-    props: any,
-    emit: any
-) {
-
-    let transform = useTransform(props, emit);
+export function useMouse({
+    props,
+    transform,
+}: any) {
 
     let lastPosition = {
         x: 0,
@@ -33,11 +31,13 @@ export function useMouse(
         });
     }
 
-    function onDblClick() {
+    function onDblClick(ev: MouseEvent) {
+        console.log("Event: ", ev);
         if (props.disabled) return;
         if (!props.dblClickEnabled || !props.zoomEnabled) return;
 
-        transform.changeZoom(props.dblClickZoomStep, "dblClick");
+        const zoomOrigin = { x: ev.clientX, y: ev.clientY };
+        transform.changeZoom(props.dblClickZoomStep, "dblClick", zoomOrigin);
     }
 
     function onPointerMove(ev: PointerEvent) {

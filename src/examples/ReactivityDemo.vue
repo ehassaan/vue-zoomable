@@ -95,6 +95,21 @@
         <option value="Z">Z</option>
       </select>
     </div>
+    <div>
+      <label>Zoom origin</label>
+      <select v-model="origin">
+        <option value="auto">auto</option>
+        <option value="center">center</option>
+        <option value="top">top</option>
+        <option value="bottom">bottom</option>
+        <option value="left">left</option>
+        <option value="right">right</option>
+        <option value="top-left">top-left</option>
+        <option value="top-right">top-right</option>
+        <option value="bottom-left">bottom-left</option>
+        <option value="bottom-right">bottom-right</option>
+      </select>
+    </div>
   </form>
 
   <!-- <ScrollOverlay enableWheelOnKey="Control" style="width: 500px; height: 500px; border: 1px solid black">
@@ -111,7 +126,7 @@
           :panEnabled="panEnabled" :initialPanX="0" :initialPanY="0" :initialZoom="1.5" :svgChild="true"
           :dblClickEnabled="dblClickEnabled" :wheelEnabled="mouseWheelZoomEnabled" :touchEnabled="touchEnabled"
           :minZoom="0.3" :maxZoom="2" :dblClickZoomStep="0.4" :wheelZoomStep="0.2" v-model:pan="pan" v-model:zoom="zoom"
-          :enableControlButton="enableControlButton" @zoom="showEvent" @panned="showEvent">
+          :enableControlButton="enableControlButton" @zoom="showEvent" @panned="showEvent" :zoom-origin="origin">
           <svg class="mysvg" v-if="visible">
             <g id="zoomable-content">
               <circle x="10" y="10" r="50" />
@@ -124,7 +139,7 @@
           :panEnabled="panEnabled" :initialPanX="100" :initialPanY="120" :initialZoom="1.5"
           :dblClickEnabled="dblClickEnabled" :wheelEnabled="mouseWheelZoomEnabled" :touchEnabled="touchEnabled"
           :minZoom="0.3" :maxZoom="2" :dblClickZoomStep="0.4" :wheelZoomStep="0.2" v-model:pan="pan" v-model:zoom="zoom"
-          :enableControlButton="enableControlButton" @zoom="showEvent" @panned="showEvent">
+          :enableControlButton="enableControlButton" @zoom="showEvent" @panned="showEvent" :zoom-origin="origin">
           <div id="zoomable-content">
             <div>
               <div></div>
@@ -150,7 +165,7 @@
   <VueZoomable :selector="selector" :zoomEnabled="zoomEnabled" :panEnabled="panEnabled" :initialPanX="100"
     :initialPanY="120" :initialZoom="1.0" :dblClickEnabled="dblClickEnabled" :wheelEnabled="mouseWheelZoomEnabled"
     :touchEnabled="touchEnabled" :minZoom="0.3" :maxZoom="2" :dblClickZoomStep="0.4" :wheelZoomStep="0.2"
-    :enableControlButton="enableControlButton" @zoom="showEvent" @panned="showEvent">
+    :enableControlButton="enableControlButton" @zoom="showEvent" @panned="showEvent" :zoom-origin="origin">
     <div id="zoomable-content">
       <div>
         <div></div>
@@ -313,6 +328,8 @@ let mouseWheelZoomEnabled = ref(true);
 let visible = ref(true);
 let documentFlow = ref(true);
 let enableControlButton = ref(true);
+let origin = ref<any>('center');
+
 </script>
 
 <style scoped>

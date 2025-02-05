@@ -7,13 +7,12 @@ export interface ButtonEvent {
     key: "home" | "pan-left" | "pan-right" | "pan-up" | "pan-down" | "zoom-in" | "zoom-out";
 }
 
-export function useButtons(
-    props: any,
-    emit: any
-) {
+export function useButtons({
+    props,
+    transform,
+}: { props: any, transform: ReturnType<typeof useTransform>; }) {
 
     let holdEffect = useHoldingEffect();
-    const transform = useTransform(props, emit);
 
     function zoomButtonDown(direction: number) {
 

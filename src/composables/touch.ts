@@ -3,9 +3,11 @@ import { useTransform } from './transform';
 
 export interface TouchPoint { x: number, y: number; }
 
-export function useTouch(props: any, emit: any) {
+export function useTouch({
+  props,
+  transform
+}: any) {
 
-  let transform = useTransform(props, emit);
   let pointers = ref<{ [id: number]: TouchPoint; }>({});
   let startingTpDist = ref(0);   // distance between two fingers when multi-touch started
   let lastPosition: TouchPoint | null = null;
@@ -50,9 +52,8 @@ export function useTouch(props: any, emit: any) {
       center = res.center;
     }
     if (props.zoomEnabled) {
-      transform.changeZoom(deltaZoom, "touch");
+      transform.changeZoom(deltaZoom, "touch", center);
     }
-    console.log("TouchMovePan: ", lastPosition, center, transform.pan.value);
 
     if (lastPosition === null) {
       lastPosition = {
