@@ -1,6 +1,6 @@
 <template>
 
-  <div>
+  <div class="container">
     <VueZoomable style="width: 500px; height: 500px; border: 1px solid black" selector="#boxes" :minZoom="0.3"
       :maxZoom="2" :dblClickZoomStep="0.4" :wheelZoomStep="0.01" v-model:pan="pan" v-model:zoom="zoom">
       <div id="boxes">
@@ -36,6 +36,10 @@ const pan = ref({ x: 100, y: 100 });
 </script>
 
 <style>
+.container li {
+  margin: 0 !important;
+}
+
 #boxes {
   display: flex;
   flex-direction: column;
