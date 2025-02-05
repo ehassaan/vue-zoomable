@@ -76,7 +76,7 @@
         :svgChild="true" :dblClickEnabled="dblClickEnabled" :wheelEnabled="mouseWheelZoomEnabled"
         :touchEnabled="touchEnabled" :minZoom="minZoom" :maxZoom="maxZoom" :dblClickZoomStep="0.4" :wheelZoomStep="0.01"
         v-model:pan="pan" v-model:zoom="zoom" :enableControlButton="enableControlButton" @zoom="showEvent"
-        @panned="showEvent">
+        @panned="showEvent" :zoom-origin="zoomOrigin">
         <svg class="mysvg" v-if="visible">
           <g id="zoomable-content">
             <circle x="10" y="10" r="50" />
@@ -89,7 +89,8 @@
         :zoomEnabled="zoomEnabled" :panEnabled="panEnabled" :initialPanX="100" :initialPanY="120" :initialZoom="1.5"
         :dblClickEnabled="dblClickEnabled" :wheelEnabled="mouseWheelZoomEnabled" :touchEnabled="touchEnabled"
         :minZoom="minZoom" :maxZoom="maxZoom" :dblClickZoomStep="0.4" :wheelZoomStep="0.01" v-model:pan="pan"
-        v-model:zoom="zoom" :enableControlButton="enableControlButton" @zoom="showEvent" @panned="showEvent">
+        v-model:zoom="zoom" :enableControlButton="enableControlButton" @zoom="showEvent" @panned="showEvent"
+        :zoom-origin="zoomOrigin">
         <div id="zoomable-content">
           <div>
             <div></div>
