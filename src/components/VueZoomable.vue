@@ -14,12 +14,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, onMounted, watch } from 'vue';
+import { computed, ref, onMounted, watch, PropType } from 'vue';
 import ControlButtons from "./ControlButtons.vue";
 import { useZoomable } from '../composables/zoomable';
+import type { ZoomableEvent } from '../entities/ZoomableEvent';
 
 
-let emitNative = defineEmits(["panned", "zoom", "update:zoom", "update:pan"]);
+let emit = defineEmits(["panned", "zoom", "update:zoom", "update:pan"]);
 let props = defineProps({
   zoom: {
     type: Number,
@@ -100,21 +101,25 @@ let props = defineProps({
   disabled: {
     type: Boolean,
     default: false,
+  },
+  zoomOrigin: {
+    type: String as PropType<'content-center' | 'pointer'>,
+    default: 'pointer',
   }
 });
 
 let container = ref();
 let transformTarget = computed<HTMLElement>(() => container.value?.querySelector(props.selector));
-let zoomable = useZoomable(props, emit);
+let zoomable = useZoomable({ props, onChange, container, target: transformTarget });
 
 
-function emit(name: string, event: ZoomableEvent) {
+function onChange(name: string, event: ZoomableEvent) {
   if (name === "zoom") {
-    emitNative("update:zoom", event.zoom);
+    emit("update:zoom", event.zoom);
   } else if (name === "panned") {
-    emitNative("update:pan", event.pan);
+    emit("update:pan", event.pan);
   }
-  emitNative(name as any, event);
+  emit(name as any, event);
 }
 
 let transform = computed(() => {
@@ -124,8 +129,8 @@ let transform = computed(() => {
 function setTransform() {
   if (!transformTarget.value) return;
   transformTarget.value.style.transform = transform.value;
-  transformTarget.value.style.transition = "transform 0.06s ease-out";
-  transformTarget.value.style.transformOrigin = "center center";
+  transformTarget.value.style.transformOrigin = 'center center';
+  transformTarget.value.style.transition = "transform 0.07s ease-out";
   transformTarget.value.style.transformBox = "fill-box";
 }
 
@@ -153,8 +158,6 @@ onMounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-
-  transition: transform 0.1s ease-out;
 }
 
 .buttons {

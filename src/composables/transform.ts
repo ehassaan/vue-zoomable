@@ -1,29 +1,30 @@
-import { computed, onMounted, ref, watch } from "vue";
+import { computed, onMounted, Ref, ref, watch } from "vue";
+import type { ZoomableEvent } from "../entities/ZoomableEvent";
 
-export const state = {
-  pan: ref({ x: 0, y: 0 }),
-  zoom: ref(0),
-  origin: ref({ x: 0, y: 0 })
-};
 
-export function useTransform(
-  props: any,
-  emit: any,
-) {
+export function useTransform({
+  props,
+  onChange,
+  container,
+  target,
+}: { props: any; onChange: any; container: Ref<HTMLElement>; target: Ref<HTMLElement>; }) {
+
+  const pan = ref({ x: 0, y: 0 });
+  const zoom = ref(0);
 
   onMounted(() => {
-    state.zoom.value = props.minZoom;
+    zoom.value = props.minZoom;
 
-    state.pan.value = {
+    pan.value = {
       x: props.pan != null ? props.pan.x : props.initialPanX,
       y: props.pan != null ? props.pan.y : props.initialPanY,
     };
 
     if (props.zoom) {
-      state.zoom.value = props.zoom;
+      zoom.value = props.zoom;
     }
     else if (props.initialZoom >= props.minZoom && props.initialZoom <= props.maxZoom) {
-      state.zoom.value = props.initialZoom;
+      zoom.value = props.initialZoom;
     }
   });
 
@@ -31,7 +32,7 @@ export function useTransform(
     () => props.zoom,
     () => {
       if (!isNaN(props.zoom)) {
-        state.zoom.value = props.zoom;
+        zoom.value = props.zoom;
       }
     }
   );
@@ -40,71 +41,100 @@ export function useTransform(
     () => props.pan,
     () => {
       if (props.pan) {
-        state.pan.value.x = props.pan.x;
-        state.pan.value.y = props.pan.y;
+        pan.value.x = props.pan.x;
+        pan.value.y = props.pan.y;
       }
     }, { deep: true });
 
-  function changeZoom(deltaZoom: number, eventSource: string) {
-    if (isNaN(deltaZoom)) return;
+  function changeZoom(deltaZoom: number, eventSource: string, zoomOrigin?: { x: number, y: number; }) {
+
+    if (isNaN(deltaZoom) || deltaZoom === 0) return;
 
     // calculate the new zoom value including all the bounds and store the old value for later compare if an event should be sent
-    const oldZoom = state.zoom.value;
-    let newZoom = state.zoom.value + deltaZoom;
+    const oldZoom = zoom.value;
+    let newZoom = zoom.value + deltaZoom;
 
     if (newZoom > props.maxZoom) newZoom = props.maxZoom;
     else if (newZoom < props.minZoom) newZoom = props.minZoom;
 
-    // check if it should sent an update, and do so
+    if (Math.abs(oldZoom - newZoom) < 0.0001) return;
 
-    if (oldZoom !== newZoom) {
-      state.zoom.value = newZoom;
+    zoom.value = newZoom;
 
-      let event: ZoomableEvent = {
-        zoom: state.zoom.value,
-        pan: {
-          x: state.pan.value.x,
-          y: state.pan.value.y,
-          deltaX: 0,
-          deltaY: 0,
-        },
-        type: eventSource
-      };
-      emit("zoom", event);
+    if (props.zoomOrigin === 'center') {
+      zoomOrigin = getElementCenter(container.value);
     }
+    if (props.zoomOrigin !== 'content-center') {
+      if (!zoomOrigin) zoomOrigin = getElementCenter(container.value);
+
+      const center = estimateTargetCenter(container.value, pan.value);
+
+      const deltaPan = {
+        x: (newZoom - oldZoom) * ((center.x - zoomOrigin.x) / oldZoom),
+        y: (newZoom - oldZoom) * ((center.y - zoomOrigin.y) / oldZoom),
+      };
+      console.log("Delta Pan: ", deltaPan, center, zoomOrigin);
+      changePan(deltaPan.x, deltaPan.y, 'zoom');
+    }
+
+    let event: ZoomableEvent = {
+      zoom: newZoom,
+      delta: {
+        zoom: deltaZoom,
+        pan: {
+          x: 0,
+          y: 0
+        },
+      },
+      pan: {
+        x: pan.value.x,
+        y: pan.value.y,
+        deltaX: 0,
+        deltaY: 0,
+      },
+      type: eventSource
+    };
+    onChange("zoom", event);
   };
 
   function changePan(deltaX: number, deltaY: number, eventType: string) {
     if (isNaN(deltaX)) deltaX = 0;
     if (isNaN(deltaY)) deltaY = 0;
 
-    state.pan.value = {
-      x: state.pan.value.x + deltaX,
-      y: state.pan.value.y + deltaY,
+    pan.value = {
+      x: pan.value.x + deltaX,
+      y: pan.value.y + deltaY,
     };
 
     let event: ZoomableEvent = {
-      zoom: state.zoom.value,
+      zoom: zoom.value,
+      delta: {
+        zoom: 0,
+        pan: {
+          x: deltaX,
+          y: deltaY
+        },
+      },
       pan: {
-        x: state.pan.value.x,
-        y: state.pan.value.y,
+        x: pan.value.x,
+        y: pan.value.y,
         deltaX: deltaX,
         deltaY: deltaY
       },
       type: eventType,
     };
-    emit("panned", event);
+    onChange("panned", event);
   }
 
   function goHome(eventSource: string) {
 
     // reset zoom
-    state.zoom.value = props.initialZoom;
-    emit("zoom", {
-      zoom: state.zoom.value,
+    zoom.value = props.initialZoom;
+    onChange("zoom", {
+      zoom: zoom.value,
       pan: {
-        x: state.pan.value.x,
-        y: state.pan.value.y,
+        x: pan.value.x,
+        y: pan.value.y,
         deltaX: 0,
         deltaY: 0,
       },
@@ -113,18 +143,18 @@ export function useTransform(
 
     // reset pan
     let delta = {
-      x: props.initialPanX - state.pan.value.x,
-      y: props.initialPanY - state.pan.value.y,
+      x: props.initialPanX - pan.value.x,
+      y: props.initialPanY - pan.value.y,
     };
-    state.pan.value = {
+    pan.value = {
       x: props.initialPanX,
       y: props.initialPanY,
     };
-    emit("panned", {
-      zoom: state.zoom.value,
+    onChange("panned", {
+      zoom: zoom.value,
       pan: {
-        x: state.pan.value.x,
-        y: state.pan.value.y,
+        x: pan.value.x,
+        y: pan.value.y,
         deltaX: delta.x,
         deltaY: delta.y,
       },
@@ -133,12 +163,32 @@ export function useTransform(
   }
 
   return {
-    zoom: computed(() => state.zoom.value),
-    pan: computed(() => state.pan.value),
-    setZoom: (zoom: number) => { state.zoom.value = zoom; },
-    setPan: (pan: { x: number, y: number; }) => { state.pan.value = pan; },
+    zoom: computed(() => zoom.value),
+    pan: computed(() => pan.value),
+    setZoom: (z: number) => { zoom.value = z; },
+    setPan: (p: { x: number, y: number; }) => { pan.value = p; },
     changeZoom,
     changePan,
     goHome
+  };
+}
+
+
+function getElementCenter(element: HTMLElement) {
+  const rect = element.getBoundingClientRect();
+  const center = {
+    x: rect.left + rect.width / 2,
+    y: rect.top + rect.height / 2,
+  };
+  return center;
+}
+
+
+// Using container and pan to estimate center because CSS transition on transform target
+function estimateTargetCenter(container: HTMLElement, targetPan: { x: number, y: number; }) {
+  const center = getElementCenter(container);
+  return {
+    x: center.x + targetPan.x,
+    y: center.y + targetPan.y,
   };
 }
