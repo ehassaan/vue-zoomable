@@ -98,16 +98,9 @@
     <div>
       <label>Zoom origin</label>
       <select v-model="origin">
-        <option value="auto">auto</option>
         <option value="center">center</option>
-        <option value="top">top</option>
-        <option value="bottom">bottom</option>
-        <option value="left">left</option>
-        <option value="right">right</option>
-        <option value="top-left">top-left</option>
-        <option value="top-right">top-right</option>
-        <option value="bottom-left">bottom-left</option>
-        <option value="bottom-right">bottom-right</option>
+        <option value="content-center">content-center</option>
+        <option value="pointer">pointer</option>
       </select>
     </div>
   </form>

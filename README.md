@@ -58,25 +58,26 @@ import "vue-zoomable/dist/style.css";
 ## VueZoomable
 ### Props
 
-| Name                | type    | default | Description                                                                     |
-| ------------------- | ------- | ------- | ------------------------------------------------------------------------------- |
-| selector            | string  | `* > *` | Root element to apply transform on. Preferrably an `id` on `<div>` or `<g>` tag |
-| maxZoom             | number  | 3       | Maximum allowed zoom                                                            |
-| minZoom             | number  | 0.5     | Minimum allowed zoom                                                            |
-| dblClickZoomStep    | number  | 0.4     | Step size for zoom on double click                                              |
-| wheelZoomStep       | number  | 0.2     | Step size for zoom on wheel                                                     |
-| panEnabled          | boolean | true    | Enable panning                                                                  |
-| zoomEnabled         | boolean | true    | Enable zoom                                                                     |
-| mouseEnabled        | boolean | true    | Enable mouse events                                                             |
-| touchEnabled        | boolean | true    | Enable touch events                                                             |
-| dblClickEnabled     | boolean | true    | Zoom on double click enabled                                                    |
-| wheelEnabled        | boolean | true    | Zoom on mouse enabled                                                           |
-| initialZoom         | number  | 0.5     | (Deprecated) Initial zoom value. Use v-model:zoom                               |
-| initialPanX         | number  | 0       | (Deprecated) Initial pan along x-axis. Use v-model:pan                          |
-| initialPanY         | number  | 0       | (Deprecated) Initial pan along y-axis. Use v-model:pan                          |
-| enableControlButton | boolean | true    | Enable or disable control buttons                                               |
-| buttonPanStep       | number  | 15      | Step size for pan on control buttons                                            |
-| buttonZoomStep      | number  | 0.1     | Step size for pan on control buttons                                            |
+| Name                | type    | default        | Description                                                                                                                                                                                              |
+| ------------------- | ------- | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| selector            | string  | `* > *`        | Root element to apply transform on. Preferrably an `id` on `<div>` or `<g>` tag                                                                                                                          |
+| maxZoom             | number  | 3              | Maximum allowed zoom                                                                                                                                                                                     |
+| minZoom             | number  | 0.5            | Minimum allowed zoom                                                                                                                                                                                     |
+| dblClickZoomStep    | number  | 0.4            | Step size for zoom on double click                                                                                                                                                                       |
+| wheelZoomStep       | number  | 0.2            | Step size for zoom on wheel                                                                                                                                                                              |
+| panEnabled          | boolean | true           | Enable panning                                                                                                                                                                                           |
+| zoomEnabled         | boolean | true           | Enable zoom                                                                                                                                                                                              |
+| mouseEnabled        | boolean | true           | Enable mouse events                                                                                                                                                                                      |
+| touchEnabled        | boolean | true           | Enable touch events                                                                                                                                                                                      |
+| dblClickEnabled     | boolean | true           | Zoom on double click enabled                                                                                                                                                                             |
+| wheelEnabled        | boolean | true           | Zoom on mouse enabled                                                                                                                                                                                    |
+| initialZoom         | number  | 0.5            | (Deprecated) Initial zoom value. Use v-model:zoom                                                                                                                                                        |
+| initialPanX         | number  | 0              | (Deprecated) Initial pan along x-axis. Use v-model:pan                                                                                                                                                   |
+| initialPanY         | number  | 0              | (Deprecated) Initial pan along y-axis. Use v-model:pan                                                                                                                                                   |
+| enableControlButton | boolean | true           | Enable or disable control buttons                                                                                                                                                                        |
+| buttonPanStep       | number  | 15             | Step size for pan on control buttons                                                                                                                                                                     |
+| buttonZoomStep      | number  | 0.1            | Step size for pan on control buttons                                                                                                                                                                     |
+| zoomOrigin          | string  | content-center | Possible values, <br/> `content-center`: Scale the content w.r.t its center<br>`center`: Scale the content w.r.t center of the container <br> `pointer`: Scale the content w.r.t position of the pointer |
 
 ### Model
 

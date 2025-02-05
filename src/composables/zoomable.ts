@@ -19,10 +19,8 @@ export function useZoomable({ props, onChange, container, target
   return {
     zoom: transform.zoom,
     pan: transform.pan,
-    origin: transform.origin,
     setZoom: transform.setZoom,
     setPan: transform.setPan,
-    setOrigin: transform.setOrigin,
     onWheel: wheel.onWheel,
     onTouchStart: touch.onTouchStart,
     onButtonUp: buttons.onButtonUp,

@@ -103,8 +103,8 @@ let props = defineProps({
     default: false,
   },
   zoomOrigin: {
-    type: String as PropType<'auto' | 'center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | { x: number, y: number; }>,
-    default: 'center',
+    type: String as PropType<'content-center' | 'pointer'>,
+    default: 'pointer',
   }
 });
 
