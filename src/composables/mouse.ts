@@ -32,7 +32,6 @@ export function useMouse({
     }
 
     function onDblClick(ev: MouseEvent) {
-        console.log("Event: ", ev);
         if (props.disabled) return;
         if (!props.dblClickEnabled || !props.zoomEnabled) return;
 
