@@ -73,7 +73,6 @@ export function useTransform({
         x: (newZoom - oldZoom) * ((center.x - zoomOrigin.x) / oldZoom),
         y: (newZoom - oldZoom) * ((center.y - zoomOrigin.y) / oldZoom),
       };
-      console.log("Delta Pan: ", deltaPan, center, zoomOrigin);
       changePan(deltaPan.x, deltaPan.y, 'zoom');
     }
 

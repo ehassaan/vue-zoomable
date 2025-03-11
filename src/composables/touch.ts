@@ -21,8 +21,6 @@ export function useTouch({
 
     if (ev.touches.length < 1) return;
 
-    console.log("TouchMove: ", ev, transform.pan.value);
-
     const p1 = ev.touches.item(0);
 
     if (!p1) return;

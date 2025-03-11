@@ -28,7 +28,6 @@ export function useButtons({
 
     function onButtonDown(button: ButtonEvent) {
         if (props.disabled) return;
-        console.log(button);
 
         switch (button.key) {
             case "home":
