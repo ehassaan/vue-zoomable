@@ -84,7 +84,6 @@ function onTouchEnd(ev: TouchEvent) {
 }
 
 function onPointerDown(ev: PointerEvent) {
-    console.log("pointer-down: ", ev);
     if (parent && parent.contains(ev.target)) {
         ev.preventDefault();
         return;
