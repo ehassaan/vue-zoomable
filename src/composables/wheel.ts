@@ -8,7 +8,8 @@ export function useWheel({ props, transform }: any) {
     if (!props.wheelEnabled || !props.zoomEnabled) return;
 
     // normalizes the value of ev.deltaY to either be 1 or -1 and multiplies it with the double click zoom step
-    const deltaZoom = props.wheelZoomStep * -1 * ev.deltaY / Math.abs(ev.deltaY);
+    const delta = Math.abs(ev.deltaY) > 0 ? ev.deltaY : ev.deltaX;
+    const deltaZoom = props.wheelZoomStep * -1 * delta / Math.abs(delta);
     const origin = { x: ev.clientX, y: ev.clientY };
     transform.changeZoom(deltaZoom, "wheel", origin);
 
